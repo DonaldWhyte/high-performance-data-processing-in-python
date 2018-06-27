@@ -1,0 +1,159 @@
+.reveal section img {
+    border: 0px;
+    box-shadow: none;
+}
+
+/* Title */
+#logo-notice {
+    position: relative;
+    float: right;
+}
+
+#logo-notice p {
+    font-size: 18px;
+    text-align: center;
+}
+
+img[alt="pycon_russia"] {
+    width: 130px;
+    margin: 0px !important;
+}
+
+/* Multi-column Layout */
+
+.left-col {
+    width: 50%;
+    float: left;
+}
+
+.right-col {
+    width: 50%;
+    float: right;
+}
+
+.left-col1of3 {
+    width: 33%;
+    float: left;
+}
+
+.right-col2of3 {
+    width: 66%;
+    float: left;
+}
+
+.clear-col {
+    float: none;
+    clear: both;
+}
+
+/* Font Styling */
+
+code {
+    color: #00D;
+    font-weight: bold !important;
+}
+
+.large code {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.largish code {
+    font-size: 24px;
+    line-height: 26px;
+}
+
+.medium code {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.medium-large code {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.small p {
+    font-size: 36px;
+}
+
+.small code {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.small-table-text td, .small-table-text th {
+    font-size: 20px;
+}
+
+.medium-table-text td, .medium-table-text th {
+    font-size: 26px;
+}
+
+.bio-table td {
+    text-align: center !important;
+    border: 0px !important;
+    max-width: 400px;
+}
+
+/* Slide-wide styles. */
+.small-slide p,
+.small-slide ul,
+.small-slide li
+{
+    font-size: 32px !important;
+}
+
+.medium-slide p,
+.medium-slide ul,
+.medium-slide li
+{
+    font-size: 50px !important;
+}
+
+.large-slide p,
+.large-slide ul,
+.large-slide li
+{
+    font-size: 60px !important;
+}
+
+.highlighted-inline {
+    background-color: #888;
+}
+
+.highlighted {
+    background-color: #888;
+}
+
+/* For highlighting specific lines in code formatted using hljs */
+code mark {
+    display: inline-block;
+    width: 100%;
+    background: yellow;
+    color: black;
+}
+
+code mark span {
+    background: none !important;
+    color: inherit !important;
+}
+
+/* Images */
+img[alt="portrait"] {
+    width: 250px;
+    border: 2px solid black !important;
+}
+
+img[alt="small_portrait"] {
+    width: 220px;
+    border: 2px solid black !important;
+}
+
+
+/* Section Heading Icons */
+img[alt="fin"] {
+    width: 200px;
+    position: relative;
+    top: 30px !important;
+}
