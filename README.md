@@ -1,14 +1,10 @@
-# Mocking in Rust using Double
+# High Performance Data Processing In Python
 
-### [View Presentation Slides](http://donaldwhyte.github.io/mocking-in-rust-using-double/)
+### [View Presentation Slides](http://donaldwhyte.github.io/high-performance-data-processing-in-python)
 
-Talk demonstrating how to write behaviour verification tests in Rust using mocks.
+Talk demonstrating how to massively optimise data processing and numerical computation in Python.
 
-Topics covered:
-
-* unit testing in Rust
-* behaviour verification with test doubles
-* mocking in Rust tests using the [*`double`*](https://github.com/DonaldWhyte/double) crate
+TODO: more detailed description of talk contents
 
 ## Running Presentation
 
