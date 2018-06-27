@@ -152,6 +152,10 @@ img[alt="small_portrait"] {
 
 
 /* Section Heading Icons */
+img[alt="dataset"],
+img[alt="python"],
+img[alt="numpy"],
+img[alt="vectorisation"],
 img[alt="fin"] {
     width: 200px;
     position: relative;
