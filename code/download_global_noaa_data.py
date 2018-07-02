@@ -55,14 +55,15 @@ def _main():
                         tarfile.open(tmpfile.name).extractall(path=tmpdir)
                         for fname in os.listdir(tmpdir):
                             print(f'Processing {fname}')
-                            with open(fname, 'r') as in_file:
+                            fpath = os.path.join(tmpdir, fname)
+                            with open(fpath, 'r') as in_file:
                                 reader = csv.DictReader(
                                     in_file,
                                     quotechar='"',
                                     delimiter=',',
                                     skipinitialspace=True)
-                                for row in reader:
-                                    print(f'\t{row}')
+                                #for row in reader:
+                                #    print(f'\t{row}')
                                 writer.writerows(list(reader))
 
             # Sleep for some interval to prevent overloading the source site.

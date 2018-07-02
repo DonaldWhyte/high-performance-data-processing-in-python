@@ -150,6 +150,10 @@ img[alt="small_portrait"] {
     border: 2px solid black !important;
 }
 
+img[alt="ecosystem"] {
+    width: 320px;
+}
+
 
 /* Section Heading Icons */
 img[alt="dataset"],

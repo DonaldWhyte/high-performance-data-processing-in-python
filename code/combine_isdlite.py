@@ -1,5 +1,7 @@
 import argparse
 import csv
+import datetime
+from io import TextIOWrapper
 import tarfile
 import tempfile
 
@@ -21,15 +23,23 @@ def _main():
     args = _parse_args()
 
     with open(args.output, 'wt') as out_file:
-        archive = tarfile.open(args.input, mode='r:gz')
         writer = csv.DictWriter(out_file, fieldnames=_OUTPUT_COLUMNS)
+        writer.writeheader()
+
+        archive = tarfile.open(args.input, mode='r:gz')
         for i, fname in enumerate(archive.getnames()):
             if i % 1000 == 0:
                 print(f'Processed {i} files')
-            writer.writerows([
-                _process_line(line)
-                for line in archive.extractfile(fname).readlines()
-            ])
+
+            fname_components = fname.split('-')
+            if len(filename_components) == 3:
+                writer.writerows([
+                    _process_line(
+                        line,
+                        station_usaf=fname_components[0],
+                        station_wban=fname_components[1])
+                    for line in TextIOWrapper(archive.extractfile(fname)).readlines()
+                ])
 
 
 def _parse_args() -> argparse.Namespace:
@@ -45,21 +55,25 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _process_line(line: str) -> dict:
+def _process_line(line: str,
+                  station_usaf: str,
+                  station_wban: str) -> dict:
     fields = line.split()
     date_components = [x for x in fields[:4]]
     timestamp = datetime.datetime.strptime(
         ' '.join(date_components), '%Y %m %d %H')
     return {
+        'station_usaf': station_usaf,
+        'station_wban': station_wban,
         'timestamp': timestamp.strftime('%Y-%m-%d %H:%M:%S'),
-        'air_temperature': float(fields[5]),
-        'dew_point_temperature': float(fields[6]),
-        'sea_level_pressure': float(fields[7]),
-        'wind_direction': float(fields[8]),
-        'wind_speed_rate': float(fields[9]),
-        'sky_condition': float(fields[10]),
-        'liquid_precipitation_1h': float(fields[11]),
-        'liquid_precipitation_6h': float(fields[12])
+        'air_temperature': float(fields[4]),
+        'dew_point_temperature': float(fields[5]),
+        'sea_level_pressure': float(fields[6]),
+        'wind_direction': float(fields[7]),
+        'wind_speed_rate': float(fields[8]),
+        'sky_condition': float(fields[9]),
+        'liquid_precipitation_1h': float(fields[10]),
+        'liquid_precipitation_6h': float(fields[11])
     }
 
 

@@ -49,6 +49,8 @@ processing and numerical computation
 TODO: but why? it's so slow?
 
 [NEXT]
+![ecosystem](images/ecosystem.svg)
+
 Wealth of the tools!
 
 TODO: icon cloud of stuffs
@@ -71,11 +73,60 @@ _X times speed up_
 ## 1. The Dataset
 ![dataset](images/dataset.svg)
 
+[NEXT]
+### Integrated Surface Database (ISD)
+
+Global database of atmospheric data.
+
+![isd](images/isd.gif)
+
+_note_
+This map shows the spatial distribution of Integrated Surface Database
+stations for all time periods.
+
+Source: https://www.ncdc.noaa.gov/isd
+
+[NEXT]
+### Measurements
+
+<div class="left-col" style="text-center: left">
+  <ul>
+    <li>wind speed and direction</li>
+    <li>temperature</li>
+    <li>sea level pressure</li>
+    <li>visibility (clear skies, fog, etc.)</li>
+  </ul>
+</div>
+<div class="right-col">
+  <img src="images/weather_measurements.jpg" alt="weather_measurements" />
+</div>
+<div class="clear-col"></div>
+
+[NEXT]
+* includes data from 35,000 weather stations
+* some stations active since 1901
+* integrates data from over 100 original data sources
+
+_note_
+Detailed list of fields:
+
+wind speed and direction, wind gust, temperature, dew point, cloud data, sea level pressure, altimeter setting, station pressure, present weather, visibility, precipitation amounts for various time periods, snow depth, and various other elements as observed by each station.
+
+[NEXT]
+**Total uncompressed data volume is > 600GB.**
+
+_note_
+ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
+
+[NEXT]
+TODO: mention research question here
+
 [NEXT SECTION]
 ## 2. Python Approach
 ![python](images/python.svg)
 
 [NEXT]
+### Data Format
 TODO: how to implement processing
 
 [NEXT]
@@ -93,13 +144,55 @@ TODO: what is Python actually doing under the hood to make it so slow?
 what is it?
 
 [NEXT]
-How does it work? Basic primitives, memory layout, stride, etc.
+How does it work? Basic primitives, memory layout, stride, etc.]
+
+[NEXT]
+### `numpy.ndarray`
+
+TODO: summary of why it is (one or many D array of contiguous memory that stores data)
+
+[NEXT]
+### `numpy.ndarray`
+
+| | |
+| - | - |
+| `data` | pointer indicating the memory address of the first byte in the array |
+| `dtype` | the kind of elements contained within the array |
+| `shape` | TODO |
+| `stride` | TODO |
+| `flags` | TODO |
+
+_note_
+The shape indicates the shape of the array
+
+The strides are the number of bytes that should be skipped in memory to go to the next element. If your strides are (10,1), you need to proceed one byte to get to the next column and 10 bytes to locate the next row.
+
+[NEXT]
+TODO: given visual example of shape (3,0)
+
+[NEXT]
+TODO: given visual example of shape (0, 3)
+
+[NEXT]
+TODO: given visual example of shape (3, 3)
+
+[NEXT]
+TODO: given visual example of shape (4, 2)
+
+[NEXT]
+TODO: show reshaping, and how it works without copying and just changing the stride
+
+[NEXT]
+TODO: transpose example, which is a common use case for reshaping
+
+[NEXT]
+TODO: broadcasting -- can reduce copies
 
 [NEXT]
 TODO: using numpy in naive way on dataset processing
 
 [NEXT]
-TODO: see massive speed increase from even some basic stuff!
+TODO: use it to perform processing, massive speed increase for even some basic stuff!
 
 
 [NEXT SECTION]
@@ -123,6 +216,9 @@ TODO: give high-level theoretical example of vectorisation
 TODO: achieved via SIMD -- show CPU register example
 
 [NEXT]
+TODO: show basic toy example with timings
+
+[NEXT]
 TODO: show numpy code from the example and how it's vectorising
 
 [NEXT]
@@ -139,7 +235,7 @@ But wait...there's more!
 
 
 [NEXT SECTION]
-## 5. Cython
+## 5. cython
 ![cython](images/cython.svg)
 
 _note_
