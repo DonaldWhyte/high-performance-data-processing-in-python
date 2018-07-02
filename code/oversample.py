@@ -12,18 +12,27 @@ import pandas as pd
 
 _NON_MEASUREMENT_COLUMNS = {
     'STATION', 'STATION_NAME', 'ELEVATION', 'LATITUDE', 'LONGITUDE', 'DATE'
+    #'STATION', 'DATE', 'SOURCE', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'NAME',
+    #'REPORT_TYPE', 'CALL_SIGN', 'QUALITY_CONTROL'
 }
 
 def _main():
     args = _parse_args()
     step_size = {
+        '1sec': 1,
+        '5sec': 5,
+        '10sec': 10,
+        '30sec': 30,
         '1min': 60,
-        '10min': 600
+        '5min': 60 * 5,
+        '10min': 60 * 10,
+        '30min': 60 * 30
     }[args.granularity]
 
-    with open(args.input, 'rt') as f:
-        reader = csv.DictReader(f)
-        rows = sorted(list(reader), key=lambda x: (x['STATION'], x['DATE']))
+    df = pd.read_csv(args.input)
+    df.sort_values(['STATION', 'DATE'], inplace=True)
+    float_cols = list(df.select_dtypes(include=['float']).columns)
+    rows = df.to_dict(orient='record')
 
     with open(args.output, 'wt') as f:
         writer = csv.DictWriter(f, fieldnames=rows[0].keys())
@@ -39,12 +48,12 @@ def _main():
                 n_steps = int((b_dt - a_dt).total_seconds() / step_size)
                 interpolated_values = {
                     col: _interpolate(float(a[col]), float(b[col]), n_steps)
-                    for col in a.keys() if col not in _NON_MEASUREMENT_COLUMNS
+                    for col in a.keys() if col in float_cols
                 }
                 for step in range(1, n_steps):
                     row = {
                         col: val for col, val in a.items()
-                        if col in _NON_MEASUREMENT_COLUMNS
+                        if col not in float_cols
                     }
                     row['DATE'] = (
                         (a_dt + datetime.timedelta(seconds=(step * step_size)))
@@ -52,29 +61,13 @@ def _main():
                     row.update({
                         col: f'{interpolated_values[col][step]:.4f}'
                         for col in a.keys()
-                        if col not in _NON_MEASUREMENT_COLUMNS
+                        if col in float_cols
                     })
                     writer.writerow(row)
 
         # Need to write the final row of the input CSV after the interpolation
-        # looip.
+        # loop.
         writer.writerow(b)
-
-
-def _primary_key(row: dict) -> Tuple[str, str]:
-    return row['STATION']
-
-
-def _to_dt(val: str) -> datetime.datetime:
-    return datetime.datetime.strptime(val, _DT_FORMAT)
-
-
-_DT_FORMAT = '%Y%m%d %H:%M'
-
-
-def _interpolate(start: float, end: float, n_steps: int) -> List[float]:
-    step_size = (end - start) / n_steps
-    return [start + step_size * step for step in range(n_steps)]
 
 
 def _parse_args() -> argparse.Namespace:
@@ -94,6 +87,23 @@ def _parse_args() -> argparse.Namespace:
         help='granularity of oversampling. This determines how many extra '
              'samples will be generated between two time points.')
     return parser.parse_args()
+
+
+
+def _primary_key(row: dict) -> Tuple[str, str]:
+    return row['STATION']
+
+
+def _to_dt(val: str) -> datetime.datetime:
+    return datetime.datetime.strptime(val, _DT_FORMAT)
+
+
+_DT_FORMAT = '%Y-%m-%dT%H:%M%S'
+
+
+def _interpolate(start: float, end: float, n_steps: int) -> List[float]:
+    step_size = (end - start) / n_steps
+    return [start + step_size * step for step in range(n_steps)]
 
 
 if __name__ == '__main__':
