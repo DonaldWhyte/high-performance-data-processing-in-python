@@ -8,6 +8,8 @@ import tempfile
 
 _OUTPUT_COLUMNS = (
     'timestamp',
+    'station_usaf',
+    'station_wban',
     'air_temperature',
     'dew_point_temperature',
     'sea_level_pressure',
@@ -31,8 +33,8 @@ def _main():
             if i % 1000 == 0:
                 print(f'Processed {i} files')
 
-            fname_components = fname.split('-')
-            if len(filename_components) == 3:
+            fname_components = fname.split('/')[-1].split('-')
+            if len(fname_components) == 3:
                 writer.writerows([
                     _process_line(
                         line,
@@ -40,6 +42,8 @@ def _main():
                         station_wban=fname_components[1])
                     for line in TextIOWrapper(archive.extractfile(fname)).readlines()
                 ])
+            else:
+                print(f'Skipping file {fname}')
 
 
 def _parse_args() -> argparse.Namespace:
