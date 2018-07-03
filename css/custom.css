@@ -154,6 +154,17 @@ img[alt="ecosystem"] {
     width: 320px;
 }
 
+img[alt="isd"] {
+    width: 400px;
+}
+
+img[alt="weather_measurements"] {
+    width: 320px;
+}
+
+img[alt="globe"] {
+    width: 300px;
+}
 
 /* Section Heading Icons */
 img[alt="dataset"],

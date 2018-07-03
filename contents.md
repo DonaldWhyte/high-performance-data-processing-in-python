@@ -49,11 +49,9 @@ processing and numerical computation
 TODO: but why? it's so slow?
 
 [NEXT]
+### Wealth of Tools
+
 ![ecosystem](images/ecosystem.svg)
-
-Wealth of the tools!
-
-TODO: icon cloud of stuffs
 
 [NEXT]
 ### Outline
@@ -76,36 +74,29 @@ _X times speed up_
 [NEXT]
 ### Integrated Surface Database (ISD)
 
-Global database of atmospheric data.
-
 ![isd](images/isd.gif)
 
 _note_
+Global database of atmospheric data.
+
 This map shows the spatial distribution of Integrated Surface Database
 stations for all time periods.
 
 Source: https://www.ncdc.noaa.gov/isd
 
 [NEXT]
-### Measurements
+## Measurements
 
-<div class="left-col" style="text-center: left">
-  <ul>
-    <li>wind speed and direction</li>
-    <li>temperature</li>
-    <li>sea level pressure</li>
-    <li>visibility (clear skies, fog, etc.)</li>
-  </ul>
+<div class="left-col" style="text-center: center;">
+  <p>wind speed and direction</p>
+  <p>temperature</p>
+  <p>sea level pressure</p>
+  <p>sky visibility</p>
 </div>
 <div class="right-col">
-  <img src="images/weather_measurements.jpg" alt="weather_measurements" />
+  <img src="images/weather_measurements.svg" alt="weather_measurements" />
 </div>
 <div class="clear-col"></div>
-
-[NEXT]
-* includes data from 35,000 weather stations
-* some stations active since 1901
-* integrates data from over 100 original data sources
 
 _note_
 Detailed list of fields:
@@ -113,7 +104,22 @@ Detailed list of fields:
 wind speed and direction, wind gust, temperature, dew point, cloud data, sea level pressure, altimeter setting, station pressure, present weather, visibility, precipitation amounts for various time periods, snow depth, and various other elements as observed by each station.
 
 [NEXT]
-**Total uncompressed data volume is > 600GB.**
+## Coverage
+
+<div class="left-col">
+  <img src="images/globe.svg" alt="globe" />
+</div>
+<div class="right-col" style="text-center: left; padding-top: 12px">
+  <p>7 continents</p>
+  <p>35,000 weather stations</p>
+  <p>1901 to now</p>
+  <p>from over 100 data sources</p>
+</div>
+<div class="clear-col"></div>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+**Total Data Volume > 600GB**
 
 _note_
 ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
@@ -121,8 +127,25 @@ ISD integrates data from over 100 original data sources, including numerous data
 [NEXT]
 TODO: mention research question here
 
+[NEXT]
+### ISD-Lite
+
+|                 |                          |
+| --------------- | ------------------------ |
+|**Dates**        | 1991-01-01 to 2011-12-31 |
+|**Measurements** | 8                        |
+|**Stations**     | ~30,000                  |
+|**Rows**         | ~400,000,000             |
+
+Approx one row per station every 6 hours.
+
+_note_
+Total stations: 29,630
+Total rows: 391,908,528
+
+
 [NEXT SECTION]
-## 2. Python Approach
+## 2. Let's use Python
 ![python](images/python.svg)
 
 [NEXT]

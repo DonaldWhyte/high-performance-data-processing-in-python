@@ -60,7 +60,6 @@ typings/
 # dotenv environment variables file
 .env
 
-
-# Rust
-target/
-
+# Data files
+*.csv
+*.hdf5
