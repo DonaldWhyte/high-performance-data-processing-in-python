@@ -7,9 +7,9 @@ import numpy as np
 from typing import Optional
 
 
-_DIFFERENCE_RANGE = 4
-_ROLLING_WINDOW = 7 * 6  # 7 days
-_OUTLIER_STD_THRESHOLD = 6
+_DIFFERENCE_RANGE = 1
+_ROLLING_WINDOW = 14 * 6  # 7 days
+_OUTLIER_STD_THRESHOLD = 8
 
 
 def _main():
@@ -81,16 +81,8 @@ def _compute_outliers(data: np.array, n: int) -> np.array:
     std = _rolling_standard_deviation(differenced, avg, n)
     differences_with_std = differenced[n - 1:]
 
-    print(len(differences_with_std), len(avg), len(std))
-    with open('data', 'wt') as f:
-        f.write('\n.'.join(
-            f'{differences_with_std[i]}, {avg[i]}, {std[i]}'
-            for i in range(len(differences_with_std))
-        ))
-    raise ValueError
-
     outlier_indices = np.where(
-        np.absolute(data_with_averages - avg) > (std * _OUTLIER_STD_THRESHOLD))
+        np.absolute(differences_with_std - avg) > (std * _OUTLIER_STD_THRESHOLD))
     return outlier_indices[0]
 
 
@@ -114,8 +106,7 @@ def _rolling_standard_deviation(arr: np.array,
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
     for i in range(len(variance)):
-        print(i, len(arr[i:i+n]), rolling_avg[i], arr[i])
-        variance[i] = np.sum(arr[i:i+n] - rolling_avg[i]) / n
+        variance[i] = np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
     return np.sqrt(variance)
 
 
