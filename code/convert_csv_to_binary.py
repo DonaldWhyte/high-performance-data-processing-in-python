@@ -1,10 +1,11 @@
 import argparse
 import csv
 import datetime
-import h5py
+#import h5py
 import itertools
 import math
 import numpy as np
+import pandas as pd
 from typing import Optional
 
 
@@ -38,17 +39,30 @@ def _main():
     args = _parse_args()
     with open(args.input, 'rt') as in_file:
         reader = csv.DictReader(in_file)
-        out_hdf5 = h5py.File(args.output)
+        #out_hdf5 = h5py.File(args.output)
+        out_hdf5 = pd.HDFStore(args.output)
         for i, row_batch in enumerate(_batch(reader, _BATCH_SIZE)):
             print(f'Processed {i * _BATCH_SIZE} rows')
             for col, converter in _COLUMN_CONVERTERS.items():
-                _create_or_append_to_dataset(
+                records = [
+                    {
+                        col: converter(row[col])
+                        for col, converter in _COLUMN_CONVERTERS.items()
+                    }
+                    for row in row_batch
+                ]
+                out_hdf5.append(
+                    'isdlite',
+                    pd.DataFrame(records),
+                    data_columns=sorted(_COLUMN_CONVERTERS.keys()),
+                    format='table')
+                """_create_or_append_to_dataset(
                     out_hdf5,
                     name=col,
                     data=np.array([
                         converter(row[col]) for row in row_batch
-                    ]))
-            out_hdf5.flush()
+                    ]))"""
+            #out_hdf5.flush()
 
 
 def _parse_args() -> argparse.Namespace:
@@ -69,7 +83,7 @@ def _batch(iterable, n):
     yield from iter(lambda: list(itertools.islice(iterator, n)), [])
 
 
-def _create_or_append_to_dataset(hdf5_file: h5py.File,
+"""def _create_or_append_to_dataset(hdf5_file: h5py.File,
                                  name: str,
                                  data: np.ndarray):
     if name in hdf5_file:
@@ -81,7 +95,7 @@ def _create_or_append_to_dataset(hdf5_file: h5py.File,
             name,
             data=data,
             maxshape=(None,),
-            compression='gzip')
+            compression='gzip')"""
 
 
 if __name__ == '__main__':

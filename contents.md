@@ -125,9 +125,6 @@ _note_
 ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
 
 [NEXT]
-TODO: mention research question here
-
-[NEXT]
 ### ISD-Lite
 
 |                 |                          |
@@ -142,6 +139,14 @@ Approx one row per station every 6 hours.
 _note_
 Total stations: 29,630
 Total rows: 391,908,528
+
+[NEXT]
+TODO: Plot the
+
+
+[NEXT]
+TODO: mention research question here
+
 
 
 [NEXT SECTION]
