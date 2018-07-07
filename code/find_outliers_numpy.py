@@ -1,35 +1,41 @@
 import argparse
+import csv
 import datetime
 import h5py
 from multiprocessing import Pool
 from numba import jit
 import numpy as np
-from typing import Optional
+import time
 
 
 _DIFFERENCE_RANGE = 1
 _ROLLING_WINDOW = 14 * 6  # 7 days
-_OUTLIER_STD_THRESHOLD = 8
+_OUTLIER_STD_THRESHOLD = 9
 
 
 def _main():
     args = _parse_args()
-    _run(args.input, args.measurement, args.display)
+    _run(args.input, args.measurement, args.output)
 
 
-def _run(input_fname: str, measurement: str, display_mode: Optional[str]):
+def _run(input_fname: str, measurement: str, output_fname: str):
     input_file = h5py.File(input_fname, mode='r')
 
+    start_time = time.time()
+
     print('Determining range of each station time series')
-    station_ids = input_file['station_usaf'][:10000000]
+    station_ids = input_file['station_usaf']
     is_end_of_series = station_ids[:-1] != station_ids[1:]
     series_ends = np.where(is_end_of_series == True)[0]
     series_starts = np.concatenate([np.array([0]), series_ends + 1])
     series_ranges = list(zip(series_starts, series_ends))
-    print('Found time series for', len(series_ranges), 'ranges')
+    print(f'Found time series for {len(series_ranges)} ranges')
 
-    print('Removing time series that don\'t have enough daa')
-    ranges_with_enough_data = [(start, end) for start, end in series_ranges]
+    print('Removing time series that don\'t have enough data')
+    ranges_with_enough_data = [
+        (start, end) for start, end in series_ranges
+        if end - start >= (_DIFFERENCE_RANGE + _ROLLING_WINDOW + 1)
+    ]
     print(
         'Kept', len(ranges_with_enough_data), '/', len(series_ranges),
         'station time series')
@@ -40,18 +46,25 @@ def _run(input_fname: str, measurement: str, display_mode: Optional[str]):
         station_ids[start]: _compute_outliers(measurements[start:end],
                                               _ROLLING_WINDOW)
         for start, end in ranges_with_enough_data
-        if end - start >= (_DIFFERENCE_RANGE + _ROLLING_WINDOW + 1)
     }
 
-    if display_mode:
-        display_detailed = display_mode == 'detail'
+    elapsed_time = time.time() - start_time
+    print(f'Computed outliers in {elapsed_time:.2f} seconds')
 
-        timestamps = input_file['timestamp']
-        for station, outlier_indices in station_outliers.items():
-            print(station, 'has', len(outlier_indices), 'outliers')
-            if display_detailed:
-                for index in outlier_indices:
-                    print('\t', index, timestamps[index], measurements[index])
+    print(f'Writing outliers to {output_fname}')
+    timestamps = input_file['timestamp']
+    with open(output_fname, 'wt') as out_file:
+        writer = csv.DictWriter(out_file, fieldnames=('station_usaf', 'timestamp', 'value'))
+        for station_id in sorted(station_outliers.keys()):
+            writer.writerows([
+                {
+                    'station_usaf': station_id,
+                    'timestamp': datetime.datetime.utcfromtimestamp(
+                        timestamps[outlier_index]),
+                    'value': measurements[outlier_index]
+                }
+                for outlier_index in station_outliers[station_id]
+            ])
 
 
 def _parse_args() -> argparse.Namespace:
@@ -65,9 +78,9 @@ def _parse_args() -> argparse.Namespace:
         required=True,
         help='measurement to plot')
     parser.add_argument(
-        '-d', '--display',
-        choices=('summary', 'detail'),
-        help='display detailed information about all found outliers')
+        '-o', '--output',
+        required=True,
+        help='name of output CSV file that contains outliers')
     return parser.parse_args()
 
 
