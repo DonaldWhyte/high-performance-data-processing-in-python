@@ -1,3 +1,4 @@
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### **Высокоэффективная обработка данных в Phyton**
 
 #### High Performance Data Processing In Python
@@ -11,15 +12,17 @@
 </div>
 
 [NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+
 ### About Me
 
-<div class="left-col1of3">
+<div class="left-col">
   ![small_portrait](images/donald.jpg)
 </div>
-<div class="right-col2of3" style="text-center: left">
-  <div style="height: 27px"></div>
+<div class="right-col" style="text-center: left">
   <ul>
-    <li>Software Engineer @ <strong>Engineers Gate</strong></li>
+    <li>Software Engineer</li>
+    <li>@ Engineers Gate</li>
     <li>Scalable data infrastructure</li>
     <li>Real-time trading systems</li>
     <li>Python/C++/Rust developer</li>
@@ -28,43 +31,147 @@
 <div class="clear-col"></div>
 
 [NEXT]
-### Motivation
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 
-TODO: Python great research tool. Easy to write, fast to iterate ideas?
-
-[NEXT]
-TODO: what about performance? Python is significantly slower than other
-languages for computation!
+**Python is a hugely popular tool for research.**
 
 [NEXT]
-TODO: first basic graph of Python vs. C++
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+
+> **Data analysis is now as popular as web development with Python.**
+
+<div class="reference">
+  *JetBrains Python Developer Survey 2017* **[1]**
+</div>
+
+_note_
+https://www.jetbrains.com/research/python-developers-survey-2017/
 
 [NEXT]
-TODO: second basic graph of Python vs. C++
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## Why?
 
 [NEXT]
-TODO: general purpose language, but also dominates a massive niche: data
-processing and numerical computation
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+TODO: three obvious reasons
 
-TODO: but why? it's so slow?
+TODO
 
-[NEXT]
-### Wealth of Tools
-
-![ecosystem](images/ecosystem.svg)
+TODO
 
 [NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+
+**What about production?**
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+
+TODO: data analysis used to be the realm of research --
+one-off jobs to produce papers or presentations
+
+TODO: with ML being bigger than ever, actually _running_
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+
+### The Traditional Process
+
+1. Researcher builds an awesome model in MATLAB
+2. Programmer takes research code and rewrites it
+3. Production code is deployed
+4. Everything works fine
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Success!
+![cheering](images/cheering.gif)
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### The Reality...
+![bad_times](images/bad_times.gif)
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+
+### The Real Process
+
+1. Researcher builds an awesome model
+2. Programmer TODO
+3. TODO
+4. Deployment is delayed
+5. Cut backs TODO
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### A Better Process
+Research and production code is **identical**.
+
+_note_
+A better process is to make the research and production code **identical**.
+They can be configured differently, but the code which pre-processes the data,
+builds the model and TODO should be the same.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+What about performance?
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## TODO 1
+<div id="python-vs-c-chart1"></div>
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## TODO 2
+<div id="python-vs-c-chart2"></div>
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## TODO 3
+<div id="python-vs-c-chart3"></div>
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+Why do people still use Python in production?
+
+[NEXT]
+<!-- .slide: data-background="images/ecosystem.png" class="background" -->
+# Ecosystem
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+TODO: how it's possible
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### NumPy
+
+<div class="left-col">
+  <p>Heart of TODO.</p>
+</div>
+<div class="right-col">
+  <img src="images/numpy_coloured.svg" alt="numpy_coloured" />
+</div>
+<div class="clear-col"></div>
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+TODO: focus of tlak
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Outline
 
-1. TODO: what we're doing with dataset
+1. Find extreme weather events in a large TODO dataset
 2. Process dataset in **pure Python**
-3. Speed up processing using **numpy**
-4. Speed up processing even more using **Cython**
+3. Speed up processing using **NumPy**
+4. Speed up processing even more using **Numba**
 
 [NEXT]
-TODO: initial speed and end result
-
-_X times speed up_
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+TODO: initial speed and end result graph
 
 
 [NEXT SECTION]
@@ -125,28 +232,35 @@ _note_
 ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
 
 [NEXT]
+| **timestamp**       | **station_id** | **wind_speed_rate** | *...* |
+| ------------------- | -------------- | ------------------- | ----- |
+| 1995-01-06 03:00:00 | 407000         | 50.0                | ...   |
+| 1995-01-06 06:00:00 | 407000         | 70.0                | ...   |
+| 1995-01-06 09:00:00 | 407000         | null                | ...   |
+| 1995-01-06 12:00:00 | 407000         | 60.0                | ...   |
+| 1995-01-06 16:00:00 | 407000         | 20.0                | ...   |
+
+[NEXT]
+<div id="wind-speed-example"></div>
+
+[NEXT]
+TODO: mention research question here
+
+[NEXT]
 ### ISD-Lite
 
 |                 |                          |
 | --------------- | ------------------------ |
 |**Dates**        | 1991-01-01 to 2011-12-31 |
 |**Measurements** | 8                        |
-|**Stations**     | ~30,000                  |
+|**Stations**     | 5,182                    |
 |**Rows**         | ~400,000,000             |
 
-Approx one row per station every 6 hours.
+One row per station every 6 hours.
 
 _note_
 Total stations: 29,630
 Total rows: 391,908,528
-
-[NEXT]
-TODO: Plot the
-
-
-[NEXT]
-TODO: mention research question here
-
 
 
 [NEXT SECTION]
@@ -263,29 +377,31 @@ But wait...there's more!
 
 
 [NEXT SECTION]
-## 5. cython
-![cython](images/cython.svg)
+## 5. Numba
+![numba](images/numba.png)
 
 _note_
 see https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html for examples
 
 [NEXT]
-TODO: what is cython
+TODO: what is numba
 
 [NEXT]
-DSL on top of Python that annotates the code with static code±!
-
-[NExT}]
-massive optimisations, just by using on
+potentially massive optimisations with a couple of line of code
 
 [NEXT]
-TODO: show graph of speed with and without cython
+TODO: show JIT decorator
 
 [NEXT]
-works especially well with numpy, show how
+TODO: show what types it deduces under the hood
 
 [NEXT]
-TODO: show graph of speed with and without cython numpy code
+TODO: show graph of speed with and without Numba
+
+[NEXT]
+TODO: emphasise that it won't really speed up vectorised numpy code
+
+TODO: but it's good optimising the inherent loops present
 
 [NEXT SECTION]
 ## Fin
@@ -296,6 +412,9 @@ TODO: show final graphs on log scale of speeds
 
 [NEXT]
 TODO: conclusion
+
+[NEXT]
+TODO: be sure to emphasise the importance of numerical computation optimisation
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -327,6 +446,11 @@ TODO: conclusion
 
 [NEXT SECTION]
 ## Appendix
+
+[NEXT]
+### References
+
+**[1]** https://www.jetbrains.com/research/python-developers-survey-2017/
 
 [NEXT]
 ### Image Credits

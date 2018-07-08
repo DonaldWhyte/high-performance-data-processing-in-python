@@ -1,6 +1,7 @@
 .reveal section img {
     border: 0px;
     box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.0);
 }
 
 /* Title */
@@ -14,9 +15,35 @@
     text-align: center;
 }
 
+.highcharts-label text {
+    font-size: 26px !important;
+}
+
 img[alt="pycon_russia"] {
     width: 130px;
     margin: 0px !important;
+}
+
+/* Background Slides */
+.background h1,
+.background h2,
+.background h3,
+.background h4,
+.background h5,
+.background p,
+.background li,
+.background em,
+.background strong
+{
+    color: white !important;
+}
+
+.background blockquote {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+.background a {
+    color: #4c98ff;
 }
 
 /* Multi-column Layout */
@@ -29,7 +56,7 @@ img[alt="pycon_russia"] {
 .right-col {
     width: 50%;
     float: right;
-}
+}2
 
 .left-col1of3 {
     width: 33%;
@@ -126,6 +153,13 @@ code {
     background-color: #888;
 }
 
+.reference {
+    float: right;
+    text-align: right;
+    font-size: 32px !important;
+    margin-top: 32px !important;
+}
+
 /* For highlighting specific lines in code formatted using hljs */
 code mark {
     display: inline-block;
@@ -151,7 +185,11 @@ img[alt="small_portrait"] {
 }
 
 img[alt="ecosystem"] {
-    width: 320px;
+    width: 500px;
+}
+
+img[alt="numpy_coloured"] {
+    width: 200px;
 }
 
 img[alt="isd"] {
@@ -171,6 +209,7 @@ img[alt="dataset"],
 img[alt="python"],
 img[alt="numpy"],
 img[alt="vectorisation"],
+img[alt="numba"],
 img[alt="fin"] {
     width: 200px;
     position: relative;

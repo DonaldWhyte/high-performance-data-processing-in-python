@@ -1,23 +1,27 @@
 import argparse
 import datetime
+import h5py
 import matplotlib.pyplot as plt
-import pandas as pd
+import numpy as np
 
 
 def _main():
     args = _parse_args()
 
-    print()
-    store = pd.read_hdf(args.input, mode='r')
-    df = pd.read_hdf(
-        'isdlite_table.h5',
-        'isdlite',
-        columns=['timestamp', args.measurement],
-        where=[f'station_usaf=={args.station}'])
-    df['timestamp'] = df['timestamp'].apply(datetime.datetime.fromtimestamp)
-    df.sort_values('timestamp', inplace=True)
+    input_file = h5py.File(args.input, mode='r')
 
-    plt.plot(df['timestamp'], df[args.measurement])
+    indices_of_data = np.where(input_file['station_usaf'][:] == args.station)[0]
+    if len(indices_of_data) == 0:
+        print('No data to plot')
+        return
+
+    timestamps = [
+        datetime.datetime.fromtimestamp(x)
+        for x in input_file['timestamp'][indices_of_data]
+    ]
+    measurements = input_file[args.measurement][indices_of_data]
+
+    plt.plot(timestamps, measurements)
     plt.title(f'station {args.station} {args.measurement}')
     plt.show()
 

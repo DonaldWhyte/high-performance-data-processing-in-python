@@ -19,7 +19,6 @@
     <!--<link rel="stylesheet" href="css/print/pdf.css">-->
     <link rel="stylesheet" href="css/custom.css">
 
-
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -56,6 +55,9 @@
 
     <!-- Custom JS libraries -->
     <script src="lib/js/jquery-3.2.1.min.js"></script>
+    <!-- TOOD: download locally -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
 
     <!-- Reveal initialisation -->
     <script>
@@ -64,7 +66,6 @@
         progress: true,
         history: true,
         center: true,
-
         transition: 'none', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
@@ -82,6 +83,224 @@
             }
           }
         ]
+      });
+
+      // FUNCTIONS
+      function load_chart_event() {
+        $("text:contains('Highcharts.com')").remove();
+      }
+
+      function create_line_chart(container_id,
+                                 series,
+                                 x_axis_label,
+                                 y_axis_label,
+                                 label_colour)
+      {
+        return Highcharts.chart(container_id, {
+          chart: {
+            events: { load: load_chart_event },
+            marginTop: 32,
+            marginBottom: 64,
+            borderColor: '#4572A7',
+            backgroundColor: '#222',
+            borderWidth: 3,
+            borderColor: '#444',
+            plotShadow: true
+          },
+          title: { text: ''},
+          xAxis: {
+            lineWidth: 1,
+            lineColor: '#CCCCCC',
+            tickPixelInterval: 80,
+            tickLength: 5,
+            tickWidth: 1,
+            tickColor: '#FFFFFF',
+            tickPosition: 'outside', // 'inside' or 'outside'
+            gridLineWidth: 1,
+            gridLineColor: '#444444',
+            showFirstLabel: true,
+            showLastLabel: false,
+            startOnTick: true,
+            endOnTick: true,
+            allowDecimals: false,
+            title: {
+              text: x_axis_label,
+              style: {
+                'color': 'white',
+                'font-size': '22px'
+              }
+            },
+            labels: {
+              align: 'center',
+              style: {
+                'color': 'white',
+                'font-size': '18px'
+              }
+            }
+          },
+          yAxis: {
+            lineWidth: 1,
+            lineColor: '#CCCCCC',
+            tickPixelInterval: 50,
+            tickLength: 5,
+            tickWidth: 1,
+            tickColor: '#FFFFFF',
+            tickPosition: 'inside',
+            gridLineWidth: 1,
+            gridLineColor: '#444444',
+            alternateGridColor: 'rgba(0, 0, 0, .2)',
+            minorTickInterval: null,
+            minorTickLength: 2,
+            minorTickWidth: 0,
+            minorTickColor: '#cccccc',
+            minorTickPosition: 'outside',
+            minorGridLineWidth: 1,
+            minorGridLineColor: '#333333',
+            minRange: 1,
+            showFirstLabel: false,
+            showLastLabel: true,
+            title: {
+              text: y_axis_label,
+              style: {
+                'color': 'white',
+                'font-size': '22px'
+              }
+            },
+            labels: {
+              align: 'right',
+              style: {
+                'color': 'white',
+                'font-size': '20px'
+              }
+            },
+            maxZoom: 1
+          },
+          legend: {
+            enabled: false,
+            floating: true,
+            layout: 'vertical',
+            borderWidth: 1,
+            borderColor: '#444444',
+            borderCornerRadius: 5,
+            shadow: true,
+            backgroundColor: 'rgba(32, 32, 32, .75)',
+            align: 'left',
+            x: 80,
+            verticalAlign: 'top',
+            y: 30,
+            itemStyle: {
+              color: '#CCCCCC',
+              listStyle: 'none',
+              listStyleImage: 'none'
+            },
+            itemHiddenStyle: {
+              color: '#444444'
+            },
+            itemHoverStyle: {
+              color: 'white'
+            }
+          },
+          tooltip: { enabled: false },
+          plotOptions: {
+            series: {
+                lineWidth: 5,
+                shadow: true,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle'
+                }
+            }
+          },
+          series: series
+        });
+      }
+
+      Reveal.addEventListener('ready', function(event) {
+        const python_label = 'Python';
+        const python_colour = '#44AA44';
+        const c_label = 'C';
+        const c_colour = '#FF0000';
+
+        create_line_chart(
+          'python-vs-c-chart1',
+          [
+            {
+              name: python_label,
+              color: python_colour,
+              data: [
+                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
+              ]
+            },
+            {
+              name: c_label,
+              color: c_colour,
+              data: [
+                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
+              ],
+            },
+          ],
+          'Number of Elements',
+          'Seconds',
+          'white');
+
+        create_line_chart(
+          'python-vs-c-chart2',
+          [
+            {
+              name: python_label,
+              color: python_colour,
+              data: [
+                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
+              ]
+            },
+            {
+              name: c_label,
+              color: c_colour,
+              data: [
+                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
+              ],
+            },
+          ],
+          'Number of Elements',
+          'Seconds',
+          'white');
+
+        create_line_chart(
+          'python-vs-c-chart3',
+          [
+            {
+              name: python_label,
+              color: python_colour,
+              data: [
+                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
+              ]
+            },
+            {
+              name: c_label,
+              color: c_colour,
+              data: [
+                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
+              ],
+            },
+          ],
+          'Number of Elements',
+          'Seconds',
+          'white');
+
+        create_line_chart(
+          'wind-speed-example',
+          [
+            {
+              name: '',
+              color: 'black',
+              data: [
+                [0, 0]
+              ]
+            }
+          ],
+          'Timestamp',
+          'Wind Speed Rate',
+          'white')
       });
     </script>
 
