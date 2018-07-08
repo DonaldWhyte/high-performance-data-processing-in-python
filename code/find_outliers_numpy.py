@@ -72,7 +72,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         '-i', '--input',
         required=True,
-        help='path to input HDF5 file containing time series to plot')
+        help='path to input HDF5 file containing time series to find '
+             'outliers in')
     parser.add_argument(
         '-m', '--measurement',
         required=True,
