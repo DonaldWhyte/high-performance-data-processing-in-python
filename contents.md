@@ -13,7 +13,6 @@
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-
 ### About Me
 
 <div class="left-col">
@@ -32,8 +31,7 @@
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-
-**Python is a hugely popular tool for research.**
+**Python is a hugely popular tool for data analysis.**
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -61,7 +59,6 @@ TODO
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-
 **What about production?**
 
 [NEXT]
@@ -77,7 +74,7 @@ TODO: with ML being bigger than ever, actually _running_
 
 ### The Traditional Process
 
-1. Researcher builds an awesome model in MATLAB
+1. Researcher builds model in their tech of choice
 2. Programmer takes research code and rewrites it
 3. Production code is deployed
 4. Everything works fine
@@ -94,10 +91,8 @@ TODO: with ML being bigger than ever, actually _running_
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-
-### The Real Process
-
-1. Researcher builds an awesome model
+### The Reality...
+1. Researcher builds model that works on their machine
 2. Programmer TODO
 3. TODO
 4. Deployment is delayed
@@ -134,6 +129,13 @@ What about performance?
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Reasons Python is Slow
+* TODO
+* TODO
+* TODO
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 Why do people still use Python in production?
 
 [NEXT]
@@ -142,14 +144,14 @@ Why do people still use Python in production?
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-TODO: how it's possible
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### NumPy
 
 <div class="left-col">
-  <p>Heart of TODO.</p>
+  <ul>
+  <li>Heart of TODO.</li>
+  <li>TODO</li>
+  <li>TODO</li>
+  </ul>
 </div>
 <div class="right-col">
   <img src="images/numpy_coloured.svg" alt="numpy_coloured" />
@@ -164,14 +166,16 @@ TODO: focus of tlak
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Outline
 
-1. Find extreme weather events in a large TODO dataset
+1. Analyse a large weather dataset
 2. Process dataset in **pure Python**
-3. Speed up processing using **NumPy**
+3. Speed up processing using **NumPy** and vectorisation
 4. Speed up processing even more using **Numba**
 
 [NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-TODO: initial speed and end result graph
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+## Final Optimised Solution?
+
+**1000 times** faster.
 
 
 [NEXT SECTION]
@@ -232,50 +236,192 @@ _note_
 ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
 
 [NEXT]
+### Example
+![tabriz_airport](images/tabriz_airport.png)
+
+[NEXT]
 | **timestamp**       | **station_id** | **wind_speed_rate** | *...* |
 | ------------------- | -------------- | ------------------- | ----- |
-| 1995-01-06 03:00:00 | 407000         | 50.0                | ...   |
-| 1995-01-06 06:00:00 | 407000         | 70.0                | ...   |
-| 1995-01-06 09:00:00 | 407000         | null                | ...   |
-| 1995-01-06 12:00:00 | 407000         | 60.0                | ...   |
-| 1995-01-06 16:00:00 | 407000         | 20.0                | ...   |
+| 1995-01-06 03:00:00 | 407060         | 50.0                | ...   |
+| 1995-01-06 06:00:00 | 407060         | 70.0                | ...   |
+| 1995-01-06 09:00:00 | 407060         | null                | ...   |
+| 1995-01-06 12:00:00 | 407060         | 60.0                | ...   |
+| 1995-01-06 16:00:00 | 407060         | 20.0                | ...   |
+
+_note_
+TODO: add explanation of wind speed rate here
 
 [NEXT]
-<div id="wind-speed-example"></div>
+### Tabriz Wind Speed Rate
+##### (2011-12-29 to 2011-12-31)
+![tabriz_wind_speed_rate](images/tabriz_wind_speed_rate.png)
 
 [NEXT]
+# Goal
 TODO: mention research question here
 
 [NEXT]
-### ISD-Lite
+### Trimmed Data
+
+**ISD-Lite Dataset**
 
 |                 |                          |
 | --------------- | ------------------------ |
 |**Dates**        | 1991-01-01 to 2011-12-31 |
-|**Measurements** | 8                        |
-|**Stations**     | 5,182                    |
+|**Measurement**  | Wind Speed Rate          |
+|**Stations**     | ~6000                    |
 |**Rows**         | ~400,000,000             |
-
-One row per station every 6 hours.
 
 _note_
 Total stations: 29,630
-Total rows: 391,908,528
+Total rows: 391,908,527
 
 
 [NEXT SECTION]
-## 2. Let's use Python
+## 2. Let's Use Python
 ![python](images/python.svg)
 
 [NEXT]
-### Data Format
-TODO: how to implement processing
+How do we detect hurricanes?
+
+Finding data points with unusually low/high `wind_speed_rate` values.,
 
 [NEXT]
-TODO: really slow!
+### Detecting Outliers
+![outlier_detection](images/outlier_detection.png)
+
+[NEXT]
+### Detecting Outliers
+
+At each point `i` in the time series:
+
+1. Take values in time series between points `i - 30` and `i`
+2. Calculate mean and standard deviation
+3. Value at `i` is an outlier if it's:
+  - more than **6 standard deviations** away from the mean
+
+[NEXT]
+![rolling_mean_and_std](images/rolling_mean_and_std.png)
+
+[NEXT]
+### Problem: Null Values
+<table>
+  <tr>
+    <th>timestamp</th>
+    <th>station_id</th>
+    <th>wind_speed_rate</th>
+  </tr>
+  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
+  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr class="bad-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>null</td></tr>
+  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
+</table>
+
+[NEXT]
+### Solution: Fill Forward
+<table>
+  <tr>
+    <th>timestamp</th>
+    <th>station_id</th>
+    <th>wind_speed_rate</th>
+  </tr>
+  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
+  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr class="good-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
+</table>
+
+[NEXT]
+### Complete Process
+TODO: add diagram illustrating full process
+
+_note_
+1. Split full dataset into separate station time series
+2. For each weather station time series, detect outliers by:
+  1. calculate rolling mean and stdev at each point
+  2. check if a point is > 6 stdevs away from its rolling mean value
+  3. if so, mark point as outlier
+3. generate CSV containing all outliers in each station's data
+
+[NEXT]
+### Input
+
+* HDF5 file containing three columns:
+  - `timestamp`
+  - `station_id`
+  - `wind_speed_rate`
+* Rows already sorted by station and time
+
+_note_
+TODO: what is HDF5 file
+
+[NEXT]
+### The Code
+TODO: point to where you can find the code
+
+[NEXT]
+```bash
+> python3 -m find_outliers_purepy \
+    --input isdlite.hdf5 \
+    --output outliers.csv \
+    --measurement wind_speed_rate
+Found TODO outliers in TODO stations
+Outlier search took TODO
+```
+
+[NEXT]
+```bash
+> cat outliers.csv | head
+TODO
+```
+
+[NEXT]
+TODO: show news report of actual incident
+
+[NEXT]
+### Performance
+* **Time taken:** TODO
+* **Average time per row:** TODO
+
+[NEXT]
+### Profiling the Code
+
+Let's find out which step(s) were the performance bottlenecks.
+
+```bash
+> python3 -m cProfile -o profile_output \
+     find_outliers_purepy.py \
+     --input isdlite.hdf5 \
+     --output outliers.csv \
+     --measurement wind_speed_rate
+```
+
+[NEXT]
+### Visualising Performance Bottlenecks
+
+```bash
+> pip3 install snakeviz
+> snakeviz profile_output
+```
+
+[NEXT]
+TODO: show snakeviz output
+
+[NEXT]
+TODO: break down time for each step (bar chart, standard graph for all breakdowns)
 
 [NEXT]
 TODO: what is Python actually doing under the hood to make it so slow?
+
+[NEXT]
+### Reason 1: Memory Indirection
+TODO
+
+[NEXT]
+### Reason 2: Difficult to Vectorise
+TODO
 
 
 [NEXT SECTION]
@@ -283,10 +429,25 @@ TODO: what is Python actually doing under the hood to make it so slow?
 ![numpy](images/numpy.svg)
 
 [NEXT]
-what is it?
+Fundamental package for high performance computing in Python.
 
 [NEXT]
-How does it work? Basic primitives, memory layout, stride, etc.]
+### The Foundation
+
+Foundation on which nearly all of the higher-level data tools are built.
+
+Example tools:
+
+* TODO
+
+[NEXT]
+### Features
+
+* `ndarray`, a fast and space-efficient multidimensional array
+  - provides vectorized arithmetic operations and sophisticated broadcasting capabilities
+
+[NEXT]
+How does it work? Basic primitives, memory layout, stride, etc.
 
 [NEXT]
 ### `numpy.ndarray`
@@ -296,13 +457,13 @@ TODO: summary of why it is (one or many D array of contiguous memory that stores
 [NEXT]
 ### `numpy.ndarray`
 
-| | |
-| - | - |
-| `data` | pointer indicating the memory address of the first byte in the array |
-| `dtype` | the kind of elements contained within the array |
-| `shape` | TODO |
+|          |                                                                      |
+| -------- | -------------------------------------------------------------------- |
+| `data`   | pointer indicating the memory address of the first byte in the array |
+| `dtype`  | the kind of elements contained within the array                      |
+| `shape`  | TODO |
 | `stride` | TODO |
-| `flags` | TODO |
+| `flags`  | TODO |
 
 _note_
 The shape indicates the shape of the array

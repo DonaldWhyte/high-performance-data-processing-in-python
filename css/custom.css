@@ -2,6 +2,7 @@
     border: 0px;
     box-shadow: none;
     background-color: rgba(255, 255, 255, 0.0);
+    margin: 0px;
 }
 
 /* Title */
@@ -33,7 +34,10 @@ img[alt="pycon_russia"] {
 .background p,
 .background li,
 .background em,
-.background strong
+.background strong,
+.background td,
+.background tr,
+.background th
 {
     color: white !important;
 }
@@ -123,6 +127,16 @@ code {
     max-width: 400px;
 }
 
+.bad-row td {
+    color: red;
+    font-weight: bold;
+}
+
+.good-row td {
+    color: green;
+    font-weight: bold;
+}
+
 /* Slide-wide styles. */
 .small-slide p,
 .small-slide ul,
@@ -202,6 +216,18 @@ img[alt="weather_measurements"] {
 
 img[alt="globe"] {
     width: 300px;
+}
+
+img[alt="tabriz_airport"] {
+    width: 600px;
+}
+
+img[alt="tabriz_wind_speed_rate"] {
+    width: 500px;
+}
+
+img[alt="outlier_detection"] {
+    width: 650px;
 }
 
 /* Section Heading Icons */

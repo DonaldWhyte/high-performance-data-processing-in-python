@@ -72,19 +72,19 @@ def _main():
 def _compute_outliers(data: List[dict], n: int) -> np.array:
     data = _fill_forward(data)
 
-    differenced = [
-        curr - prev
-        for prev, curr in zip(data[:-_DIFFERENCE_RANGE],
-                              data[_DIFFERENCE_RANGE:])
-    ]
+    #differenced = [
+    #    curr - prev
+    #    for prev, curr in zip(data[:-_DIFFERENCE_RANGE],
+    #                          data[_DIFFERENCE_RANGE:])
+    #]
 
-    avg = _rolling_average(differenced, n)
-    std = _rolling_standard_deviation(differenced, avg, n)
-    differences_with_std = differenced[n - 1:]
+    avg = _rolling_average(data, n)
+    std = _rolling_standard_deviation(data, avg, n)
+    series_with_std = data[n - 1:]
 
     return [
         i for i in range(len(differences_with_std))
-        if math.fabs(differences_with_std[i] - avg[i] >
+        if math.fabs(series_with_std[i] - avg[i] >
                      (std * _OUTLIER_STD_THRESHOLD))
     ]
 

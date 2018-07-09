@@ -88,15 +88,15 @@ def _parse_args() -> argparse.Namespace:
 def _compute_outliers(data: np.array, n: int) -> np.array:
     data = _fill_forward(data)
 
-    shifted = data[:-_DIFFERENCE_RANGE]
-    differenced = data[_DIFFERENCE_RANGE:] - shifted
+    #shifted = data[:-_DIFFERENCE_RANGE]
+    #differenced = data[_DIFFERENCE_RANGE:] - shifted
 
-    avg = _rolling_average(differenced, n)
-    std = _rolling_standard_deviation(differenced, avg, n)
-    differences_with_std = differenced[n - 1:]
+    avg = _rolling_average(data, n)
+    std = _rolling_standard_deviation(data, avg, n)
+    series_with_std = data[n - 1:]
 
     outlier_indices = np.where(
-        np.absolute(differences_with_std - avg) > (std * _OUTLIER_STD_THRESHOLD))
+        np.absolute(series_with_std - avg) > (std * _OUTLIER_STD_THRESHOLD))
     return outlier_indices[0]
 
 
