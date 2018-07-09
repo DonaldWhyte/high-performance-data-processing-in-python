@@ -51,11 +51,11 @@ https://www.jetbrains.com/research/python-developers-survey-2017/
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-TODO: three obvious reasons
+High-level and easy to use.
 
-TODO
+Wealth of tools for processing/analysing data.
 
-TODO
+General-purpose language useful outside of data analysis.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
@@ -63,21 +63,65 @@ TODO
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Isolated to Research?
 
-TODO: data analysis used to be the realm of research --
-one-off jobs to produce papers or presentations
+![chart](images/chart.svg)
+![research](images/research.svg)
+![one_off_batch_job](images/one_off_batch_job.svg)
 
-TODO: with ML being bigger than ever, actually _running_
+Large data analysis/processing typically isolated to research.
+
+One-off batch jobs to produce insight for research and decision making.
+
+_note_
+Data analysis used to only be active in the realm of research. Analysts would
+write one-off jobs that cleaned up data and analysed it. The findings would
+then be included in research papers, presentations to management in firms and so on.
+
+It was very rare that you'd run such heavy data analysis frequently in live
+production systems.
+
+[NEXT]
+<!-- .slide: data-background="images/ml_landscape_dec15.jpg" class="background" -->
+### Things Have Changed
+
+More data than ever before.
+
+Machine learning and other statistical models are being run in live, production systems.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Artificial Intelligence
+### Projected Global Revenue
+<div id="deep-learning-revenue"></div>
 
+[Source: Tractica December 2017](https://www.tractica.com/newsroom/press-releases/artificial-intelligence-software-market-to-reach-89-8-billion-in-annual-worldwide-revenue-by-2025/)
+<!-- .element: style="font-size: 28px" -->
+
+_note_
+Artificial Intelligence software market projected to reach almost $90 billion
+by 2025.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+More data to process.
+
+More numerical models being trained for live use.
+
+Models larger and more complex.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+**Strict time requirements.**
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### The Traditional Process
 
 1. Researcher builds model in their tech of choice
-2. Programmer takes research code and rewrites it
+2. Programmer takes research code and rewrites it in heavily optimised C/C++
 3. Production code is deployed
-4. Everything works fine
+4. _Everything works fine_
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -86,17 +130,24 @@ TODO: with ML being bigger than ever, actually _running_
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### The Reality...
-![bad_times](images/bad_times.gif)
+### The Reality
+![bad_construction](images/bad_construction.gif)
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### The Reality...
+### The Reality
 1. Researcher builds model that works on their machine
-2. Programmer TODO
-3. TODO
-4. Deployment is delayed
-5. Cut backs TODO
+2. Programmer attempts to rewrite model for production
+3. Programmer can't to replicate the researcher's results
+4. Everything spends tons of time figuring out why
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Results in...
+![anger](images/anger.gif)
+
+* Deployment delays
+* Compromises on model accuracy to get it out the door
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -106,41 +157,41 @@ Research and production code is **identical**.
 _note_
 A better process is to make the research and production code **identical**.
 They can be configured differently, but the code which pre-processes the data,
-builds the model and TODO should be the same.
+trains the models and executes it in prod should be the same.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-What about performance?
+### Problem
+Pure Python is slow.
+
+_note_
+But we like Python because it's easy to use for research.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-## TODO 1
+### TODO 1
 <div id="python-vs-c-chart1"></div>
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-## TODO 2
+### TODO 2
 <div id="python-vs-c-chart2"></div>
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-## TODO 3
+### TODO 3
 <div id="python-vs-c-chart3"></div>
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Reasons Python is Slow
-* TODO
-* TODO
-* TODO
+### Solution
+Python's ecosystem for data science.
 
 [NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-Why do people still use Python in production?
+<!-- .slide: data-background="images/ecosystem.png" -->
 
 [NEXT]
-<!-- .slide: data-background="images/ecosystem.png" class="background" -->
-# Ecosystem
+<!-- .slide: data-background="images/ecosystem_marked.png" -->
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -160,7 +211,7 @@ Why do people still use Python in production?
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-TODO: focus of tlak
+TODO: focus of talk
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -184,7 +235,6 @@ TODO: focus of tlak
 
 [NEXT]
 ### Integrated Surface Database (ISD)
-
 ![isd](images/isd.gif)
 
 _note_
@@ -249,7 +299,13 @@ ISD integrates data from over 100 original data sources, including numerous data
 | 1995-01-06 16:00:00 | 407060         | 20.0                | ...   |
 
 _note_
-TODO: add explanation of wind speed rate here
+Wind speed rate = the rate of horizontal travel of air past a fixed point.
+
+UNITS: meters per second
+SCALING FACTOR: 10
+MISSING VALUE: -9999
+
+http://www.polmontweather.co.uk/windspd.htm
 
 [NEXT]
 ### Tabriz Wind Speed Rate
@@ -257,8 +313,12 @@ TODO: add explanation of wind speed rate here
 ![tabriz_wind_speed_rate](images/tabriz_wind_speed_rate.png)
 
 [NEXT]
-# Goal
-TODO: mention research question here
+# Research Goal
+Use IDS data to detect extreme weather events that occurred anywhere on the planet.
+
+[NEXT]
+## Detecting Hurricanes
+![hurricanes](images/hurricanes.jpg)
 
 [NEXT]
 ### Trimmed Data
@@ -273,7 +333,7 @@ TODO: mention research question here
 |**Rows**         | ~400,000,000             |
 
 _note_
-Total stations: 29,630
+Total stations: 5,700
 Total rows: 391,908,527
 
 
@@ -284,7 +344,7 @@ Total rows: 391,908,527
 [NEXT]
 How do we detect hurricanes?
 
-Finding data points with unusually low/high `wind_speed_rate` values.,
+Finding data points with unusually low/high `wind_speed_rate` values.
 
 [NEXT]
 ### Detecting Outliers
@@ -616,4 +676,5 @@ TODO: be sure to emphasise the importance of numerical computation optimisation
 [NEXT]
 ### Image Credits
 
-[Freepik](https://www.freepik.com/)
+* [Freepik](https://www.freepik.com/)
+* [Icon Fonts](http://www.onlinewebfonts.com/icon)

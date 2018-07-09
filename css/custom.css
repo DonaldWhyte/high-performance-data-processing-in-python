@@ -198,6 +198,14 @@ img[alt="small_portrait"] {
     border: 2px solid black !important;
 }
 
+img[alt="chart"],
+img[alt="research"],
+img[alt="one_off_batch_job"]
+{
+    width: 100px;
+    padding: 16px;
+}
+
 img[alt="ecosystem"] {
     width: 500px;
 }

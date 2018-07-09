@@ -215,6 +215,66 @@
         });
       }
 
+      function create_bar_chart(container_id,
+                                series,
+                                categories,
+                                y_axis_label,
+                                label_colour)
+      {
+        return Highcharts.chart(container_id, {
+          chart: {
+            type: 'column',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            events: { load: load_chart_event },
+            marginTop: 64,
+            marginBottom: 32
+          },
+          title: { text: '' },
+          xAxis: {
+            categories: categories,
+            crosshair: true,
+            labels: {
+              style: {
+                color: 'white',
+                'font-weight': 'strong',
+                'font-size': '18px'
+              }
+            }
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: y_axis_label,
+              style: {
+                color: 'white',
+                'font-weight': 'strong',
+                'font-size': '28px'
+              }
+            },
+            labels: {
+              formatter: function () {
+                return '$' + this.value
+              },
+              style: {
+                color: 'white',
+                'font-weight': 'strong',
+                'font-size': '18px'
+              }
+            }
+          },
+          legend: { enabled: false },
+          tooltip: { enabled: false },
+          exporting: { enabled: false },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          series: series
+        });
+      }
+
       Reveal.addEventListener('ready', function(event) {
         const python_label = 'Python';
         const python_colour = '#44AA44';
@@ -285,6 +345,18 @@
           ],
           'Number of Elements',
           'Seconds',
+          'white');
+
+        create_bar_chart(
+          'deep-learning-revenue',
+          [
+            {
+              name: 'Global Revenue',
+              data: [ 2000, 3500, 8000, 10500, 18000, 25000, 38000, 52000, 70500, 90000 ]
+            }
+          ],
+          [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+          'Revenue ($ millions)',
           'white');
       });
     </script>
