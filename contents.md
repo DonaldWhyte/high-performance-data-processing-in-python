@@ -149,8 +149,8 @@ Models larger and more complex.
 ### Results in...
 ![anger](images/anger.gif)
 
-* Deployment delays
-* Compromises on model accuracy to get it out the door
+* Significant deployment delays
+* Compromises on model accuracy to release it faster
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -428,22 +428,45 @@ _note_
 * Rows already sorted by station and time
 
 _note_
-TODO: what is HDF5 file
+HDF5 is an open source file format for storing huge amounts of numerical data.
+
+It’s typically used in research applications (meteorology, astronomy, genomics etc.) to distribute and access very large datasets without using a database.
+
+It lets you store huge amounts of numerical data, and easily manipulate that data from NumPy. For example, you can slice into multi-terabyte datasets stored on disk, as if they were real NumPy arrays. Thousands of datasets can be stored in a single file, categorized and tagged however you want.
 
 [NEXT]
 ### The Code
-TODO: point to where you can find the code
+
+Source file: `find_outliers_purepy.py`
+
+<pre class="medium"><code data-noescape class="bash">&gt; git clone https://github.com/DonaldWhyte/high-performance-data-processing-in-python/
+&gt; cd high-performance-data-processing-in-python/
+&gt; cd code/
+&gt; python3 -m find_outliers_purepy --help
+usage: find_outliers_numpy.py [-h] -i INPUT -m MEASUREMENT -o OUTPUT
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        path to input HDF5 file containing data to find
+                        outliers in
+  -m MEASUREMENT, --measurement MEASUREMENT
+                        measurement to find outliers in
+  -o OUTPUT, --output OUTPUT
+                        name of output CSV file that contains outliers
+</code></pre>
 
 [NEXT]
 ### Code Breakdown
 
-| | |
-| ----------------- | ---- |
-| `station_ranges`  | TODO |
-| `fill_forward`    | TODO |
-| `rolling_average` | TODO |
-| `rolling_std`     | TODO |
-| `find_outliers`   | TODO |
+|                   |                                                           |
+| ----------------- | ------------------------------------------------------- |
+| `station_ranges`  | partition full dataset into per-station time series     |
+| `fill_forward`    | fill in missing data with previous values               |
+| `rolling_average` | computing rolling average at every time point           |
+| `rolling_std`     | computing rolling stdev at every time point             |
+| `find_outliers`   | get indices of outliers using deviance from rolling avg |
+<!-- .element class="medium-table-text" -->
 
 [NEXT]
 ```bash
@@ -462,6 +485,12 @@ TODO
 ```
 
 [NEXT]
+### Success!
+
+```bash
+TODO: single outlier
+```
+
 TODO: show news report of actual incident
 
 [NEXT]
@@ -494,7 +523,8 @@ Let's find out which step(s) were the performance bottlenecks.
 TODO: show snakeviz output
 
 [NEXT]
-TODO: break down time for each step (bar chart, standard graph for all breakdowns)
+### Execution Time Breakdown
+<div id="purepython-times"></div>
 
 [NEXT]
 TODO: what is Python actually doing under the hood to make it so slow?

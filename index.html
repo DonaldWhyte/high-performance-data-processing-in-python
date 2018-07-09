@@ -220,15 +220,38 @@
                                 categories,
                                 y_axis_label,
                                 y_axis_label_formatter,
-                                label_colour)
+                                theme,
+                                show_legend)
       {
+        const label_colour = {
+          'light': 'white',
+          'dark': 'black'
+        }[theme];
+
+        if (show_legend) {
+          var legend = {
+            x: 0,
+            itemStyle: {
+              fontSize: 22,
+              color: label_colour
+            },
+            symbolHeight: 18,
+          };
+          var chart_margin_bottom = 100;
+          var axis_label_size = '22px';
+        } else {
+          var legend = {enabled: false};
+          var chart_margin_bottom = 32;
+          var axis_label_size = '28px';
+        }
+
         return Highcharts.chart(container_id, {
           chart: {
             type: 'column',
             backgroundColor: 'rgba(0, 0, 0, 0)',
             events: { load: load_chart_event },
             marginTop: 64,
-            marginBottom: 32
+            marginBottom: chart_margin_bottom
           },
           title: { text: '' },
           xAxis: {
@@ -236,7 +259,7 @@
             crosshair: true,
             labels: {
               style: {
-                color: 'white',
+                color: label_colour,
                 'font-weight': 'strong',
                 'font-size': '18px'
               }
@@ -247,21 +270,21 @@
             title: {
               text: y_axis_label,
               style: {
-                color: 'white',
+                color: label_colour,
                 'font-weight': 'strong',
-                'font-size': '28px'
+                'font-size': axis_label_size
               }
             },
             labels: {
               formatter: y_axis_label_formatter,
               style: {
-                color: 'white',
+                color: label_colour,
                 'font-weight': 'strong',
                 'font-size': '18px'
               }
             }
           },
-          legend: { enabled: false },
+          legend: legend,
           tooltip: { enabled: false },
           exporting: { enabled: false },
           plotOptions: {
@@ -299,7 +322,8 @@
           ],
           'execution time (secs)',
           function () { return this.value + 's'; },
-          'white');
+          'light',
+          false);
 
         create_bar_chart(
           'deep-learning-revenue',
@@ -312,7 +336,30 @@
           [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
           'Revenue ($ millions)',
           function () { return '$' + this.value; },
-          'white');
+          'light',
+          false);
+
+        create_bar_chart(
+          'purepython-times',
+          [
+            {
+              name: 'Pure Python',
+              // TODO: fill in actual times
+              data: [ 60, 60, 60, 60, 60 ]
+            }
+          ],
+          [
+            'station_ranges',
+            'fill_forward',
+            'rolling_average',
+            'rolling_std',
+            'find_outliers'
+          ],
+          'execution time (mins)',
+          function () { return this.value + 'm'; },
+          'dark',
+          true);
+
       });
     </script>
 

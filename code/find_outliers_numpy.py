@@ -72,12 +72,11 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         '-i', '--input',
         required=True,
-        help='path to input HDF5 file containing time series to find '
-             'outliers in')
+        help='path to input HDF5 file containing data to find outliers in')
     parser.add_argument(
         '-m', '--measurement',
         required=True,
-        help='measurement to plot')
+        help='measurement to find outliers in')
     parser.add_argument(
         '-o', '--output',
         required=True,
@@ -87,9 +86,6 @@ def _parse_args() -> argparse.Namespace:
 
 def _compute_outliers(data: np.array, n: int) -> np.array:
     data = _fill_forward(data)
-
-    #shifted = data[:-_DIFFERENCE_RANGE]
-    #differenced = data[_DIFFERENCE_RANGE:] - shifted
 
     avg = _rolling_average(data, n)
     std = _rolling_std(data, avg, n)
