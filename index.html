@@ -219,6 +219,7 @@
                                 series,
                                 categories,
                                 y_axis_label,
+                                y_axis_label_formatter,
                                 label_colour)
       {
         return Highcharts.chart(container_id, {
@@ -252,9 +253,7 @@
               }
             },
             labels: {
-              formatter: function () {
-                return '$' + this.value
-              },
+              formatter: y_axis_label_formatter,
               style: {
                 color: 'white',
                 'font-weight': 'strong',
@@ -276,75 +275,30 @@
       }
 
       Reveal.addEventListener('ready', function(event) {
-        const python_label = 'Python';
-        const python_colour = '#44AA44';
-        const c_label = 'C';
-        const c_colour = '#FF0000';
-
-        create_line_chart(
-          'python-vs-c-chart1',
+        create_bar_chart(
+          'python-vs-c',
           [
             {
-              name: python_label,
-              color: python_colour,
-              data: [
-                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
-              ]
+              name: 'CPython 3.7',
+              color: '#44AA44',
+              data: [ 3.52, 15.57, 21.71, 79.61, 92.78, 61.81 ]
             },
             {
-              name: c_label,
-              color: c_colour,
-              data: [
-                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
-              ],
-            },
+              name: 'C (gcc)',
+              color: '#FF0000',
+              data: [ 1.75, 1.5, 1.75, 5.07, 2.54, 1.32 ]
+            }
           ],
-          'Number of Elements',
-          'Seconds',
-          'white');
-
-        create_line_chart(
-          'python-vs-c-chart2',
           [
-            {
-              name: python_label,
-              color: python_colour,
-              data: [
-                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
-              ]
-            },
-            {
-              name: c_label,
-              color: c_colour,
-              data: [
-                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
-              ],
-            },
+            'pidigits',
+            'regex-redux',
+            'r-complement',
+            'k-nucleotide',
+            'binary-trees',
+            'fasta'
           ],
-          'Number of Elements',
-          'Seconds',
-          'white');
-
-        create_line_chart(
-          'python-vs-c-chart3',
-          [
-            {
-              name: python_label,
-              color: python_colour,
-              data: [
-                [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7]
-              ]
-            },
-            {
-              name: c_label,
-              color: c_colour,
-              data: [
-                [1, 0.1], [2, 0.2], [3, 0.3], [4, 0.4], [5, 0.5], [6, 0.6], [7, 0.7]
-              ],
-            },
-          ],
-          'Number of Elements',
-          'Seconds',
+          'execution time (secs)',
+          function () { return this.value + 's'; },
           'white');
 
         create_bar_chart(
@@ -357,6 +311,7 @@
           ],
           [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
           'Revenue ($ millions)',
+          function () { return '$' + this.value; },
           'white');
       });
     </script>

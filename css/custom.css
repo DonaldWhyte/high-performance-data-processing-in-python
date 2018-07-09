@@ -38,6 +38,7 @@ img[alt="pycon_russia"] {
 .background td,
 .background tr,
 .background th
+.background
 {
     color: white !important;
 }
@@ -174,6 +175,11 @@ code {
     margin-top: 32px !important;
 }
 
+.source {
+    margin-top: 32px !important;
+    font-size: 28px !important;
+}
+
 /* For highlighting specific lines in code formatted using hljs */
 code mark {
     display: inline-block;
@@ -198,10 +204,7 @@ img[alt="small_portrait"] {
     border: 2px solid black !important;
 }
 
-img[alt="chart"],
-img[alt="research"],
-img[alt="one_off_batch_job"]
-{
+img[alt="research_use_case"] {
     width: 100px;
     padding: 16px;
 }
@@ -212,6 +215,26 @@ img[alt="ecosystem"] {
 
 img[alt="numpy_coloured"] {
     width: 200px;
+}
+
+img[alt="scipy"] {
+    width: 110px;
+    padding: 16px;
+}
+
+img[alt="pandas"] {
+    width: 200px;
+    padding: 16px;
+}
+
+img[alt="sklearn"] {
+    width: 180px;
+    padding: 16px;
+}
+
+img[alt="matplotlib"] {
+    width: 300px;
+    padding: 16px;
 }
 
 img[alt="isd"] {

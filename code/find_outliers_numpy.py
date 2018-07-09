@@ -92,7 +92,7 @@ def _compute_outliers(data: np.array, n: int) -> np.array:
     #differenced = data[_DIFFERENCE_RANGE:] - shifted
 
     avg = _rolling_average(data, n)
-    std = _rolling_standard_deviation(data, avg, n)
+    std = _rolling_std(data, avg, n)
     series_with_std = data[n - 1:]
 
     outlier_indices = np.where(
@@ -114,9 +114,7 @@ def _rolling_average(arr: np.array, n: int) -> np.array:
 
 
 @jit
-def _rolling_standard_deviation(arr: np.array,
-                                rolling_avg: np.array,
-                                n: int) -> np.array:
+def _rolling_std(arr: np.array, rolling_avg: np.array, n: int) -> np.array:
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
     for i in range(len(variance)):

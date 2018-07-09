@@ -65,9 +65,9 @@ General-purpose language useful outside of data analysis.
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Isolated to Research?
 
-![chart](images/chart.svg)
-![research](images/research.svg)
-![one_off_batch_job](images/one_off_batch_job.svg)
+![research_use_case](images/chart.svg)
+![research_use_case](images/research.svg)
+![research_use_case](images/one_off_batch_job.svg)
 
 Large data analysis/processing typically isolated to research.
 
@@ -95,8 +95,11 @@ Machine learning and other statistical models are being run in live, production 
 ### Projected Global Revenue
 <div id="deep-learning-revenue"></div>
 
-[Source: Tractica December 2017](https://www.tractica.com/newsroom/press-releases/artificial-intelligence-software-market-to-reach-89-8-billion-in-annual-worldwide-revenue-by-2025/)
-<!-- .element: style="font-size: 28px" -->
+<div class="source">
+  <p>
+    Source: [Tractica December 2017](https://www.tractica.com/newsroom/press-releases/artificial-intelligence-software-market-to-reach-89-8-billion-in-annual-worldwide-revenue-by-2025/)
+  </p>
+</div>
 
 _note_
 Artificial Intelligence software market projected to reach almost $90 billion
@@ -169,18 +172,14 @@ But we like Python because it's easy to use for research.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### TODO 1
-<div id="python-vs-c-chart1"></div>
+### Python vs. C Performance
+<div id="python-vs-c"></div>
 
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### TODO 2
-<div id="python-vs-c-chart2"></div>
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### TODO 3
-<div id="python-vs-c-chart3"></div>
+<div class="source">
+  <p>
+    Source: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/python3-gcc.html)
+  </p>
+</div>
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -199,19 +198,33 @@ Python's ecosystem for data science.
 
 <div class="left-col">
   <ul>
-  <li>Heart of TODO.</li>
-  <li>TODO</li>
-  <li>TODO</li>
+    <li>Heart of scientific computing in Python.</li>
+    <li>Stores and operates date in C/FORTRAN structures</li>
+    <li>Avoids slowness of Python</li>
   </ul>
 </div>
 <div class="right-col">
+  <div style="height: 20px"></div>
   <img src="images/numpy_coloured.svg" alt="numpy_coloured" />
 </div>
 <div class="clear-col"></div>
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-TODO: focus of talk
+Foundation of most scientific computing packages.
+
+![scipy](images/scipy.svg)
+![pandas](images/pandas.svg)
+![sklearn](images/sklearn.svg)
+![matplotlib](images/matplotlib.svg)
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## Our Focus
+
+Showing how to use NumPy to process numerical data.
+
+Exploring how NumPy leverages vectorisation to dramatically boost performance.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -224,9 +237,9 @@ TODO: focus of talk
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-## Final Optimised Solution?
+## Final Optimised Solution
 
-**1000 times** faster.
+1000 times faster than pure Python.
 
 
 [NEXT SECTION]
@@ -420,6 +433,17 @@ TODO: what is HDF5 file
 [NEXT]
 ### The Code
 TODO: point to where you can find the code
+
+[NEXT]
+### Code Breakdown
+
+| | |
+| ----------------- | ---- |
+| `station_ranges`  | TODO |
+| `fill_forward`    | TODO |
+| `rolling_average` | TODO |
+| `rolling_std`     | TODO |
+| `find_outliers`   | TODO |
 
 [NEXT]
 ```bash
