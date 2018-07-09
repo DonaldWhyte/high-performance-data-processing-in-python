@@ -459,7 +459,7 @@ optional arguments:
 [NEXT]
 ### Code Breakdown
 
-|                   |                                                           |
+|                   |                                                         |
 | ----------------- | ------------------------------------------------------- |
 | `station_ranges`  | partition full dataset into per-station time series     |
 | `fill_forward`    | fill in missing data with previous values               |
@@ -543,16 +543,10 @@ TODO
 ![numpy](images/numpy.svg)
 
 [NEXT]
+### The Foundation
 Fundamental package for high performance computing in Python.
 
-[NEXT]
-### The Foundation
-
-Foundation on which nearly all of the higher-level data tools are built.
-
-Example tools:
-
-* TODO
+Most higher-level data libraries build on top of NumPy.
 
 [NEXT]
 ### Features
@@ -570,46 +564,176 @@ TODO: summary of why it is (one or many D array of contiguous memory that stores
 
 [NEXT]
 ### `numpy.ndarray`
-
-|          |                                                                      |
-| -------- | -------------------------------------------------------------------- |
-| `data`   | pointer indicating the memory address of the first byte in the array |
-| `dtype`  | the kind of elements contained within the array                      |
-| `shape`  | TODO |
-| `stride` | TODO |
-| `flags`  | TODO |
+![ndarray](images/ndarray_0.svg)
 
 _note_
-The shape indicates the shape of the array
+`data` is pointer indicating the memory address of the first byte in the array.
 
-The strides are the number of bytes that should be skipped in memory to go to the next element. If your strides are (10,1), you need to proceed one byte to get to the next column and 10 bytes to locate the next row.
+`dtype` indicates the type of elements stored in the array.
 
-[NEXT]
-TODO: given visual example of shape (3,0)
+`shape` indicates the shape of the array. That is, it defines the dimensionality
+of the data in the array and how many elements the array stores for each dimension.
 
-[NEXT]
-TODO: given visual example of shape (0, 3)
+The `strides` are the number of bytes that should be skipped in memory to go to the next element. If your strides are (32, 8), you need to proceed 8 bytes to get to the next column and 32 bytes to move to the next row.
 
-[NEXT]
-TODO: given visual example of shape (3, 3)
+`flags` is a set of flags
 
 [NEXT]
-TODO: given visual example of shape (4, 2)
+### Examples
+
+First, let's import NumPy.
+
+```python
+import numpy as np
+```
 
 [NEXT]
-TODO: show reshaping, and how it works without copying and just changing the stride
+### Example
+
+```python
+>>> a = np.arange(9, dtype=np.float64)
+>>> a
+array([0., 1., 2., 3., 4., 5., 6., 7., 8.])
+>>> a.shape
+(9,)
+>>> a.strides
+(8,)
+```
+<!-- .element: class="large" -->
 
 [NEXT]
-TODO: transpose example, which is a common use case for reshaping
+### Memory Layout
+![ndarray](images/ndarray_1.svg)
+
+### Python View
+![python_view](images/python_view_1.svg)
 
 [NEXT]
+### Reshape
+
+```python
+>>> b = a.reshape(3, 3)
+>>> b
+array([[0., 1., 2.],
+       [3., 4., 5.],
+       [6., 7., 8.]])
+```
+
+![ndarray](images/ndarray_2.svg)
+
+[NEXT]
+### Transpose
+
+```python
+>>> b.T
+array([[0., 3., 6.],
+       [1., 4., 7.],
+       [2., 5., 8.]])
+```
+
+![ndarray](images/ndarray_3.svg)
+
+[NEXT]
+### Slicing One Dimension
+
+```python
+>>> b[:, :2]
+array([[0., 1.],
+       [3., 4.],
+       [6., 7.]])
+```
+
+![ndarray](images/ndarray_4.svg)
+
+[NEXT]
+### Slicing Multiple Dimensions
+
+```python
+>>> b[:2, :2]
+array([[0., 1.],
+       [3., 4.]])
+```
+
+![ndarray](images/ndarray_5.svg)
+
+[NEXT]
+### Only Examine Every Nth Element
+
+```python
+>>> b[::2, ::2]
+array([[0., 2.],
+       [6., 8.]])
+```
+
+![ndarray](images/ndarray_6.svg)
+
+[NEXT]
+TODO: key takeway -- no copying -- just a view! two perf benefits
+
+[NEXT]
+TODO: mention Python/C space thing
+
+[NEXT]
+### Keep it in NumPy!
+
+TODO
+
+[NEXT]
+### Broadcasting
 TODO: broadcasting -- can reduce copies
 
 [NEXT]
-TODO: using numpy in naive way on dataset processing
+### Using NumPy for Outlier Detection
 
 [NEXT]
-TODO: use it to perform processing, massive speed increase for even some basic stuff!
+### Recap
+
+|                   |                                                         |
+| ----------------- | ------------------------------------------------------- |
+| `station_ranges`  | partition full dataset into per-station time series     |
+| `fill_forward`    | fill in missing data with previous values               |
+| `rolling_average` | computing rolling average at every time point           |
+| `rolling_std`     | computing rolling stdev at every time point             |
+| `find_outliers`   | get indices of outliers using deviance from rolling avg |
+<!-- .element class="medium-table-text" -->
+
+[NEXT]
+`station_ranges()`
+
+TODO
+
+[NEXT]
+`fill_forward()`
+
+```python
+TODO
+```
+
+[NEXT]
+`rolling_average()`
+
+```python
+TODO
+```
+
+[NEXT]
+`rolling_std()`
+
+```python
+TODO
+```
+
+[NEXT]
+`find_outliers()`
+
+TODO
+
+[NEXT]
+### Execution Time Breakdown
+<div id="numpy-times"></div>
+
+[NEXT]
+TODO: mid-section summary
 
 
 [NEXT SECTION]
@@ -648,7 +772,8 @@ TODO: show how you can even improve vectorisation via memory efficiency!
 TODO: another graph to demonstrate speedup
 
 [NEXT]
-But wait...there's more!
+### Execution Time Breakdown
+<div id="vectorised-times"></div>
 
 
 [NEXT SECTION]
@@ -671,7 +796,8 @@ TODO: show JIT decorator
 TODO: show what types it deduces under the hood
 
 [NEXT]
-TODO: show graph of speed with and without Numba
+### Execution Time Breakdown
+<div id="final-times"></div>
 
 [NEXT]
 TODO: emphasise that it won't really speed up vectorised numpy code

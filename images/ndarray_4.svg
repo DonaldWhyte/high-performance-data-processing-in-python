@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="887px" height="276px" viewBox="0 0 887 276" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 10</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="444 66 489 66 489 111 483.384988 111 444 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="2" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner4"></feOffset>
+            <feComposite in="shadowOffsetInner4" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner4"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner4" result="shadowMatrixInner4"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner4"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-3" points="487 66 532 66 532 111 526.384988 111 487 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="2" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-5" points="530 66 575 66 575 111 569.384988 111 530 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="2" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-7" points="573 66 618 66 618 111 612.384988 111 573 111"></polygon>
+        <filter x="-6.7%" y="-6.7%" width="113.3%" height="113.3%" filterUnits="objectBoundingBox" id="filter-8">
+            <feOffset dx="6" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-9" points="616 66 661 66 661 111 655.384988 111 616 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-10">
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-11" points="659 66 704 66 704 111 698.384988 111 659 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-12">
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-13" points="702 66 747 66 747 111 741.384988 111 702 111"></polygon>
+        <filter x="-6.7%" y="-6.7%" width="113.3%" height="113.3%" filterUnits="objectBoundingBox" id="filter-14">
+            <feOffset dx="6" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-15" points="745 66 790 66 790 111 784.384988 111 745 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-16">
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-17" points="788 66 833 66 833 111 827.384988 111 788 111"></polygon>
+        <filter x="-2.2%" y="-2.2%" width="104.4%" height="104.4%" filterUnits="objectBoundingBox" id="filter-18">
+            <feOffset dx="2" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetInner3"></feOffset>
+            <feComposite in="shadowOffsetInner3" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner3"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner3" result="shadowMatrixInner3"></feColorMatrix>
+            <feOffset dx="-2" dy="0" in="SourceAlpha" result="shadowOffsetInner4"></feOffset>
+            <feComposite in="shadowOffsetInner4" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner4"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowInnerInner4" result="shadowMatrixInner4"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner3"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner4"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-10" transform="translate(0.000000, -7.000000)">
+            <path d="M1,196 L1,239 L135,239 L135,196 L1,196 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="strides" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="22.96875" y="231">strides</tspan>
+            </text>
+            <path d="M1,153 L1,196 L135,196 L135,153 L1,153 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="shape" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#FF0000" text-decoration="underline">
+                <tspan x="24.9550781" y="188">shape</tspan>
+            </text>
+            <path d="M1,110 L1,153 L135,153 L135,110 L1,110 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="dtype" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="40.9335938" y="145">dtype</tspan>
+            </text>
+            <path d="M1,67 L1,110 L135,110 L135,67 L1,67 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="data" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="58.9335938" y="102">data</tspan>
+            </text>
+            <path d="M1,239 L1,282 L135,282 L135,239 L1,239 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="flags" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="52.9570312" y="274">flags</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            </g>
+            <text id="0" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="456.489258" y="101">0</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+            </g>
+            <text id="1" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="499.489258" y="101">1</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#AEAEAE" fill-rule="evenodd" xlink:href="#path-5"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+            </g>
+            <text id="2" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="542.489258" y="101">2</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-7"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-8)" xlink:href="#path-7"></use>
+            </g>
+            <text id="3" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="585.489258" y="101">3</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-9"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-10)" xlink:href="#path-9"></use>
+            </g>
+            <text id="4" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="628.489258" y="101">4</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#AEAEAE" fill-rule="evenodd" xlink:href="#path-11"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-12)" xlink:href="#path-11"></use>
+            </g>
+            <text id="5" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="671.489258" y="101">5</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-13"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-14)" xlink:href="#path-13"></use>
+            </g>
+            <text id="6" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="714.489258" y="101">6</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-15"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-16)" xlink:href="#path-15"></use>
+            </g>
+            <text id="7" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="757.489258" y="101">7</tspan>
+            </text>
+            <g id="Rectangle">
+                <use fill="#AEAEAE" fill-rule="evenodd" xlink:href="#path-17"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-18)" xlink:href="#path-17"></use>
+            </g>
+            <text id="8" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                <tspan x="800.489258" y="101">8</tspan>
+            </text>
+            <path d="M277,110 L277,153 L382,153 L382,110 L277,110 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="float64" font-family="Helvetica" font-size="32" font-weight="normal" fill="#000000">
+                <tspan x="282.460938" y="143">float64</tspan>
+            </text>
+            <path d="M135,67 L135,110 L240,110 L240,67 L135,67 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <path d="M135,110 L135,153 L240,153 L240,110 L135,110 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <path d="M135,153 L135,196 L240,196 L240,153 L135,153 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <path d="M135,196 L135,239 L240,239 L240,196 L135,196 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="(24,8)" font-family="Helvetica" font-size="32" font-weight="normal" fill="#000000">
+                <tspan x="146.40625" y="227">(24,8)</tspan>
+            </text>
+            <text id="(3,-2)" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#FF0000" text-decoration="underline">
+                <tspan x="148.3125" y="184">(3, 2)</tspan>
+            </text>
+            <path d="M135,239 L135,282 L240,282 L240,239 L135,239 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+            <text id="•" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="182.898438" y="100">•</tspan>
+            </text>
+            <text id="•" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="182.898438" y="143">•</tspan>
+            </text>
+            <text id="..." font-family="Helvetica" font-size="32" font-weight="normal" fill="#000000">
+                <tspan x="174.328125" y="265">...</tspan>
+            </text>
+            <path d="M241.480198,88.5 L434.529358,88.5" id="Line-4" stroke="#000000" stroke-width="2" stroke-linecap="square"></path>
+            <polygon id="Arrowhead" fill="#000000" transform="translate(435.000000, 88.500000) rotate(180.000000) translate(-435.000000, -88.500000) " points="444 98 426 88.5 444 79"></polygon>
+            <path d="M240.5,131.5 L267,131.5" id="Line-3" stroke="#000000" stroke-width="2" stroke-linecap="square"></path>
+            <polygon id="Arrowhead" fill="#000000" transform="translate(267.000000, 131.500000) rotate(180.000000) translate(-267.000000, -131.500000) " points="276.5 141 257.5 131.5 276.5 122"></polygon>
+            <text id="memory-block" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="670.03125" y="31">memory block</tspan>
+            </text>
+            <path d="M567,89.5 L538,89.5" id="Line-8" stroke="#000000" stroke-width="2" stroke-linecap="square"></path>
+            <path d="M696,89.5 L667,89.5" id="Line-8" stroke="#000000" stroke-width="2" stroke-linecap="square"></path>
+            <path d="M824,89.5 L795,89.5" id="Line-8" stroke="#000000" stroke-width="2" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

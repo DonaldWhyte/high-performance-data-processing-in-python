@@ -330,7 +330,7 @@
           [
             {
               name: 'Global Revenue',
-              data: [ 2000, 3500, 8000, 10500, 18000, 25000, 38000, 52000, 70500, 90000 ]
+              data: [2000, 3500, 8000, 10500, 18000, 25000, 38000, 52000, 70500, 9000]
             }
           ],
           [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
@@ -339,27 +339,49 @@
           'light',
           false);
 
-        create_bar_chart(
-          'purepython-times',
-          [
-            {
-              name: 'Pure Python',
-              // TODO: fill in actual times
-              data: [ 60, 60, 60, 60, 60 ]
-            }
-          ],
-          [
-            'station_ranges',
-            'fill_forward',
-            'rolling_average',
-            'rolling_std',
-            'find_outliers'
-          ],
-          'execution time (mins)',
-          function () { return this.value + 'm'; },
-          'dark',
-          true);
+        const pure_python_times = {
+            name: 'Pure Python',
+            color: 'green',
+            data: [60, 60, 60, 60, 60]
+        };
+        const numpy_times = {
+          name: 'NumPy',
+          color: 'red',
+          data: [6, 6, 6, 6, 6]
 
+        };
+        const vectorised_times = {
+          name: 'NumPy + Vectorised',
+          color: 'blue',
+          data: [6, 6, 6, 6, 6]
+        };
+        const final_times = {
+          name: 'NumPy + Vectorised + Numba',
+          color: 'black',
+          data: [6, 6, 6, 6, 6]
+        };
+        const timing_sections = [
+          'station_ranges',
+          'fill_forward',
+          'rolling_average',
+          'rolling_std',
+          'find_outliers'
+        ];
+        const time_axis_label = 'execution time (mins)';
+        const time_axis_formatter = function () { return this.value + 'm'; };
+
+        create_bar_chart(
+          'purepython-times', [pure_python_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+        create_bar_chart(
+          'numpy-times', [pure_python_times, numpy_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+        create_bar_chart(
+          'vectorised-times', [numpy_times, vectorised_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+        create_bar_chart(
+          'final-times', [numpy_times, vectorised_times, final_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
       });
     </script>
 

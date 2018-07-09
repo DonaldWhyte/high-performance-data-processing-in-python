@@ -63,3 +63,5 @@ typings/
 # Data files
 *.csv
 *.hdf5
+
+__pycache__
