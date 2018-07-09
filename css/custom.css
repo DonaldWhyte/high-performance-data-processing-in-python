@@ -261,6 +261,10 @@ img[alt="outlier_detection"] {
     width: 650px;
 }
 
+img[alt="complete_process"] {
+    width: 600px;
+}
+
 /* Section Heading Icons */
 img[alt="dataset"],
 img[alt="python"],

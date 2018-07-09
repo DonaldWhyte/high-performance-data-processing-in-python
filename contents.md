@@ -407,8 +407,8 @@ At each point `i` in the time series:
 </table>
 
 [NEXT]
-### Complete Process
-TODO: add diagram illustrating full process
+## Complete Process
+![complete_process](images/complete_process.svg)
 
 _note_
 1. Split full dataset into separate station time series
