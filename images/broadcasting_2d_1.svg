@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="384px" height="248px" viewBox="0 0 384 248" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 32</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-32">
+            <g id="Group-30" transform="translate(253.000000, 59.000000)">
+                <path d="M1,1 L1,44 L44,44 L44,1 L1,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="0" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="12.4892578" y="35">0</tspan>
+                </text>
+                <path d="M44,1 L44,44 L87,44 L87,1 L44,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="3" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="55.4892578" y="35">3</tspan>
+                </text>
+                <path d="M87,1 L87,44 L130,44 L130,1 L87,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="8" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="98.4892578" y="35">8</tspan>
+                </text>
+                <path d="M1,44 L1,87 L44,87 L44,44 L1,44 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="6" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="12.4892578" y="78">6</tspan>
+                </text>
+                <path d="M44,44 L44,87 L87,87 L87,44 L44,44 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="12" opacity="0.800000012" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="45.4785156" y="78">12</tspan>
+                </text>
+                <path d="M87,44 L87,87 L130,87 L130,44 L87,44 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="20" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="88.4785156" y="78">20</tspan>
+                </text>
+                <path d="M1,86 L1,129 L44,129 L44,86 L1,86 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="12" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="2.47851562" y="120">12</tspan>
+                </text>
+                <path d="M44,86 L44,129 L87,129 L87,86 L44,86 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="21" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="45.4785156" y="120">21</tspan>
+                </text>
+                <path d="M87,86 L87,129 L130,129 L130,86 L87,86 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="32" font-family="Helvetica" font-size="36" font-weight="normal" fill="#000000">
+                    <tspan x="88.4785156" y="120">32</tspan>
+                </text>
+            </g>
+            <text id="=" font-family="Helvetica" font-size="52" font-weight="normal" fill="#000000">
+                <tspan x="176.632812" y="143">=</tspan>
+            </text>
+            <g id="Group-31">
+                <g id="Group-25">
+                    <path d="M1,1 L1,44 L44,44 L44,1 L1,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                    <text id="2" font-family="Helvetica" font-size="36" font-weight="normal" fill="#FF0000">
+                        <tspan x="12.4892578" y="35">2</tspan>
+                    </text>
+                    <path d="M44,1 L44,44 L87,44 L87,1 L44,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                    <text id="3" font-family="Helvetica" font-size="36" font-weight="normal" fill="#0000FF">
+                        <tspan x="55.4892578" y="35">3</tspan>
+                    </text>
+                    <path d="M87,1 L87,44 L130,44 L130,1 L87,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                    <text id="4" font-family="Helvetica" font-size="36" font-weight="normal" fill="#417505">
+                        <tspan x="98.4892578" y="35">4</tspan>
+                    </text>
+                </g>
+                <path d="M1,119 L1,162 L44,162 L44,119 L1,119 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="0" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#FF0000">
+                    <tspan x="12.4892578" y="153">0</tspan>
+                </text>
+                <path d="M44,119 L44,162 L87,162 L87,119 L44,119 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="1" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#0000FF">
+                    <tspan x="55.4892578" y="153">1</tspan>
+                </text>
+                <path d="M87,119 L87,162 L130,162 L130,119 L87,119 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="2" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#417505">
+                    <tspan x="98.4892578" y="153">2</tspan>
+                </text>
+                <path d="M1,162 L1,205 L44,205 L44,162 L1,162 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="3" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#FF0000">
+                    <tspan x="12.4892578" y="196">3</tspan>
+                </text>
+                <path d="M44,162 L44,205 L87,205 L87,162 L44,162 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="4" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#0000FF">
+                    <tspan x="55.4892578" y="196">4</tspan>
+                </text>
+                <path d="M87,162 L87,205 L130,205 L130,162 L87,162 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="5" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#417505">
+                    <tspan x="98.4892578" y="196">5</tspan>
+                </text>
+                <path d="M1,204 L1,247 L44,247 L44,204 L1,204 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="6" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#FF0000">
+                    <tspan x="12.4892578" y="238">6</tspan>
+                </text>
+                <path d="M44,204 L44,247 L87,247 L87,204 L44,204 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="7" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#0000FF">
+                    <tspan x="55.4892578" y="238">7</tspan>
+                </text>
+                <path d="M87,204 L87,247 L130,247 L130,204 L87,204 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
+                <text id="8" font-family="Helvetica-Bold, Helvetica" font-size="36" font-weight="bold" fill="#417505">
+                    <tspan x="98.4892578" y="238">8</tspan>
+                </text>
+                <polygon id="Path-3" stroke="#FF0000" stroke-width="2" fill="#D8D8D8" points="32.8613281 44.0898438 40.0683594 118.623047 4.44335938 118.623047 13.046875 44.0898438"></polygon>
+                <polygon id="Path-3" stroke="#0000FF" stroke-width="2" fill="#D8D8D8" points="75.8613281 44.0898438 83.0683594 118.623047 47.4433594 118.623047 56.046875 44.0898438"></polygon>
+                <polygon id="Path-3" stroke="#417505" stroke-width="2" fill="#D8D8D8" points="118.861328 44.0898438 126.068359 118.623047 90.4433594 118.623047 99.046875 44.0898438"></polygon>
+                <text id="*" font-family="Helvetica" font-size="52" font-weight="normal" fill="#000000">
+                    <tspan x="55.7636719" y="111">*</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

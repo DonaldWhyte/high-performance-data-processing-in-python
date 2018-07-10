@@ -348,7 +348,6 @@
           name: 'NumPy',
           color: 'red',
           data: [6, 6, 6, 6, 6]
-
         };
         const vectorised_times = {
           name: 'NumPy + Vectorised',
@@ -382,6 +381,40 @@
         create_bar_chart(
           'final-times', [numpy_times, vectorised_times, final_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+
+        create_bar_chart(
+          'basic-numpy-benchmark-times',
+          [
+            {
+              name: 'timings',
+              color: 'blue',
+              data: [1.0996, 0.8266, 3.4815, 0.0305]
+            }
+          ],
+          ['python (indexing)', 'python (zip)', 'numpy (loop)', 'numpy (built-in)'],
+          'execution time (secs)',
+          function () { return this.value + 's'; },
+          'dark',
+          false);
+        create_bar_chart(
+          'basic-numpy-benchmark-speedup',
+          [
+            {
+              name: 'speedup',
+              color: 'red',
+              data: [
+                1.0996 / 1.0996,
+                1.0996 / 0.8266,
+                1.0996 / 3.4815,
+                1.0996 / 0.0305
+              ]
+            }
+          ],
+          ['python (indexing)', 'python (zip)', 'numpy (loop)', 'numpy (built-in)'],
+          'speedup factor',
+          function () { return this.value; },
+          'dark',
+          false);
       });
     </script>
 

@@ -524,17 +524,20 @@ TODO: show snakeviz output
 
 [NEXT]
 ### Execution Time Breakdown
+
+**Total time:** TODO mins
+
 <div id="purepython-times"></div>
 
 [NEXT]
 TODO: what is Python actually doing under the hood to make it so slow?
 
 [NEXT]
-### Reason 1: Memory Indirection
+### Reason 1: Invocation Overhead
 TODO
 
 [NEXT]
-### Reason 2: Difficult to Vectorise
+### Reason 2: Fragmented Memory
 TODO
 
 
@@ -668,19 +671,144 @@ array([[0., 2.],
 ![ndarray](images/ndarray_6.svg)
 
 [NEXT]
-TODO: key takeway -- no copying -- just a view! two perf benefits
+Reshaping or slicing arrays creates a **view**.
+
+No copies are made.
 
 [NEXT]
-TODO: mention Python/C space thing
+### Performance Benefits
+
+* Data stored contiguously
+* Cache locality
+* No copies for common reshaping/slicing operations
+
+[NEXT]
+### Benchmark
+#### Adding 10,000,000 Numbers
+
+[NEXT]
+### Pure Python
+
+```python
+a = list(range(10000000))
+b = list(range(10000000))
+
+# 1. indexing
+c = [a[i] + b[i] for i in range(len(a))]
+
+# 2. zip
+d = [x + y for x, y in zip(a, b)]
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+### NumPy
+
+```python
+import numpy as np
+
+a = np.arange(10000000)
+b = np.arange(10000000)
+
+# 3. loop
+c = np.zeros(len(a))
+for i in range(len(a)):
+    c[i] = a[i] + b[i]
+
+# 4. built-in numpy addition operator
+d = a + b
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+### Timing (seconds)
+<div id="basic-numpy-benchmark-times"></div>
+
+_note_
+Timings were produced on a Macbook Pro with the following specs:
+
+Processor: 2.3 GHz Intel Core i5
+Memory: 8 GB 2133 MHz LPDDR3
+
+[NEXT]
+### Speedup Factor
+<div id="basic-numpy-benchmark-speedup"></div>
+
+[NEXT]
+NumPy with loops is the slowest of all choices.
+
+Takes **4x** longer than pure Python!
+
+[NEXT]
+### Explicitly Looping over Numpy Array
+![numpy_add_loop](images/numpy_add_loop.svg)
+
+_note_
+For every integer, we're making two `__getitem__` calls, performing the
+addition in Python and copying each result into the output numpy array with
+a call to `__setitem__`.
+
+This dramatically slows down the computation for two reasons:
+
+1. This adds function call overhead. We invoke four Python functions for each
+   integer. That's 40,000,000 function calls.
+2. It performs three copies for each addition. It copies the `i`th element of
+   `a` and `b`, then copies the addition into `c`.
+3. The overhead and copies destroy cache locality. The copies are likely in a
+   very different part of the address space, meaning the CPU is having to do
+   more work to fetch data from RAM, instead of just using its local cache.
+
+[NEXT]
+### Using Built-in Addition
+![numpy_add_native](images/numpy_add_native.svg)
+
+_note_
+The full addition logic is executed in native, compiled NumPy code. There are
+no function call overheads and no copies.
+
+The memory buffers storing `a` and `b` are directly accessed when adding.
+Since those buffers are stored contiguously in memory, we're cache friendly.
+The CPU has to fetch less data from RAM.
 
 [NEXT]
 ### Keep it in NumPy!
+Don't loop through `np.ndarray`s.
 
-TODO
+Move the computation to the NumPy/C/native code level where possible.
+
+[NEXT]
+### A Problem...
+For arrays with the same size, operations are performed element-by-element.
+
+Sometimes we want to apply smaller scalars or vectors to larger arrays.
+
+[NEXT]
+### A Problem...
+We want to use NumPy's built-in operations...
+
+...but we don't want to perform loads of copies to match up the array sizes.
 
 [NEXT]
 ### Broadcasting
-TODO: broadcasting -- can reduce copies
+Allows us to apply smaller arrays to larger arrays.
+
+**Without copying.**
+
+[NEXT]
+### Broadcasting Scalar to Array
+![broadcasting](images/broadcasting_1d_0.svg)
+
+[NEXT]
+### Broadcasting Scalar to Array
+![broadcasting](images/broadcasting_1d_1.svg)
+
+[NEXT]
+### Broadcasting Vector to Array
+![broadcasting](images/broadcasting_2d_0.svg)
+
+[NEXT]
+### Broadcasting Vector to Array
+![broadcasting](images/broadcasting_2d_1.svg)
 
 [NEXT]
 ### Using NumPy for Outlier Detection
@@ -700,48 +828,80 @@ TODO: broadcasting -- can reduce copies
 [NEXT]
 `station_ranges()`
 
-TODO
+```python
+def station_ranges(station_ids: np.ndarray) -> List[Tuple[int, int]]:
+  is_end_of_series = station_ids[:-1] != station_ids[1:]
+  series_ends = np.where(is_end_of_series == True)[0]
+  series_starts = np.concatenate([np.array([0]), series_ends + 1])
+  return list(zip(series_starts, series_ends))
+```
 
 [NEXT]
 `fill_forward()`
 
 ```python
-TODO
+def fill_forward(arr: np.ndarray) -> np.ndarray:
+  mask = np.isnan(arr)
+  indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
+  np.maximum.accumulate(indices_to_use, axis=0, out=indices_to_use)
+  return arr[indices_to_use]
 ```
 
 [NEXT]
 `rolling_average()`
 
 ```python
-TODO
+def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
+  ret = np.cumsum(arr, dtype=float)
+  ret[n:] = ret[n:] - ret[:-n]
+  return ret[n - 1:] / n
 ```
 
 [NEXT]
 `rolling_std()`
 
 ```python
-TODO
+def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
+  variance = np.zeros(len(arr) - n + 1)
+  assert len(variance) == len(rolling_avg)
+  for i in range(len(variance)):
+    variance[i] = (
+      np.sum(np.square(arr[i:i+n] - rolling_avg[i]))
+      / n)
+  return np.sqrt(variance)
 ```
 
 [NEXT]
 `find_outliers()`
 
-TODO
+```python
+def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
+  data = _fill_forward(data)
+  avg = _rolling_average(data, n)
+  std = _rolling_std(data, avg, n)
+  series_with_std = data[n - 1:]
+
+  outlier_indices = np.where(
+      np.absolute(series_with_std - avg) >
+      (std * _OUTLIER_STD_THRESHOLD))
+  return outlier_indices[0]
+```
 
 [NEXT]
 ### Execution Time Breakdown
+
+**Total time:** TODO mins -> TODO mins
+
 <div id="numpy-times"></div>
-
-[NEXT]
-TODO: mid-section summary
-
 
 [NEXT SECTION]
 ## 4. Vectorisation
 ![vectorisation](images/vectorisation.svg)
 
 [NEXT]
-TODO: why does numpy provide such a speedup?
+### Recap
+
+TODO: why numpy provided such a speed up
 
 [NEXT]
 TODO: memory efficiency, packed together, less indirection in memory,
@@ -773,6 +933,8 @@ TODO: another graph to demonstrate speedup
 
 [NEXT]
 ### Execution Time Breakdown
+**Total time:** TODO mins -> TODO mins
+
 <div id="vectorised-times"></div>
 
 
@@ -797,6 +959,8 @@ TODO: show what types it deduces under the hood
 
 [NEXT]
 ### Execution Time Breakdown
+**Total time:** TODO mins -> TODO mins
+
 <div id="final-times"></div>
 
 [NEXT]

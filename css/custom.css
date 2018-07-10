@@ -265,6 +265,12 @@ img[alt="complete_process"] {
     width: 600px;
 }
 
+img[alt="numpy_add_loop"],
+img[alt="numpy_add_native"]
+{
+    width: 500px;
+}
+
 /* Section Heading Icons */
 img[alt="dataset"],
 img[alt="python"],
