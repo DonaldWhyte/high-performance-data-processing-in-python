@@ -549,24 +549,37 @@ TODO
 ### The Foundation
 Fundamental package for high performance computing in Python.
 
-Most higher-level data libraries build on top of NumPy.
+Many libraries/frameworks are built on top of NumPy.
 
 [NEXT]
 ### Features
 
-* `ndarray`, a fast and space-efficient multidimensional array
-  - provides vectorized arithmetic operations and sophisticated broadcasting capabilities
+* multi-dimensional array objects
+* routines for fast operations on arrays
+  - mathematical, logical, sorting, selecting
+* statistical operations
+* efficient loading/saving of numerical data to disk
+* random simulation
 
 [NEXT]
-How does it work? Basic primitives, memory layout, stride, etc.
+`numpy.ndarray`
+
+* class encapsulating n-dimensional arrays
+* fixed size
+* elements must be the same type
+* no memory overhead
+  - elements stored in single contiguous memory block
+* fast logical and mathematical operations
+  - executed in heavily optimised compiled code
+
+_note_
+At the core of the NumPy package, is the ndarray object. This encapsulates
+n-dimensional arrays of homogeneous data types, with many operations being
+performed in compiled code for performance.
 
 [NEXT]
-### `numpy.ndarray`
+`numpy.ndarray`
 
-TODO: summary of why it is (one or many D array of contiguous memory that stores data)
-
-[NEXT]
-### `numpy.ndarray`
 ![ndarray](images/ndarray_0.svg)
 
 _note_
@@ -609,7 +622,7 @@ array([0., 1., 2., 3., 4., 5., 6., 7., 8.])
 ![ndarray](images/ndarray_1.svg)
 
 ### Python View
-![python_view](images/python_view_1.svg)
+![python_view](images/python_view.svg)
 
 [NEXT]
 ### Reshape
