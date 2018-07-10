@@ -89,7 +89,7 @@ def series_ranges(station_ids: np.ndarray) -> List[Tuple[str, str]]:
 
 
 def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
-    fill_forward(data)
+    data = fill_forward(data)
     series_with_averages = data[n - 1:]
     return find_outliers(
         series_with_averages,
@@ -97,17 +97,17 @@ def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
         rolling_std(data, avg, n))
 
 
-def fill_forward(arr: np.ndarray):
-    for i in range(1, len(arr)):
-        if np.isnan(arr[i]):
-            arr[i] = arr[i - 1]
+def fill_forward(arr: np.ndarray) -> np.ndarray:
+    mask = np.isnan(arr)
+    indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
+    np.maximum.accumulate(indices_to_use, axis=0, out=indices_to_use)
+    return arr[indices_to_use]
 
 
 def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
-    avg = np.zeros(len(arr) - n + 1)
-    for i in range(len(avg)):
-        avg[i] = arr[i:i+n].sum() / n
-    return avg
+    ret = np.cumsum(arr, dtype=float)
+    ret[n:] = ret[n:] - ret[:-n]
+    return ret[n - 1:] / n
 
 
 def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:

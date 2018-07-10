@@ -843,44 +843,48 @@ Allows us to apply smaller arrays to larger arrays.
 
 ```python
 def station_ranges(station_ids: np.ndarray) -> List[Tuple[int, int]]:
-  is_end_of_series = station_ids[:-1] != station_ids[1:]
-  series_ends = np.where(is_end_of_series == True)[0]
-  series_starts = np.concatenate([np.array([0]), series_ends + 1])
-  return list(zip(series_starts, series_ends))
+    is_end_of_series = station_ids[:-1] != station_ids[1:]
+    series_ends = np.where(is_end_of_series == True)[0]
+    series_starts = np.concatenate([np.array([0]), series_ends + 1])
+    return list(zip(series_starts, series_ends))
 ```
 
 [NEXT]
 `fill_forward()`
 
 ```python
-def fill_forward(arr: np.ndarray) -> np.ndarray:
-  mask = np.isnan(arr)
-  indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
-  np.maximum.accumulate(indices_to_use, axis=0, out=indices_to_use)
-  return arr[indices_to_use]
+def fill_forward(arr: np.ndarray):
+    for i in range(1, len(arr)):
+        if np.isnan(arr[i]):
+            arr[i] = arr[i - 1]
 ```
+<!-- .element: class="large" -->
 
 [NEXT]
 `rolling_average()`
 
 ```python
-def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
-  ret = np.cumsum(arr, dtype=float)
-  ret[n:] = ret[n:] - ret[:-n]
-  return ret[n - 1:] / n
+def rolling_average(arr: np.ndarray,
+                    n: int) -> np.ndarray:
+    ret = np.cumsum(arr, dtype=float)
+    ret[n:] = ret[n:] - ret[:-n]
+    return ret[n - 1:] / n
 ```
+<!-- .element: class="large" -->
 
 [NEXT]
 `rolling_std()`
 
 ```python
-def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
+def rolling_std(arr: np.ndarray,
+                rolling_avg: np.ndarray,
+                n: int) -> np.ndarray:
   variance = np.zeros(len(arr) - n + 1)
   assert len(variance) == len(rolling_avg)
   for i in range(len(variance)):
-    variance[i] = (
-      np.sum(np.square(arr[i:i+n] - rolling_avg[i]))
-      / n)
+      variance[i] = (
+          np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
+      )
   return np.sqrt(variance)
 ```
 
@@ -907,42 +911,132 @@ def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
 
 <div id="numpy-times"></div>
 
+[NEXT]
+### Why NumPy is So Much Faster
+
+* No extra memory overhead
+* Minimal copying
+* Cache friendly
+* Operations executed in optimised compiled code
+
+[NEXT]
+But also...
+
 [NEXT SECTION]
 ## 4. Vectorisation
 ![vectorisation](images/vectorisation.svg)
 
 [NEXT]
-### Recap
-
-TODO: why numpy provided such a speed up
-
-[NEXT]
-TODO: memory efficiency, packed together, less indirection in memory,
-helps cache lines, lower level/less instructions
+<!-- .slide: class="large-slide" -->
+Execute several operations in parallel.
 
 [NEXT]
-TODO: but also vectorisation! explain what this is
+### SIMD
+TODO
 
 [NEXT]
-TODO: give high-level theoretical example of vectorisation
+### CPUs and GPUs
+TODO: GPU slide, mention big stuff in ML
 
 [NEXT]
-TODO: achieved via SIMD -- show CPU register example
+### Example
+#### Adding 10,000,000 Numbers
+
+TODO: explain tess
 
 [NEXT]
-TODO: show basic toy example with timings
+### Non-Vectorised
+
+```c
+void add(int len, float* a, float* b, float* out) {
+    for (int i = 0; i < len; ++i) {
+        out[i] = a[i] + b[i];
+    }
+}
+```
 
 [NEXT]
-TODO: show numpy code from the example and how it's vectorising
+### Vectorised
+
+```c
+void add_vectorised(int len, float* a, float* b, float* out) {
+    int i = 0;
+    for (; i < len - 4; i += 4) {
+        out[i] = a[i] + b[i];
+        out[i + 1] = a[i + 1] + b[i + 1];
+        out[i + 2] = a[i + 2] + b[i + 2];
+        out[i + 3] = a[i + 3] + b[i + 3];
+    }
+    for (; i < len; ++i) {
+        out[i] = a[i] + b[i];
+    }
+}
+
+```
 
 [NEXT]
-TODO: graph to recap non-vectorised and vectorised
+Disable optimisations to prevent compiler auto-vectorising.
+
+```bash
+clang -O0 vectorised_timings.c
+```
 
 [NEXT]
-TODO: show how you can even improve vectorisation via memory efficiency!
+<!-- .slide: class="medium-slide" -->
+**Speedup: 1.4x**
+<div id="vectorise-benchmark"></div>
 
 [NEXT]
-TODO: another graph to demonstrate speedup
+TODO: differen definitions of vectorised
+
+[NEXT]
+**Unvectorised `fill_forward()`**
+
+```python
+def fill_forward(arr: np.ndarray):
+    for i in range(1, len(arr)):
+        if np.isnan(arr[i]):
+            arr[i] = arr[i - 1]
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+**Vectorised `fill_forward()`**
+
+```python
+def fill_forward(arr: np.ndarray) -> np.ndarray:
+    mask = np.isnan(arr)
+    indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
+    np.maximum.accumulate(
+        indices_to_use,
+        axis=0,
+        out=indices_to_use)
+    return arr[indices_to_use]
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+**Unvectorised `rolling_average()`**
+
+```python
+def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
+    avg = np.zeros(len(arr) - n + 1)
+    for i in range(len(avg)):
+        avg[i] = arr[i:i+n].sum() / n
+    return avg
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+**Vectorised `rolling_average()`**
+
+```python
+def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
+    ret = np.cumsum(arr, dtype=float)
+    ret[n:] = ret[n:] - ret[:-n]
+    return ret[n - 1:] / n
+```
+<!-- .element: class="large" -->
 
 [NEXT]
 ### Execution Time Breakdown

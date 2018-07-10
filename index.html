@@ -415,6 +415,14 @@
           function () { return this.value; },
           'dark',
           false);
+        create_bar_chart(
+          'vectorise-benchmark',
+          [{name: 'timings', color: 'blue', data: [0.023458, 0.015989]}],
+          ['non-vectorised', 'vectorised'],
+          'execution time (secs)',
+          function () { return this.value + 's'; },
+          'dark',
+          false);
       });
     </script>
 

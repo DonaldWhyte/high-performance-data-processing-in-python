@@ -5,6 +5,7 @@ import time
 from typing import List, Tuple
 
 import h5py
+from numba import jit
 import numpy as np
 
 
@@ -81,6 +82,7 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+@jit
 def series_ranges(station_ids: np.ndarray) -> List[Tuple[str, str]]:
     is_end_of_series = station_ids[:-1] != station_ids[1:]
     series_ends = np.where(is_end_of_series == True)[0]
@@ -88,8 +90,9 @@ def series_ranges(station_ids: np.ndarray) -> List[Tuple[str, str]]:
     return list(zip(series_starts, series_ends))
 
 
+@jit
 def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
-    fill_forward(data)
+    data = fill_forward(data)
     series_with_averages = data[n - 1:]
     return find_outliers(
         series_with_averages,
@@ -97,19 +100,22 @@ def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
         rolling_std(data, avg, n))
 
 
-def fill_forward(arr: np.ndarray):
-    for i in range(1, len(arr)):
-        if np.isnan(arr[i]):
-            arr[i] = arr[i - 1]
+@jit
+def fill_forward(arr: np.ndarray) -> np.ndarray:
+    mask = np.isnan(arr)
+    indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
+    np.maximum.accumulate(indices_to_use, axis=0, out=indices_to_use)
+    return arr[indices_to_use]
 
 
+@jit
 def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
-    avg = np.zeros(len(arr) - n + 1)
-    for i in range(len(avg)):
-        avg[i] = arr[i:i+n].sum() / n
-    return avg
+    ret = np.cumsum(arr, dtype=float)
+    ret[n:] = ret[n:] - ret[:-n]
+    return ret[n - 1:] / n
 
 
+@jit
 def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
@@ -118,6 +124,7 @@ def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
     return np.sqrt(variance)
 
 
+@jit
 def find_outliers(series_with_avgs: np.ndarray,
                   rolling_avg: np.ndarray,
                   rolling_std: np.ndarray) -> np.ndarray:

@@ -64,4 +64,9 @@ typings/
 *.csv
 *.hdf5
 
+# Python files
 __pycache__
+
+# C files
+*.o
+*.out
