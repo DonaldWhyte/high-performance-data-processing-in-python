@@ -5,7 +5,7 @@ import time
 from typing import List, Tuple
 
 import h5py
-from numba import jit
+from numba import jit(nopython=True)
 import numpy as np
 
 
@@ -82,7 +82,7 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-@jit
+@jit(nopython=True)
 def series_ranges(station_ids: np.ndarray) -> List[Tuple[str, str]]:
     is_end_of_series = station_ids[:-1] != station_ids[1:]
     series_ends = np.where(is_end_of_series == True)[0]
@@ -90,7 +90,7 @@ def series_ranges(station_ids: np.ndarray) -> List[Tuple[str, str]]:
     return list(zip(series_starts, series_ends))
 
 
-@jit
+@jit(nopython=True)
 def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
     data = fill_forward(data)
     series_with_averages = data[n - 1:]
@@ -100,7 +100,7 @@ def compute_outliers(data: np.ndarray, n: int) -> np.ndarray:
         rolling_std(data, avg, n))
 
 
-@jit
+@jit(nopython=True)
 def fill_forward(arr: np.ndarray) -> np.ndarray:
     mask = np.isnan(arr)
     indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
@@ -108,14 +108,14 @@ def fill_forward(arr: np.ndarray) -> np.ndarray:
     return arr[indices_to_use]
 
 
-@jit
+@jit(nopython=True)
 def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
     ret = np.cumsum(arr, dtype=float)
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
 
-@jit
+@jit(nopython=True)
 def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
@@ -124,7 +124,7 @@ def rolling_std(arr: np.ndarray, rolling_avg: np.ndarray, n: int) -> np.ndarray:
     return np.sqrt(variance)
 
 
-@jit
+@jit(nopython=True)
 def find_outliers(series_with_avgs: np.ndarray,
                   rolling_avg: np.ndarray,
                   rolling_std: np.ndarray) -> np.ndarray:

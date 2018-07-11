@@ -1,8 +1,6 @@
 from statistics import mean, stdev
 from timeit import repeat
 
-import numpy as np
-
 
 _NUM_TESTS = 5
 
@@ -20,7 +18,10 @@ c = [a[i] + b[i] for i in range(len(a))]
         '''\
 c = [x + y for x, y in zip(a, b)]
         ''',
-        setup='a = list(range(10000000)); b = list(range(10000000))',
+        setup='''\
+a = list(range(10000000))
+b = list(range(10000000))
+        ''',
         number=1,
         repeat=_NUM_TESTS)
 
@@ -30,7 +31,11 @@ c = np.zeros(len(a))
 for i in range(len(a)):
     c[i] = a[i] + b[i]
         ''',
-        setup='import numpy as np; a = np.arange(10000000); b = np.arange(10000000)',
+        setup='''\
+import numpy as np
+a = np.arange(10000000)
+b = np.arange(10000000)
+        ''',
         number=1,
         repeat=_NUM_TESTS)
 
@@ -38,7 +43,11 @@ for i in range(len(a)):
         '''\
 a + b
         ''',
-        setup='import numpy as np; a = np.arange(10000000); b = np.arange(10000000)',
+        setup='''\
+import numpy as np
+a = np.arange(10000000)
+b = np.arange(10000000)
+        ''',
         number=1,
         repeat=_NUM_TESTS)
 

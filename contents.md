@@ -351,7 +351,7 @@ Total rows: 391,908,527
 
 
 [NEXT SECTION]
-## 2. Let's Use Python
+## 2. Pure Python
 ![python](images/python.svg)
 
 [NEXT]
@@ -866,9 +866,10 @@ def fill_forward(arr: np.ndarray):
 ```python
 def rolling_average(arr: np.ndarray,
                     n: int) -> np.ndarray:
-    ret = np.cumsum(arr, dtype=float)
-    ret[n:] = ret[n:] - ret[:-n]
-    return ret[n - 1:] / n
+    avg = np.zeros(len(arr) - n + 1)
+    for i in range(len(avg)):
+        avg[i] = arr[i:i+n].sum() / n
+    return avg
 ```
 <!-- .element: class="large" -->
 
@@ -879,13 +880,13 @@ def rolling_average(arr: np.ndarray,
 def rolling_std(arr: np.ndarray,
                 rolling_avg: np.ndarray,
                 n: int) -> np.ndarray:
-  variance = np.zeros(len(arr) - n + 1)
-  assert len(variance) == len(rolling_avg)
-  for i in range(len(variance)):
-      variance[i] = (
-          np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
-      )
-  return np.sqrt(variance)
+    variance = np.zeros(len(arr) - n + 1)
+    assert len(variance) == len(rolling_avg)
+    for i in range(len(variance)):
+        variance[i] = (
+            np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
+        )
+    return np.sqrt(variance)
 ```
 
 [NEXT]
@@ -893,15 +894,15 @@ def rolling_std(arr: np.ndarray,
 
 ```python
 def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
-  data = _fill_forward(data)
-  avg = _rolling_average(data, n)
-  std = _rolling_std(data, avg, n)
-  series_with_std = data[n - 1:]
+    fill_forward(data)
+    avg = rolling_average(data, n)
+    std = rolling_std(data, avg, n)
+    series_with_std = data[n - 1:]
 
-  outlier_indices = np.where(
-      np.absolute(series_with_std - avg) >
-      (std * _OUTLIER_STD_THRESHOLD))
-  return outlier_indices[0]
+    outlier_indices = np.where(
+        np.absolute(series_with_std - avg) >
+        (std * _OUTLIER_STD_THRESHOLD))
+    return outlier_indices[0]
 ```
 
 [NEXT]
@@ -987,7 +988,17 @@ clang -O0 vectorised_timings.c
 <div id="vectorise-benchmark"></div>
 
 [NEXT]
-TODO: differen definitions of vectorised
+TODO: different definitions of vectorised
+
+_note_
+Include stuff:
+
+Vectorization describes the absence of any explicit looping, indexing, etc., in the code - these things are taking place, of course, just “behind the scenes” in optimized, pre-compiled C code. Vectorized code has many advantages, among which are:
+
+vectorized code is more concise and easier to read
+fewer lines of code generally means fewer bugs
+the code more closely resembles standard mathematical notation (making it easier, typically, to correctly code mathematical constructs)
+vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
 
 [NEXT]
 **Unvectorised `fill_forward()`**
@@ -1006,7 +1017,10 @@ def fill_forward(arr: np.ndarray):
 ```python
 def fill_forward(arr: np.ndarray) -> np.ndarray:
     mask = np.isnan(arr)
-    indices_to_use = np.where(~mask, np.arange(mask.shape[0]), 0)
+    indices_to_use = np.where(
+        ~mask,
+        np.arange(mask.shape[0]),
+        0)
     np.maximum.accumulate(
         indices_to_use,
         axis=0,
@@ -1050,19 +1064,221 @@ def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
 ![numba](images/numba.png)
 
 _note_
-see https://cython.readthedocs.io/en/latest/src/tutorial/numpy.html for examples
+see https://numba.pydata.org/ for examples
 
 [NEXT]
-TODO: what is numba
+<!-- .slide: class="large-slide" -->
+Not all algorithms are vectorisable.
+
+_note_
+Are these non-vectorisable Python functions doomed to be slow?
 
 [NEXT]
-potentially massive optimisations with a couple of line of code
+### Solution
+Compile non-vectorisable Python code to native machine instructions.
 
 [NEXT]
-TODO: show JIT decorator
+### Numba
+
+Python functions annotated with Numba decorators are compiled at runtime.
+
+**Just-in-time (JIT)** compilation.
+
+**LLVM** for compiling to machine instructions.
+
+_note_
+Numba gives you the power to speed up your applications with high performance functions written directly in Python. With a few annotations, array-oriented and math-heavy Python code can be just-in-time compiled to native machine instructions, similar in performance to C, C++ and Fortran, without having to switch languages or Python interpreters.
 
 [NEXT]
-TODO: show what types it deduces under the hood
+`numba.jit`
+
+Decorator that tells Numba to compile a function to native instructions.
+
+[NEXT]
+### Our Favourite Example
+
+```python
+def sum_array(arr):
+    result = 0.0
+    for i in range(len(arr)):
+        result += arr[i]
+    return result
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+### Sprinkle Some Numba Magic
+
+<pre class="large"><code data-noescape class="python">import numpy as np
+<mark>from numba import jit</mark>
+
+<mark>@jit(nopython=True)</mark>
+def sum_array(arr):
+    result = 0.0
+    for i in range(len(arr)):
+        result += arr[i]
+    return result
+</code></pre>
+
+[NEXT]
+### Timing (seconds)
+<div id="numba-benchmark-times1"></div>
+
+_note_
+Timings were produced on a Macbook Pro with the following specs:
+
+Processor: 2.3 GHz Intel Core i5
+Memory: 8 GB 2133 MHz LPDDR3
+
+[NEXT]
+### Speedup Factor
+<div id="numba-benchmark-speedup1"></div>
+
+[NEXT]
+### Type Deduction
+
+Numba automatically deduces the types of JIT-compiled functions.
+
+Uses types of arguments in function's first invocation.
+
+[NEXT]
+### Type Deduction
+
+```python
+print('DEDUCED TYPES BEFORE CALL')
+sum_array.inspect_types()
+
+print('EXECUTING sum_array()')
+sum_array(np.arange(10000))
+
+print('DEDUCED TYPES AFTER CALL')
+sum_array.inspect_types()
+```
+<!-- .element: class="large" -->
+
+Output:
+
+```bash
+DEDUCED TYPES BEFORE CALL
+EXECUTING sum_array()
+DEDUCED TYPES AFTER CALL
+sum_array (array(int64, 1d, C),)
+```
+
+[NEXT]
+### Inspect Compiled Code
+
+```python
+sum_array.inspect_types()
+```
+
+<div class="left-col">
+  <pre class="small"><code data-noescape class="python"># --- LINE 6 ---
+def sum_array(arr):
+    # --- LINE 7 ---
+    #   arr = arg(0, name=arr)  :: array(float64, 1d, C)
+    #   $const0.1 = const(int, 0)  :: int64
+    #   result = $const0.1  :: float64
+    #   jump 4
+    # label 4
+    result = 0
+    # --- LINE 8 ---
+    #   jump 6
+    # label 6
+    #   $6.1 = global(range: <class 'range'>)  :: Function(<class 'range'>)
+    #   $6.2 = global(len: <built-in function len>)  :: Function(<built-in function len>)
+    #   $6.4 = call $6.2(arr, func=$6.2, args=[Var(arr, numba_type_inference.py (7))], kws=(), vararg=None)  :: (array(float64, 1d, C),) -> int64
+    #   del $6.2
+    #   $6.5 = call $6.1($6.4, func=$6.1, args=[Var($6.4, numba_type_inference.py (8))], kws=(), vararg=None)  :: (int64,) -> range_state_int64
+    #   del $6.4
+    #   del $6.1
+    #   $6.6 = getiter(value=$6.5)  :: range_iter_int64
+    #   del $6.5
+    # ...
+  </code></pre>
+</div>
+<div class="right-col">
+  <pre class="small"><code data-noescape class="python">for i in range(len(arr)):
+    # --- LINE 9 ---
+    #   $20.5 = getitem(value=arr, index=i)  :: float64
+    #   $20.6 = inplace_binop(fn=+=, immutable_fn=+, lhs=result, rhs=$20.5, static_lhs=<object object at 0x1065ab690>, static_rhs=<object object at 0x1065ab690>)  :: float64
+    #   result = $20.6  :: float64
+    #   jump 18
+    # label 36
+    #   del arr
+    #   del $phi20.1
+    #   del $phi18.1
+    #   del $18.4
+    #   jump 38
+    # label 38
+    #   del result
+
+    result += arr[i]
+
+# --- LINE 10 ---
+#   $38.2 = cast(value=result)  :: float64
+#   return $38.2
+
+return result
+  </code></pre>
+</div>
+<div class="clear-col"></div>
+
+[NEXT]
+### Explicitly Set Types
+
+<pre class="large"><code data-noescape class="python">from numba import int64, jit
+
+<mark>@jit(int64(int64[:]), nopython=True)</mark>
+def sum_array(arr):
+    result = 0.0
+    for i in range(len(arr)):
+        result += arr[i]
+    return result
+</code></pre>
+
+[NEXT]
+### Pure NumPy Implementation
+
+```python
+import numpy as np
+
+def sum_array(arr: np.ndarray) -> float:
+    return arr.sum()
+```
+<!-- .element: class="large" -->
+
+[NEXT]
+### Timing (seconds)
+<div id="numba-benchmark-times2"></div>
+
+_note_
+Timings were produced on a Macbook Pro with the following specs:
+
+Processor: 2.3 GHz Intel Core i5
+Memory: 8 GB 2133 MHz LPDDR3
+
+[NEXT]
+### Speedup Factor
+<div id="numba-benchmark-speedup2"></div>
+
+[NEXT]
+### Drawbacks
+
+* Numba type inference sometimes fails
+* You might need to specify types manually
+  - arguably makes code more verbose / harder to read
+* Less Python features available in `@jit(nopython=True)` functions
+  - variable types are fixed
+  - cannot use arbitrary classes
+
+_note_
+Numba FAQ lists many of the drawbacks:
+https://numba.pydata.org/numba-doc/dev/user/faq.html
+
+[NEXT]
+### Using Numba for Outlier Detection
+Added `@jit(nopython=True)` to all functions.
 
 [NEXT]
 ### Execution Time Breakdown
@@ -1071,9 +1287,44 @@ TODO: show what types it deduces under the hood
 <div id="final-times"></div>
 
 [NEXT]
-TODO: emphasise that it won't really speed up vectorised numpy code
+### Numba Has Much More
 
-TODO: but it's good optimising the inherent loops present
+* Tight integration with numpy
+* Disable the GIL to run functions in parallel:
+  - `@jit(nogil=True)`
+* Automatically parallelise loops in functions:
+  - `@jit(parallel=True)`
+* Automatically vectorise code:
+  - `@vectorize`
+* Compiling vectorised code to <span class="big-emphasis">GPUs</span>:
+  - `@jit(target='cuda')`
+
+_note_
+`parallel=True` will attempt to allocate chunks of loop iterations to different
+CPU cores for true parallelism. Note that this means the loop's logic cannot
+have any dependencies between iterations./
+
+You can pass parallel=True to any numba jitted function but that doesn't mean
+it's always utilizing all cores. You have to understand that numba uses some
+heuristics to make the code execute in parallel, sometimes these heuristics
+simply don't find anything to parallelise in the code.
+
+[NEXT]
+### To Summarise
+Use vectorised NumPy code where possible.
+
+Fall back to Numba if code cannot be vectorised.
+
+Or if you want to run your code on a GPU.
+
+
+[NEXT SECTION]
+## 6. Parallel Computation
+![parallel_computation](images/parallel_computation.svg)
+
+[NEXT]
+TODO: something like joblib
+
 
 [NEXT SECTION]
 ## Fin
@@ -1129,3 +1380,4 @@ TODO: be sure to emphasise the importance of numerical computation optimisation
 
 * [Freepik](https://www.freepik.com/)
 * [Icon Fonts](http://www.onlinewebfonts.com/icon)
+* [Appzgear](https://www.flaticon.com/authors/appzgear)

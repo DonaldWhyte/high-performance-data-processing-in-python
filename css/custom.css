@@ -138,6 +138,11 @@ code {
     font-weight: bold;
 }
 
+.big-emphasis {
+    color: red;
+    font-weight: bold !important;
+}
+
 /* Slide-wide styles. */
 .small-slide p,
 .small-slide ul,
@@ -277,6 +282,7 @@ img[alt="python"],
 img[alt="numpy"],
 img[alt="vectorisation"],
 img[alt="numba"],
+img[alt="parallel_computation"],
 img[alt="fin"] {
     width: 200px;
     position: relative;
