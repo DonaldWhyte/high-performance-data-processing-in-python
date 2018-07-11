@@ -932,18 +932,27 @@ But also...
 Execute several operations in parallel.
 
 [NEXT]
-### SIMD
+## SIMD
+
+**S**ingle **I**nstrument **M**ultiple **D**ata
+
+[NEXT]
+![sisd](images/sisd.svg)
+
+[NEXT]
+![simd](images/simd.svg)
+
+[NEXT]
+### SIMD in CPUs
 TODO
 
 [NEXT]
-### CPUs and GPUs
+### SIMD on GPUs
 TODO: GPU slide, mention big stuff in ML
 
 [NEXT]
-### Example
+### Example in C
 #### Adding 10,000,000 Numbers
-
-TODO: explain tess
 
 [NEXT]
 ### Non-Vectorised
@@ -972,7 +981,6 @@ void add_vectorised(int len, float* a, float* b, float* out) {
         out[i] = a[i] + b[i];
     }
 }
-
 ```
 
 [NEXT]
@@ -1095,7 +1103,8 @@ Numba gives you the power to speed up your applications with high performance fu
 Decorator that tells Numba to compile a function to native instructions.
 
 [NEXT]
-### Our Favourite Example
+### Example
+#### Summing an Array of Numbers
 
 ```python
 def sum_array(arr):
@@ -1109,8 +1118,7 @@ def sum_array(arr):
 [NEXT]
 ### Sprinkle Some Numba Magic
 
-<pre class="large"><code data-noescape class="python">import numpy as np
-<mark>from numba import jit</mark>
+<pre class="large"><code data-noescape class="python"><mark>from numba import jit</mark>
 
 <mark>@jit(nopython=True)</mark>
 def sum_array(arr):
@@ -1261,6 +1269,9 @@ Memory: 8 GB 2133 MHz LPDDR3
 [NEXT]
 ### Speedup Factor
 <div id="numba-benchmark-speedup2"></div>
+
+_(speedup is relative to pure Python implementation)_
+<!-- .element style="font-size: 20px !important;" -->
 
 [NEXT]
 ### Drawbacks
