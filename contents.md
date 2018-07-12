@@ -922,27 +922,67 @@ But also...
 ![vectorisation](images/vectorisation.svg)
 
 [NEXT]
-<!-- .slide: class="large-slide" -->
-Execute several operations in parallel.
+> Process of converting an algorithm from operating on a **single** value at a
+time to operating on a **set** of values at one time.
+
+_note_
+Source: https://software.intel.com/en-us/articles/vectorization-a-key-tool-to-improve-performance-on-modern-cpus
 
 [NEXT]
-## SIMD
-
-**S**ingle **I**nstrument **M**ultiple **D**ata
+Modern CPUs provide direct support for vector operations, where a
+single instruction is applied to multiple data.
 
 [NEXT]
+### Adding Two Vectors
+#### Single Instruction Single Data (SISD)
+
 ![sisd](images/sisd.svg)
 
-[NEXT]
-![simd](images/simd.svg)
+Adding **_N_** numbers takes **_N_** instructions.
 
 [NEXT]
-### SIMD in CPUs
-TODO
+### Adding Two Vectors
+#### Single Instruction Multiple Data (SIMD)
+
+![simd](images/simd.svg)
+
+Adding **_N_** numbers takes **_N / 4_** instructions.
+
+_note_
+Basically for you as a coder, SIMD allows to perform four operations
+(reading/writing/calculating) for the price of one instruction. The cost
+reduction is enabled by vectorization and data-parallelism. You don’t even have
+to handle threads and race conditions to gain this parallelism.
+
+[NEXT]
+### SIMD on CPUs
+
+<div class="left-col">
+  <ul>
+    <li>Most modern CPUs support vectorisation.</li>
+    <li>CPU with a 512 bit register can hold 8 64-bit doubles.</li>
+    <li>One instruction for 8 doubles.</li>
+  </ul>
+</div>
+<div class="right-col">
+  <img src="images/cpu.jpg" alt="cpu" />
+</div>
+<div class="clear-col"></div>
 
 [NEXT]
 ### SIMD on GPUs
-TODO: GPU slide, mention big stuff in ML
+
+<div class="left-col">
+  <ul>
+    <li>SIMD on steroids</li>
+    <li>Can process thousands of floats in one "instruction"</li>
+    <li>Enables neural nets to be trained with massive amounts of data</li>
+  </ul>
+</div>
+<div class="right-col">
+  <img src="images/gpu.jpg" alt="gpu" />
+</div>
+<div class="clear-col"></div>
 
 [NEXT]
 ### Example in C
@@ -990,17 +1030,25 @@ clang -O0 vectorised_timings.c
 <div id="vectorise-benchmark"></div>
 
 [NEXT]
-TODO: different definitions of vectorised
+### Vectorised Definitions
+
+| **Context** |                                                                                     |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Native Code | Apply single operations to multiple data items at once using special CPU registers. |
+| Python      | Keeping as much computation in `numpy`/native code as much as possible.             |
+
+Both involve making algorithms use array/vector/matrix based computation (not iterative).
 
 _note_
-Include stuff:
-
 Vectorization describes the absence of any explicit looping, indexing, etc., in the code - these things are taking place, of course, just “behind the scenes” in optimized, pre-compiled C code. Vectorized code has many advantages, among which are:
 
-vectorized code is more concise and easier to read
-fewer lines of code generally means fewer bugs
-the code more closely resembles standard mathematical notation (making it easier, typically, to correctly code mathematical constructs)
-vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
+* vectorized code is more concise and easier to read
+* fewer lines of code generally means fewer bugs
+* the code more closely resembles standard mathematical notation (making it easier, typically, to correctly code mathematical constructs)
+* vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
+
+[NEXT]
+### Using Vectorisation for Outlier Detection
 
 [NEXT]
 **Unvectorised `fill_forward()`**
@@ -1449,6 +1497,11 @@ share a segment of data between all the worker processes.
 **Total time:** TODO mins -> TODO mins
 
 <div id="parallelised-times-memmap"></div>
+
+[NEXT]
+### Interim Summary
+TODO
+
 
 [NEXT SECTION]
 ## Fin
