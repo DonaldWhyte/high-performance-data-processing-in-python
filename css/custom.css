@@ -276,6 +276,14 @@ img[alt="numpy_add_native"]
     width: 600px;
 }
 
+img[alt="joblib"] {
+    width: 150px;
+}
+
+img[alt="memmap"] {
+    width: 700px;
+}
+
 /* Section Heading Icons */
 img[alt="dataset"],
 img[alt="python"],

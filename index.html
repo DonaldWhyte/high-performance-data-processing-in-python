@@ -339,6 +339,13 @@
           'light',
           false);
 
+        const timing_sections = [
+          'station_ranges',
+          'fill_forward',
+          'rolling_average',
+          'rolling_std',
+          'find_outliers'
+        ];
         const pure_python_times = {
             name: 'Pure Python',
             color: 'green',
@@ -354,18 +361,21 @@
           color: 'blue',
           data: [6, 6, 6, 6, 6]
         };
-        const final_times = {
+        const numba_times = {
           name: 'NumPy + Vectorised + Numba',
           color: 'black',
           data: [6, 6, 6, 6, 6]
         };
-        const timing_sections = [
-          'station_ranges',
-          'fill_forward',
-          'rolling_average',
-          'rolling_std',
-          'find_outliers'
-        ];
+        const parallelised_times = {
+          name: 'Parallelised',
+          color: 'green',
+          data: [6, 6, 6, 6, 6]
+        };
+        const parallelised_times_memmap = {
+          name: 'Parallelised (memmap)',
+          color: 'red',
+          data: [6, 6, 6, 6, 6]
+        };
         const time_axis_label = 'execution time (mins)';
         const time_axis_formatter = function () { return this.value + 'm'; };
 
@@ -379,7 +389,14 @@
           'vectorised-times', [numpy_times, vectorised_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
         create_bar_chart(
-          'final-times', [numpy_times, vectorised_times, final_times],
+          'numba-times', [numpy_times, vectorised_times, numba_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+        create_bar_chart(
+          'parallelised-times', [numba_times, parallelised_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+        create_bar_chart(
+          'parallelised-times-memmap',
+          [numba_times, parallelised_times, parallelised_times_memmap],
           timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
 
         create_bar_chart(

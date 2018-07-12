@@ -737,12 +737,6 @@ d = a + b
 ### Timing (seconds)
 <div id="basic-numpy-benchmark-times"></div>
 
-_note_
-Timings were produced on a Macbook Pro with the following specs:
-
-Processor: 2.3 GHz Intel Core i5
-Memory: 8 GB 2133 MHz LPDDR3
-
 [NEXT]
 ### Speedup Factor
 <div id="basic-numpy-benchmark-speedup"></div>
@@ -1132,12 +1126,6 @@ def sum_array(arr):
 ### Timing (seconds)
 <div id="numba-benchmark-times1"></div>
 
-_note_
-Timings were produced on a Macbook Pro with the following specs:
-
-Processor: 2.3 GHz Intel Core i5
-Memory: 8 GB 2133 MHz LPDDR3
-
 [NEXT]
 ### Speedup Factor
 <div id="numba-benchmark-speedup1"></div>
@@ -1295,7 +1283,7 @@ Added `@jit(nopython=True)` to all functions.
 ### Execution Time Breakdown
 **Total time:** TODO mins -> TODO mins
 
-<div id="final-times"></div>
+<div id="numba-times"></div>
 
 [NEXT]
 ### Numba Has Much More
@@ -1334,15 +1322,140 @@ Or if you want to run your code on a GPU.
 ![parallel_computation](images/parallel_computation.svg)
 
 [NEXT]
-TODO: something like joblib
+### Recap
 
+1. Moved data to contiguous buffers
+2. Run most computation in compiled/optimised machine instructions
+3. Vectorised computation to take advantage of CPU's SIMD feature
+
+**Current speedup: TODOx**
+
+[NEXT]
+### Embarrassingly Parallel
+
+Full dataset is partitioned into different station time series.
+
+Outliers in each station time series are calculated **independently**.
+
+**Split** stations into _N_ groups.
+
+Process each group on a different CPU core.
+
+[NEXT]
+![joblib](images/joblib.svg)
+
+Library for building lightweight data pipelines.
+
+[NEXT]
+`joblib.Parallel`
+
+Parallelises Python loops.
+
+Handles spawning of new Python processes and storing intermittent results for
+you.
+
+[NEXT]
+### Example
+
+```python
+# Load station IDs and their measurements from the file.
+input_file = ...
+station_ids = input_file['station_usaf'][:]
+measurements = input_file['wind_speed_rate'][:]
+
+# Compute (start_index, end_index) ranges for all stations in
+# input file.
+series_ranges = series_ranges(station_ids)
+
+# Function that takes an individual measurement time series
+# for a single weather station and returns the indices of its
+# outliers.
+def compute_outliers(time_series: np.ndarray) -> np.ndarray:
+    pass
+```
+
+[NEXT]
+### Process Station Time Series in Parallel
+
+<pre><code data-noescape class="python">from multiprocessing import cpu_count
+from joblib import Parallel
+
+<mark>processor = Parallel(n_jobs=cpu_count())</mark>
+outliers = processor(
+    compute_outliers(measurements[start:end])
+    for start, end in series_ranges)
+</code></pre>
+
+[NEXT]
+### Execution Time Breakdown
+**Total time:** TODO mins -> TODO mins
+
+<div id="parallelised-times"></div>
+
+[NEXT]
+### Problem: Excessive Copies
+
+Worker processes receive copies of input data.
+
+Means all station time series are **copied**.
+
+Adds significant overhead to parallelisation.
+
+_note_
+By default the workers of the joblib pool are real Python processes forked
+using the `multiprocessing` module of the Python standard library. The
+arguments passed as input to the `Parallel` call are serialized and
+reallocated in the memory of each worker process.
+
+[NEXT]
+### Solution: Memmap
+
+_Map in-process memory to data stored on disk._
+
+![memmap](images/memmap.svg)
+
+
+[NEXT]
+<pre><code data-noescape class="python"># Pass full array into function, but also pass the index range
+# that contains the data for a single weather station.
+def compute_outliers(all_measurements: np.ndarray,
+                     start: int,
+                     end: int) -> np.ndarray:
+    pass
+
+# If the data size of input numpy arrays is more than 1MB, store
+# the array on a memmap'd file on disk.
+processor = Parallel(n_jobs=cpu_count(), <mark>max_nbytes='1M')</mark>
+outliers = processor(
+    compute_outliers(measurements, start, end)
+    for start, end in series_ranges)
+</code></pre>
+
+_note_
+As this problem can often occur in scientific computing with numpy based
+data structures, `joblib.Parallel` provides a special handling for large
+numpy arrays to automatically dump them on the filesystem and pass a reference
+to the worker to open them as memory map on that file using.
+
+`numpy.memmap` is a subclass of `numpy.ndarray`. This makes it possible to
+share a segment of data between all the worker processes.
+
+[NEXT]
+![joblib_memmap](images/joblib_memmap.svg)
+
+
+[NEXT]
+### Execution Time Breakdown
+**Total time:** TODO mins -> TODO mins
+
+<div id="parallelised-times-memmap"></div>
 
 [NEXT SECTION]
 ## Fin
 ![fin](images/fin.svg)
 
 [NEXT]
-TODO: show final graphs on log scale of speeds
+TODO: show final graphs on log scale of speeds + speedup factors
 
 [NEXT]
 TODO: conclusion
@@ -1385,6 +1498,15 @@ TODO: be sure to emphasise the importance of numerical computation optimisation
 ### References
 
 **[1]** https://www.jetbrains.com/research/python-developers-survey-2017/
+
+[NEXT]
+### Timing Specifications
+All performance timings in these slides were produced by running the code on a
+machine with the following specs:
+
+**OS**: macOS Sierra v10.12.6
+**Processor:** 2.3 GHz Intel Core i5
+**Memory:** 8 GB 2133 MHz LPDDR3
 
 [NEXT]
 ### Image Credits
