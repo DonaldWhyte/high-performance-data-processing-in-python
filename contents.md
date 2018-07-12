@@ -495,8 +495,8 @@ TODO: show news report of actual incident
 
 [NEXT]
 ### Performance
-* **Time taken:** TODO
-* **Average time per row:** TODO
+* **Time taken:** TIME
+* **Average time per row:** TIME
 
 [NEXT]
 ### Profiling the Code
@@ -525,20 +525,58 @@ TODO: show snakeviz output
 [NEXT]
 ### Execution Time Breakdown
 
-**Total time:** TODO mins
+**Total time:** TIME mins
 
 <div id="purepython-times"></div>
 
 [NEXT]
-TODO: what is Python actually doing under the hood to make it so slow?
+<!-- .slide: class="large-slide" -->
+Why is Python so slow?
+
+_note_
+Source for upcoming sections: https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
 
 [NEXT]
-### Reason 1: Invocation Overhead
-TODO
+## Reason 1: Dynamic Typing
 
 [NEXT]
-### Reason 2: Fragmented Memory
-TODO
+When a Python program executes, the interpreter doesn't know the type of the
+variables that are defined.
+
+![python_slow_1](images/python_slow_1.png)
+
+[NEXT]
+More instructions needed for any operation.
+
+**Primary reason** Python is slower than C or other compiled languages
+for processing numerical data.
+
+[NEXT]
+### Reason 2: Interpreted, not Compiled
+
+[NEXT]
+Python code is interpreted at runtime.
+
+Quick to iterate, but gives less chance to optimise.
+
+During compilation, a smart compiler can look ahead and optimise inefficient code.
+
+_note_
+See section 5 to learn see how compiling Python code can dramatically speed up
+code.
+
+[NEXT]
+## Reason 3: Fragmented Memory Access
+
+[NEXT]
+![python_slow_2](images/python_slow_2.png)
+
+[NEXT]
+Bad for code that steps through **data in sequence**.
+
+Iterate through a single list accesses completely different regions of memory.
+
+Not **cache friendly**.
 
 
 [NEXT SECTION]
@@ -592,7 +630,7 @@ of the data in the array and how many elements the array stores for each dimensi
 
 The `strides` are the number of bytes that should be skipped in memory to go to the next element. If your strides are (32, 8), you need to proceed 8 bytes to get to the next column and 32 bytes to move to the next row.
 
-`flags` is a set of flags
+`flags` is a set of configurable flags we don't need to cover here.
 
 [NEXT]
 ### Examples
@@ -620,6 +658,10 @@ array([0., 1., 2., 3., 4., 5., 6., 7., 8.])
 [NEXT]
 ### Memory Layout
 ![ndarray](images/ndarray_1.svg)
+
+_note_
+A NumPy array in its simplest form is a Python object build around a C array.
+That is, it has a pointer to a contiguous data buffer of values.
 
 ### Python View
 ![python_view](images/python_view.svg)
@@ -902,7 +944,7 @@ def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
 [NEXT]
 ### Execution Time Breakdown
 
-**Total time:** TODO mins -> TODO mins
+**Total time:** TIME mins -> TIME mins
 
 <div id="numpy-times"></div>
 
@@ -1104,7 +1146,7 @@ def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
 
 [NEXT]
 ### Execution Time Breakdown
-**Total time:** TODO mins -> TODO mins
+**Total time:** TIME mins -> TIME mins
 
 <div id="vectorised-times"></div>
 
@@ -1329,7 +1371,7 @@ Added `@jit(nopython=True)` to all functions.
 
 [NEXT]
 ### Execution Time Breakdown
-**Total time:** TODO mins -> TODO mins
+**Total time:** TIME mins -> TIME mins
 
 <div id="numba-times"></div>
 
@@ -1376,7 +1418,7 @@ Or if you want to run your code on a GPU.
 2. Run most computation in compiled/optimised machine instructions
 3. Vectorised computation to take advantage of CPU's SIMD feature
 
-**Current speedup: TODOx**
+**Current speedup: TIME x**
 
 [NEXT]
 ### Embarrassingly Parallel
@@ -1436,7 +1478,7 @@ outliers = processor(
 
 [NEXT]
 ### Execution Time Breakdown
-**Total time:** TODO mins -> TODO mins
+**Total time:** TIME mins -> TIME mins
 
 <div id="parallelised-times"></div>
 
@@ -1494,13 +1536,9 @@ share a segment of data between all the worker processes.
 
 [NEXT]
 ### Execution Time Breakdown
-**Total time:** TODO mins -> TODO mins
+**Total time:** TIME mins -> TIME mins
 
 <div id="parallelised-times-memmap"></div>
-
-[NEXT]
-### Interim Summary
-TODO
 
 
 [NEXT SECTION]
