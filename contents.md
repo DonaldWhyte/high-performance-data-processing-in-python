@@ -1468,11 +1468,11 @@ def compute_outliers(time_series: np.ndarray) -> np.ndarray:
 ### Process Station Time Series in Parallel
 
 <pre><code data-noescape class="python">from multiprocessing import cpu_count
-from joblib import Parallel
+from joblib import delayed, Parallel
 
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
 outliers = processor(
-    compute_outliers(measurements[start:end])
+    delayed(compute_outliers)(measurements[start:end])
     for start, end in series_ranges)
 </code></pre>
 
@@ -1517,7 +1517,7 @@ def compute_outliers(all_measurements: np.ndarray,
 # the array on a memmap'd file on disk.
 processor = Parallel(n_jobs=cpu_count(), <mark>max_nbytes='1M')</mark>
 outliers = processor(
-    compute_outliers(measurements, start, end)
+    delayed(compute_outliers)(measurements, start, end)
     for start, end in series_ranges)
 </code></pre>
 

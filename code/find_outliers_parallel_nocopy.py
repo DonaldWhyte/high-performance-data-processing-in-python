@@ -1,10 +1,12 @@
 import argparse
 import csv
 import datetime
+from multiprocessing import cpu_count
 import time
 from typing import List, Optional, Tuple
 
 import h5py
+from joblib import delayed, Parallel
 from numba import float64, int64, jit, void
 import numpy as np
 
@@ -40,10 +42,14 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
 
     print('Computing outliers')
     measurements = input_file[measurement][:]
+    processor = Parallel(n_jobs=cpu_count(), max_nbytes='1K')
+    results = processor(
+        delayed(compute_outliers)(measurements, start, end, _ROLLING_WINDOW)
+        for start, end in ranges_with_enough_data)
+
     station_outliers = {
-        station_ids[start]: compute_outliers(measurements[start:end],
-                                             _ROLLING_WINDOW)
-        for start, end in ranges_with_enough_data
+        station_ids[start_index]: result
+        for (start_index, _), result in zip(ranges_with_enough_data, results)
     }
 
     elapsed_time = time.time() - start_time
@@ -99,8 +105,10 @@ def series_ranges(station_ids):
     return np.column_stack((series_starts, series_ends))
 
 
-def compute_outliers(data, n):
-    data = fill_forward(data)
+def compute_outliers(all_data, start, end, n):
+
+    print(start, end, n)
+    data = fill_forward(all_data[start:end])
     series_with_averages = data[n - 1:]
     avg = rolling_average(data, n)
     std = rolling_std(data, avg, n)
@@ -114,14 +122,13 @@ def fill_forward(arr):
     return arr[indices_to_use]
 
 
-@jit(float64[:](float64[:], int64), nopython=True)
+@jit
 def rolling_average(arr, n):
     ret = np.cumsum(arr)
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
-
-@jit(float64[:](float64[:], float64[:], int64), nopython=True)
+@jit
 def rolling_std(arr, rolling_avg, n):
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
@@ -129,8 +136,7 @@ def rolling_std(arr, rolling_avg, n):
         variance[i] = np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
     return np.sqrt(variance)
 
-
-@jit(int64[:](float64[:], float64[:], float64[:]), nopython=True)
+@jit
 def find_outliers(series_with_avgs: np.ndarray,
                   rolling_avg: np.ndarray,
                   rolling_std: np.ndarray) -> np.ndarray:

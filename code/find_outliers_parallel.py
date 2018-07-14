@@ -1,10 +1,12 @@
 import argparse
 import csv
 import datetime
+from multiprocessing import cpu_count
 import time
 from typing import List, Optional, Tuple
 
 import h5py
+from joblib import delayed, Parallel
 from numba import float64, int64, jit, void
 import numpy as np
 
@@ -40,10 +42,14 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
 
     print('Computing outliers')
     measurements = input_file[measurement][:]
+    processor = Parallel(n_jobs=cpu_count(), max_nbytes=None)
+    results = processor(
+        delayed(compute_outliers)(measurements[start:end], _ROLLING_WINDOW)
+        for start, end in ranges_with_enough_data)
+
     station_outliers = {
-        station_ids[start]: compute_outliers(measurements[start:end],
-                                             _ROLLING_WINDOW)
-        for start, end in ranges_with_enough_data
+        station_ids[start_index]: result
+        for (start_index, _), result in zip(ranges_with_enough_data, results)
     }
 
     elapsed_time = time.time() - start_time
