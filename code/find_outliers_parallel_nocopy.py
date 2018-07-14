@@ -7,13 +7,19 @@ from typing import List, Optional, Tuple
 
 import h5py
 from joblib import delayed, Parallel
-from numba import float64, int64, jit, void
+from numba import float64, int64, jit, typeof
 import numpy as np
 
 
 _DIFFERENCE_RANGE = 1
 _ROLLING_WINDOW = 14 * 6  # 7 days
 _OUTLIER_STD_THRESHOLD = 9
+
+
+def read_only_array(dtype):
+    x = np.empty((0,), dtype=dtype)
+    x.flags.writeable = False
+    return typeof(x)
 
 
 def _main():
@@ -26,7 +32,18 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
     # computation time, not disk IO or memory speed.
     input_file = h5py.File(input_fname, mode='r')
     station_ids = input_file['station_usaf'][:]
-    measurements = input_file[measurement][:]
+
+    # Write the measurement data to an memmap'd file. This file is shared
+    # across all worker subprocesses.
+    from tempfile import NamedTemporaryFile
+    tmpfile = NamedTemporaryFile()
+    data = np.memmap(
+        tmpfile.name,
+        dtype=np.float64,
+        shape=(len(input_file[measurement]),),
+        mode='w+')
+    data[:] = input_file[measurement][:]
+    del data  # flushes contents to disk
 
     start_time = time.time()
 
@@ -45,9 +62,9 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
 
     print('Computing outliers')
 
-    processor = Parallel(n_jobs=cpu_count(), max_nbytes='1K')
+    processor = Parallel(n_jobs=cpu_count())
     results = processor(
-        delayed(compute_outliers)(measurements, start, end, _ROLLING_WINDOW)
+        delayed(compute_outliers)(tmpfile.name, measurement, start, end, _ROLLING_WINDOW)
         for start, end in ranges_with_enough_data)
 
     station_outliers = {
@@ -71,7 +88,7 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
                         'station_usaf': station_id,
                         'timestamp': datetime.datetime.utcfromtimestamp(
                             timestamps[outlier_index]),
-                        'value': measurements[outlier_index]
+                        'value': all_data[outlier_index]
                     }
                     for outlier_index in station_outliers[station_id]
                 ])
@@ -108,9 +125,13 @@ def series_ranges(station_ids):
     return np.column_stack((series_starts, series_ends))
 
 
-def compute_outliers(all_data, start, end, n):
-    print(start, end, n)
-    data = fill_forward(all_data[start:end])
+def compute_outliers(input_fname, measurement, start, end, n):
+    #input_file = h5py.File(input_fname, mode='r')
+    #data = fill_forward(input_file[measurement][start:end])
+
+    data = fill_forward(
+        np.memmap(input_fname, dtype=np.float64, mode='r')[start:end])
+
     series_with_averages = data[n - 1:]
     avg = rolling_average(data, n)
     std = rolling_std(data, avg, n)
@@ -124,13 +145,13 @@ def fill_forward(arr):
     return arr[indices_to_use]
 
 
-@jit
+@jit(float64[:](read_only_array(np.float64), int64), nopython=True)
 def rolling_average(arr, n):
     ret = np.cumsum(arr)
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
-@jit
+@jit(float64[:](read_only_array(np.float64), float64[:], int64), nopython=True)
 def rolling_std(arr, rolling_avg, n):
     variance = np.zeros(len(arr) - n + 1)
     assert len(variance) == len(rolling_avg)
@@ -138,7 +159,7 @@ def rolling_std(arr, rolling_avg, n):
         variance[i] = np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
     return np.sqrt(variance)
 
-@jit
+@jit(int64[:](read_only_array(np.float64), float64[:], float64[:]), nopython=True)
 def find_outliers(series_with_avgs: np.ndarray,
                   rolling_avg: np.ndarray,
                   rolling_std: np.ndarray) -> np.ndarray:

@@ -42,13 +42,11 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
         'station time series')
 
     print('Computing outliers')
-    station_outliers = {}
-    for i, (start, end) in enumerate(ranges_with_enough_data)
-    for
-        station_id = station_ids[start]
-        station_outliers[station_id] = compute_outliers(
-            measurements[start:end],
-            _ROLLING_WINDOW)
+    station_outliers = {
+        station_ids[start]: compute_outliers(measurements[start:end],
+                                             _ROLLING_WINDOW)
+        for start, end in ranges_with_enough_data
+    }
 
     elapsed_time = time.time() - start_time
     print(f'Computed outliers in {elapsed_time:.2f} seconds')

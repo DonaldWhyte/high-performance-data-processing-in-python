@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple
 
 import h5py
 from joblib import delayed, Parallel
-from numba import float64, int64, jit, void
+from numba import float64, int64, jit
 import numpy as np
 
 
