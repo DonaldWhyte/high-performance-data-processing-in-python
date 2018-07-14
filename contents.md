@@ -1595,9 +1595,11 @@ TODO: be sure to emphasise the importance of numerical computation optimisation
 All performance timings in these slides were produced by running the code on a
 machine with the following specs:
 
-**OS**: macOS Sierra v10.12.6
-**Processor:** 2.3 GHz Intel Core i5
-**Memory:** 8 GB 2133 MHz LPDDR3
+|                |                       |
+| -------------- | --------------------- |
+| **OS**         | macOS Sierra v10.12.6 |
+| **Processor:** | 2.3 GHz Intel Core i5 |
+| **Memory:**    | 8 GB 2133 MHz LPDDR3  |
 
 [NEXT]
 ### Image Credits

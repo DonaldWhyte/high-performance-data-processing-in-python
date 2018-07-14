@@ -18,14 +18,16 @@ def _main():
 
 
 def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
+    # Load input data before starting timer. We're only interested in measuring
+    # computation time, not disk IO or memory speed.
     input_file = h5py.File(input_fname, mode='r')
+    station_ids = list(input_file['station_usaf'][:])
+    measurements = list(input_file[measurement][:])
 
     start_time = time.time()
 
     print('Determining range of each station time series')
-    station_ids = list(input_file['station_usaf'][:1000000])
     ranges = series_ranges(station_ids)
-
     print(f'Found time series for {len(ranges)} ranges')
 
     print('Removing time series that don\'t have enough data')
@@ -38,7 +40,6 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
         'station time series')
 
     print('Computing outliers')
-    measurements = list(input_file[measurement][:1000000])
     station_outliers = {
         station_ids[start]: compute_outliers(measurements[start:end],
                                              _ROLLING_WINDOW)
@@ -50,7 +51,7 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
 
     if output_fname:
         print(f'Writing outliers to {output_fname}')
-        timestamps = list(input_file['timestamp'][:1000000])
+        timestamps = list(input_file['timestamp'][:])
         with open(output_fname, 'wt') as out_file:
             writer = csv.DictWriter(
                 out_file,
