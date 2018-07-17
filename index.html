@@ -90,129 +90,12 @@
         $("text:contains('Highcharts.com')").remove();
       }
 
-      function create_line_chart(container_id,
-                                 series,
-                                 x_axis_label,
-                                 y_axis_label,
-                                 label_colour)
-      {
-        return Highcharts.chart(container_id, {
-          chart: {
-            events: { load: load_chart_event },
-            marginTop: 32,
-            marginBottom: 64,
-            borderColor: '#4572A7',
-            backgroundColor: '#222',
-            borderWidth: 3,
-            borderColor: '#444',
-            plotShadow: true
-          },
-          title: { text: ''},
-          xAxis: {
-            lineWidth: 1,
-            lineColor: '#CCCCCC',
-            tickPixelInterval: 80,
-            tickLength: 5,
-            tickWidth: 1,
-            tickColor: '#FFFFFF',
-            tickPosition: 'outside', // 'inside' or 'outside'
-            gridLineWidth: 1,
-            gridLineColor: '#444444',
-            showFirstLabel: true,
-            showLastLabel: false,
-            startOnTick: true,
-            endOnTick: true,
-            allowDecimals: false,
-            title: {
-              text: x_axis_label,
-              style: {
-                'color': 'white',
-                'font-size': '22px'
-              }
-            },
-            labels: {
-              align: 'center',
-              style: {
-                'color': 'white',
-                'font-size': '18px'
-              }
-            }
-          },
-          yAxis: {
-            lineWidth: 1,
-            lineColor: '#CCCCCC',
-            tickPixelInterval: 50,
-            tickLength: 5,
-            tickWidth: 1,
-            tickColor: '#FFFFFF',
-            tickPosition: 'inside',
-            gridLineWidth: 1,
-            gridLineColor: '#444444',
-            alternateGridColor: 'rgba(0, 0, 0, .2)',
-            minorTickInterval: null,
-            minorTickLength: 2,
-            minorTickWidth: 0,
-            minorTickColor: '#cccccc',
-            minorTickPosition: 'outside',
-            minorGridLineWidth: 1,
-            minorGridLineColor: '#333333',
-            minRange: 1,
-            showFirstLabel: false,
-            showLastLabel: true,
-            title: {
-              text: y_axis_label,
-              style: {
-                'color': 'white',
-                'font-size': '22px'
-              }
-            },
-            labels: {
-              align: 'right',
-              style: {
-                'color': 'white',
-                'font-size': '20px'
-              }
-            },
-            maxZoom: 1
-          },
-          legend: {
-            enabled: false,
-            floating: true,
-            layout: 'vertical',
-            borderWidth: 1,
-            borderColor: '#444444',
-            borderCornerRadius: 5,
-            shadow: true,
-            backgroundColor: 'rgba(32, 32, 32, .75)',
-            align: 'left',
-            x: 80,
-            verticalAlign: 'top',
-            y: 30,
-            itemStyle: {
-              color: '#CCCCCC',
-              listStyle: 'none',
-              listStyleImage: 'none'
-            },
-            itemHiddenStyle: {
-              color: '#444444'
-            },
-            itemHoverStyle: {
-              color: 'white'
-            }
-          },
-          tooltip: { enabled: false },
-          plotOptions: {
-            series: {
-                lineWidth: 5,
-                shadow: true,
-                marker: {
-                    enabled: false,
-                    symbol: 'circle'
-                }
-            }
-          },
-          series: series
-        });
+      function sum(arr) {
+        s = 0.0;
+        for (var i in arr) {
+          s += arr[i];
+        }
+        return s
       }
 
       function create_bar_chart(container_id,
@@ -221,8 +104,13 @@
                                 y_axis_label,
                                 y_axis_label_formatter,
                                 theme,
-                                show_legend)
+                                show_legend,
+                                show_value_labels,
+                                value_label_formatter,
+                                use_log_axis)
       {
+        console.log('Rendering chart: ' + container_id);
+
         const label_colour = {
           'light': 'white',
           'dark': 'black'
@@ -245,6 +133,48 @@
           var axis_label_size = '28px';
         }
 
+        const plot_options = {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }
+        };
+        if (show_value_labels) {
+          plot_options.series =  {
+            dataLabels: {
+              enabled: true,
+              formatter: value_label_formatter,
+              align: 'center',
+              color: 'black',
+              shadow: false
+            }
+          };
+        }
+
+        const y_axis_config = {
+          title: {
+            text: y_axis_label,
+            style: {
+              color: label_colour,
+              'font-weight': 'strong',
+              'font-size': axis_label_size
+            }
+          },
+          labels: {
+            formatter: y_axis_label_formatter,
+            style: {
+              color: label_colour,
+              'font-weight': 'strong',
+              'font-size': '18px'
+            }
+          }
+        };
+        if (use_log_axis === true) {
+          y_axis_config.type = 'logarithmic';
+        } else {
+          y_axis_config.min = 0;
+        }
+
         return Highcharts.chart(container_id, {
           chart: {
             type: 'column',
@@ -265,39 +195,29 @@
               }
             }
           },
-          yAxis: {
-            min: 0,
-            title: {
-              text: y_axis_label,
-              style: {
-                color: label_colour,
-                'font-weight': 'strong',
-                'font-size': axis_label_size
-              }
-            },
-            labels: {
-              formatter: y_axis_label_formatter,
-              style: {
-                color: label_colour,
-                'font-weight': 'strong',
-                'font-size': '18px'
-              }
-            }
-          },
+          yAxis: y_axis_config,
           legend: legend,
           tooltip: { enabled: false },
           exporting: { enabled: false },
-          plotOptions: {
-            column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-            }
-          },
+          plotOptions: plot_options,
           series: series
         });
       }
 
       Reveal.addEventListener('ready', function(event) {
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ''
+            }
+        });
+
+        const secondsLabelFormatter = function() {
+          return Highcharts.numberFormat(this.y, 2) + 's';
+        };
+        const speedupLabelFormatter = function() {
+          return Highcharts.numberFormat(this.y, 1) + 'X';
+        };
+
         create_bar_chart(
           'python-vs-c',
           [
@@ -323,6 +243,7 @@
           'execution time (secs)',
           function () { return this.value + 's'; },
           'light',
+          false,
           false);
 
         create_bar_chart(
@@ -337,6 +258,7 @@
           'Revenue ($ millions)',
           function () { return '$' + this.value; },
           'light',
+          false,
           false);
 
         const timing_sections = [
@@ -349,55 +271,136 @@
         const pure_python_times = {
             name: 'Pure Python',
             color: 'green',
-            data: [60, 60, 60, 60, 60]
+            data: [42.33, 105.82, 188.12, 13912.75, 250.82]
         };
         const numpy_times = {
-          name: 'NumPy',
+          name: 'NumPy V1',
           color: 'red',
-          data: [6, 6, 6, 6, 6]
+          data: [3.919, 501.64, 1214.92, 3303.79, 3.919]
         };
         const vectorised_times = {
-          name: 'NumPy + Vectorised',
+          name: 'NumPy V2',
           color: 'blue',
-          data: [6, 6, 6, 6, 6]
+          data: [3.919, 10.7664, 2.6358, 3303.79, 1.0893]
         };
         const numba_times = {
-          name: 'NumPy + Vectorised + Numba',
+          name: 'NumPy + Numba',
           color: 'black',
-          data: [6, 6, 6, 6, 6]
+          data: [3.919, 10.7664, 2.6358, 129.7377, 1.0893]
         };
         const parallelised_times = {
           name: 'Parallelised',
           color: 'green',
-          data: [6, 6, 6, 6, 6]
+          data: [3.919, 6.01, 1.47, 72.42, 0.61]
         };
         const parallelised_times_memmap = {
           name: 'Parallelised (memmap)',
           color: 'red',
-          data: [6, 6, 6, 6, 6]
+          data: [3.919, 3.43, 0.84, 41.33, 0.35]
         };
-        const time_axis_label = 'execution time (mins)';
-        const time_axis_formatter = function () { return this.value + 'm'; };
+        const time_axis_label = 'execution time (secs)';
+        const time_axis_formatter = function () { return this.value + 's'; };
 
         create_bar_chart(
           'purepython-times', [pure_python_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter);
+        create_bar_chart(
+          'purepython-times-log', [pure_python_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter, true);
         create_bar_chart(
           'numpy-times', [pure_python_times, numpy_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter, true);
         create_bar_chart(
-          'vectorised-times', [numpy_times, vectorised_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          'vectorised-times', [pure_python_times, numpy_times, vectorised_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter, true);
         create_bar_chart(
-          'numba-times', [numpy_times, vectorised_times, numba_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          'numba-times-log', [vectorised_times, numba_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter, true);
+        create_bar_chart(
+          'numba-times', [vectorised_times, numba_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter);
         create_bar_chart(
           'parallelised-times', [numba_times, parallelised_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter);
         create_bar_chart(
           'parallelised-times-memmap',
           [numba_times, parallelised_times, parallelised_times_memmap],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark', true);
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, secondsLabelFormatter);
+
+        const total_time_sections = [
+          'Pure Python',
+          'Numpy V1',
+          'Numpy V2',
+          'Numba',
+          'Parallel',
+          'Parallel (memmap)'
+        ];
+        const original_total_time = sum(pure_python_times.data);
+
+        create_bar_chart(
+          'total-times',
+          [
+            {
+              data: [
+                original_total_time,
+                sum(numpy_times.data),
+                sum(vectorised_times.data),
+                sum(numba_times.data),
+                sum(parallelised_times.data),
+                sum(parallelised_times_memmap.data),
+              ]
+            }
+          ],
+          total_time_sections,
+          time_axis_label, time_axis_formatter, 'dark',
+          false, true, secondsLabelFormatter, true);
+
+        const total_speedups = [
+          original_total_time / original_total_time,
+          original_total_time / sum(numpy_times.data),
+          original_total_time / sum(vectorised_times.data),
+          original_total_time / sum(numba_times.data),
+          original_total_time / sum(parallelised_times.data),
+          original_total_time / sum(parallelised_times_memmap.data)
+        ];
+        create_bar_chart(
+          'total-speedups',
+          [{data: total_speedups}],
+          total_time_sections,
+          'speedup factor', time_axis_formatter, 'dark',
+          false, true, speedupLabelFormatter, false);
+
+        numba_times.color = 'blue';
+        create_bar_chart(
+          'numba-times2', [numba_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          false, true, secondsLabelFormatter);
+
+        create_bar_chart(
+          'numba-times3',
+          [{color: 'blue', data: [129.74, 10]}],
+          ['non-vectorised', 'vectorised'],
+          time_axis_label,
+          time_axis_formatter,
+          'dark',
+          false, true, secondsLabelFormatter);
+
+        total_speedups.push({y: 1000, color: 'red'});
+        total_time_sections.push('Final');
+        create_bar_chart(
+          'total-speedups2',
+          [{data: total_speedups}],
+          total_time_sections,
+          'speedup factor', time_axis_formatter, 'dark',
+          false, true, speedupLabelFormatter, false);
 
         create_bar_chart(
           'basic-numpy-benchmark-times',
@@ -412,7 +415,9 @@
           'execution time (secs)',
           function () { return this.value + 's'; },
           'dark',
-          false);
+          false,
+          true,
+          secondsLabelFormatter);
         create_bar_chart(
           'basic-numpy-benchmark-speedup',
           [
@@ -431,7 +436,9 @@
           'speedup factor',
           function () { return this.value; },
           'dark',
-          false);
+          false,
+          true,
+          speedupLabelFormatter);
 
         create_bar_chart(
           'vectorise-benchmark',
@@ -440,7 +447,11 @@
           'execution time (secs)',
           function () { return this.value + 's'; },
           'dark',
-          false);
+          false,
+          true,
+          function() {
+            return Highcharts.numberFormat(this.y, 4) + 's';
+          });
 
         const numba_sections = [
             'python',
@@ -460,7 +471,9 @@
           'execution time (secs)',
           function () { return this.value + 's'; },
           'dark',
-          false);
+          false,
+          true,
+          secondsLabelFormatter);
         create_bar_chart(
           'numba-benchmark-speedup1',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(0, 2)}],
@@ -468,7 +481,9 @@
           'speedup factor',
           function () { return this.value; },
           'dark',
-          false);
+          false,
+          true,
+          speedupLabelFormatter);
         create_bar_chart(
           'numba-benchmark-times2',
           [{name: 'timings', color: 'blue', data: numba_benchmark_times.slice(1, 4)}],
@@ -476,7 +491,9 @@
           'execution time (secs)',
           function () { return this.value + 's'; },
           'dark',
-          false);
+          false,
+          true,
+          secondsLabelFormatter);
         create_bar_chart(
           'numba-benchmark-speedup2',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(1, 4)}],
@@ -484,7 +501,9 @@
           'speedup factor',
           function () { return this.value; },
           'dark',
-          false);
+          false,
+          true,
+          speedupLabelFormatter);
       });
     </script>
 

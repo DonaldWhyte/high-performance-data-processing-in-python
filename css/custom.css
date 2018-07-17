@@ -254,6 +254,10 @@ img[alt="globe"] {
     width: 300px;
 }
 
+img[alt="hurricanes"] {
+    width: 700px;
+}
+
 img[alt="tabriz_airport"] {
     width: 600px;
 }
@@ -267,6 +271,10 @@ img[alt="outlier_detection"] {
 }
 
 img[alt="complete_process"] {
+    width: 600px;
+}
+
+img[alt="snakeviz"] {
     width: 600px;
 }
 

@@ -126,12 +126,8 @@ def series_ranges(station_ids):
 
 
 def compute_outliers(input_fname, measurement, start, end, n):
-    #input_file = h5py.File(input_fname, mode='r')
-    #data = fill_forward(input_file[measurement][start:end])
-
     data = fill_forward(
         np.memmap(input_fname, dtype=np.float64, mode='r')[start:end])
-
     series_with_averages = data[n - 1:]
     avg = rolling_average(data, n)
     std = rolling_std(data, avg, n)

@@ -327,16 +327,18 @@ http://www.polmontweather.co.uk/windspd.htm
 
 [NEXT]
 # Research Goal
-Use IDS data to detect extreme weather events that occurred anywhere on the planet.
+Use IDS data to detect all extreme weather events that happen anywhere on the planet.
 
 [NEXT]
-## Detecting Hurricanes
+## Initial Goal
+### Detecting hurricanes
+
 ![hurricanes](images/hurricanes.jpg)
 
 [NEXT]
-### Trimmed Data
+### ISD-Lite Dataset
 
-**ISD-Lite Dataset**
+Let's test our approach on a smaller dataset.
 
 |                 |                          |
 | --------------- | ------------------------ |
@@ -475,7 +477,6 @@ optional arguments:
     --output outliers.csv \
     --measurement wind_speed_rate
 Found TODO outliers in TODO stations
-Outlier search took TODO
 ```
 
 [NEXT]
@@ -494,9 +495,33 @@ TODO: single outlier
 TODO: show news report of actual incident
 
 [NEXT]
-### Performance
-* **Time taken:** TIME
-* **Average time per row:** TIME
+<!-- .slide: class="large-slide" -->
+## Time Taken
+4 hours.
+
+[NEXT]
+## The Ultimate Goal
+Use IDS data to detect all extreme weather events that happen anywhere on the planet.
+
+[NEXT]
+### Detecting Outliers in the Full Dataset
+
+All 8 measurements.
+
+All 35,000 weather stations.
+
+From 1901 to now.
+
+_note_
+What if we ran the same outlier detection code on the full dataset?
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+It would take **27 days**.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+What went wrong?
 
 [NEXT]
 ### Profiling the Code
@@ -520,14 +545,17 @@ Let's find out which step(s) were the performance bottlenecks.
 ```
 
 [NEXT]
-TODO: show snakeviz output
+![snakeviz](images/snakeviz.png)
 
 [NEXT]
-### Execution Time Breakdown
-
-**Total time:** TIME mins
+**Total time:** 4 hours (14530 secs)
 
 <div id="purepython-times"></div>
+
+[NEXT]
+**Total time:** 4 hours (14530 secs)
+
+<div id="purepython-times-log"></div>
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -942,9 +970,9 @@ def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
 ```
 
 [NEXT]
-### Execution Time Breakdown
+**Total time:** 4 hours ⟶ 1.4 hours
 
-**Total time:** TIME mins -> TIME mins
+**Speedup:** 2.85x
 
 <div id="numpy-times"></div>
 
@@ -1074,10 +1102,10 @@ clang -O0 vectorised_timings.c
 [NEXT]
 ### Vectorised Definitions
 
-| **Context** |                                                                                     |
-| ----------- | ----------------------------------------------------------------------------------- |
-| Native Code | Apply single operations to multiple data items at once using special CPU registers. |
-| Python      | Keeping as much computation in `numpy`/native code as much as possible.             |
+| **Context**     |                                                                                     |
+| --------------- | ----------------------------------------------------------------------------------- |
+| **Native Code** | Apply single operations to multiple data items at once using special CPU registers. |
+| **Python**      | Keeping as much computation in `numpy`/native code as much as possible.             |
 
 Both involve making algorithms use array/vector/matrix based computation (not iterative).
 
@@ -1145,8 +1173,9 @@ def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
 <!-- .element: class="large" -->
 
 [NEXT]
-### Execution Time Breakdown
-**Total time:** TIME mins -> TIME mins
+**Total time:** 1.4 hours ⟶ 48 mins
+
+**Speedup:** 5x
 
 <div id="vectorised-times"></div>
 
@@ -1370,8 +1399,16 @@ https://numba.pydata.org/numba-doc/dev/user/faq.html
 Added `@jit(nopython=True)` to all functions.
 
 [NEXT]
-### Execution Time Breakdown
-**Total time:** TIME mins -> TIME mins
+**Total time:** 48 mins ⟶ 2.46 mins
+
+**Speedup:** 98x
+
+<div id="numba-times-log"></div>
+
+[NEXT]
+**Total time:** 48 mins ⟶ 2.46 mins
+
+**Speedup:** 98x
 
 <div id="numba-times"></div>
 
@@ -1418,7 +1455,7 @@ Or if you want to run your code on a GPU.
 2. Run most computation in compiled/optimised machine instructions
 3. Vectorised computation to take advantage of CPU's SIMD feature
 
-**Current speedup: TIME x**
+**Current speedup: 98x**
 
 [NEXT]
 ### Embarrassingly Parallel
@@ -1477,8 +1514,9 @@ outliers = processor(
 </code></pre>
 
 [NEXT]
-### Execution Time Breakdown
-**Total time:** TIME mins -> TIME mins
+**Total time:** 2.46 mins ⟶ 1.37 mins
+
+**Speedup:** 177x
 
 <div id="parallelised-times"></div>
 
@@ -1535,8 +1573,9 @@ share a segment of data between all the worker processes.
 
 
 [NEXT]
-### Execution Time Breakdown
-**Total time:** TIME mins -> TIME mins
+**Total time:** 1.37 mins ⟶ 0.78 mins
+
+**Speedup:** 309x
 
 <div id="parallelised-times-memmap"></div>
 
@@ -1546,7 +1585,51 @@ share a segment of data between all the worker processes.
 ![fin](images/fin.svg)
 
 [NEXT]
-TODO: show final graphs on log scale of speeds + speedup factors
+<div id="total-times"></div>
+
+[NEXT]
+<div id="total-speedups"></div>
+
+[NEXT]
+### Main Bottleneck
+Computing rolling standard deviation.
+<div id="numba-times2"></div>
+
+[NEXT]
+### Vectorised Rolling STD
+
+```python
+TODO
+```
+
+[NEXT]
+### Vectorised Rolling STD
+<div id="numba-times3"></div>
+
+[NEXT]
+### Final Speedup
+**TODO** times faster.
+<div id="total-speedups2"></div>
+
+[NEXT]
+## The Ultimate Goal
+Use IDS data to detect all extreme weather events that happen anywhere on the planet.
+
+[NEXT]
+### Detecting Outliers in the Full Dataset
+
+All 8 measurements.
+
+All 35,000 weather stations.
+
+From 1901 to now.
+
+_note_
+What if we ran the same outlier detection code on the full dataset?
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+**27 days** ⟶ **TODO**
 
 [NEXT]
 TODO: conclusion

@@ -1,4 +1,5 @@
 import argparse
+from collections import defaultdict
 import csv
 import datetime
 import time
@@ -26,11 +27,14 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
     station_ids = input_file['station_usaf'][:]
     measurements = input_file[measurement][:]
 
+    total_timings = defaultdict(float)
     start_time = time.time()
 
     print('Determining range of each station time series')
+    series_ranges_start = time.time()
     ranges = series_ranges(station_ids)
     print(f'Found time series for {len(ranges)} ranges')
+    total_timings['series_ranges'] = time.time() - series_ranges_start
 
     print('Removing time series that don\'t have enough data')
     ranges_with_enough_data = [
@@ -42,14 +46,20 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
         'station time series')
 
     print('Computing outliers')
-    station_outliers = {
-        station_ids[start]: compute_outliers(measurements[start:end],
-                                             _ROLLING_WINDOW)
-        for start, end in ranges_with_enough_data
-    }
+    station_outliers = {}
+    for start, end in ranges_with_enough_data:
+        station_id = station_ids[start]
+        station_outliers[station_id], timings = compute_outliers(
+            measurements[start:end],
+            _ROLLING_WINDOW)
+        for key, value in timings.items():
+            total_timings[key] += value
 
     elapsed_time = time.time() - start_time
-    print(f'Computed outliers in {elapsed_time:.2f} seconds')
+    print(f'Computed outliers in {elapsed_time:.4f} seconds')
+
+    for func_name, timing in total_timings.items():
+        print(f'{func_name} took {timing:.4f} seconds')
 
     if output_fname:
         print(f'Writing outliers to {output_fname}')
@@ -102,11 +112,27 @@ def series_ranges(station_ids):
 
 
 def compute_outliers(data, n):
+    timings = {}
+
+    start = time.time()
     data = fill_forward(data)
+    timings['fill_forward'] = time.time() - start
+
     series_with_averages = data[n - 1:]
+
+    start = time.time()
     avg = rolling_average(data, n)
+    timings['rolling_average'] = time.time() - start
+
+    start = time.time()
     std = rolling_std(data, avg, n)
-    return find_outliers(series_with_averages, avg, std)
+    timings['rolling_std'] = time.time() - start
+
+    start = time.time()
+    result = find_outliers(series_with_averages, avg, std)
+    timings['find_outliers'] = time.time() - start
+
+    return result, timings
 
 
 def fill_forward(arr):

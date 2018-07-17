@@ -70,3 +70,6 @@ __pycache__
 # C files
 *.o
 *.out
+
+# Profiler artefacts
+*.perf
