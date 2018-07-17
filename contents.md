@@ -1597,18 +1597,12 @@ Computing rolling standard deviation.
 
 [NEXT]
 ### Vectorised Rolling STD
-
-```python
-TODO
-```
-
-[NEXT]
-### Vectorised Rolling STD
-<div id="numba-times3"></div>
+**Speedup:** 10x
+<div id="numba-rolling-std-times"></div>
 
 [NEXT]
 ### Final Speedup
-**TODO** times faster.
+**1145** times faster.
 <div id="total-speedups2"></div>
 
 [NEXT]
@@ -1629,7 +1623,7 @@ What if we ran the same outlier detection code on the full dataset?
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-**27 days** ⟶ **TODO**
+**27 days** ⟶ **38 minutes**
 
 [NEXT]
 TODO: conclusion

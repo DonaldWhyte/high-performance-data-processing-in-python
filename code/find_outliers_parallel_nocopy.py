@@ -147,6 +147,7 @@ def rolling_average(arr, n):
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
+
 @jit(float64[:](read_only_array(np.float64), float64[:], int64), nopython=True)
 def rolling_std(arr, rolling_avg, n):
     variance = np.zeros(len(arr) - n + 1)
@@ -154,6 +155,7 @@ def rolling_std(arr, rolling_avg, n):
     for i in range(len(variance)):
         variance[i] = np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
     return np.sqrt(variance)
+
 
 @jit(int64[:](read_only_array(np.float64), float64[:], float64[:]), nopython=True)
 def find_outliers(series_with_avgs: np.ndarray,

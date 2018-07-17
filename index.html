@@ -385,15 +385,15 @@
           false, true, secondsLabelFormatter);
 
         create_bar_chart(
-          'numba-times3',
-          [{color: 'blue', data: [129.74, 10]}],
+          'numba-rolling-std-times',
+          [{color: 'blue', data: [129.7377, 13.0642]}],
           ['non-vectorised', 'vectorised'],
           time_axis_label,
           time_axis_formatter,
           'dark',
           false, true, secondsLabelFormatter);
 
-        total_speedups.push({y: 1000, color: 'red'});
+        total_speedups.push({y: 1144.9, color: 'red'});
         total_time_sections.push('Final');
         create_bar_chart(
           'total-speedups2',
