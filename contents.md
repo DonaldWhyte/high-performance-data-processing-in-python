@@ -661,13 +661,12 @@ The `strides` are the number of bytes that should be skipped in memory to go to 
 `flags` is a set of configurable flags we don't need to cover here.
 
 [NEXT]
-### Examples
-
-First, let's import NumPy.
+### Code Examples
 
 ```python
 import numpy as np
 ```
+<!-- .element: class="large" -->
 
 [NEXT]
 ### Example
@@ -957,15 +956,12 @@ def rolling_std(arr: np.ndarray,
 `find_outliers()`
 
 ```python
-def find_outliers(data: np.ndarray, n: int) -> np.ndarray:
-    fill_forward(data)
-    avg = rolling_average(data, n)
-    std = rolling_std(data, avg, n)
-    series_with_std = data[n - 1:]
-
+def find_outliers(data: np.ndarray,
+                  rolling_avg: np.ndarray,
+                  rolling_std: np.ndarray) -> np.ndarray:
     outlier_indices = np.where(
-        np.absolute(series_with_std - avg) >
-        (std * _OUTLIER_STD_THRESHOLD))
+        np.absolute(data - rolling_avg) >
+        (rolling_std * _OUTLIER_STD_THRESHOLD))
     return outlier_indices[0]
 ```
 
