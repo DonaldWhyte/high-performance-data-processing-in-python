@@ -298,8 +298,12 @@
           color: 'red',
           data: [3.919, 3.43, 0.84, 41.33, 0.35]
         };
+
         const time_axis_label = 'execution time (secs)';
         const time_axis_formatter = function () { return this.value + 's'; };
+
+        const speedup_axis_label = 'speedup factor';
+        const speedup_axis_formatter = function () { return this.value + 'x'; };;
 
         create_bar_chart(
           'purepython-times', [pure_python_times],
@@ -375,7 +379,7 @@
           'total-speedups',
           [{data: total_speedups}],
           total_time_sections,
-          'speedup factor', time_axis_formatter, 'dark',
+          speedup_axis_label, speedup_axis_formatter, 'dark',
           false, true, speedupLabelFormatter, false);
 
         numba_times.color = 'blue';
@@ -399,7 +403,7 @@
           'total-speedups2',
           [{data: total_speedups}],
           total_time_sections,
-          'speedup factor', time_axis_formatter, 'dark',
+          speedup_axis_label, speedup_axis_formatter, 'dark',
           false, true, speedupLabelFormatter, false);
 
         create_bar_chart(

@@ -471,27 +471,82 @@ optional arguments:
 <!-- .element class="medium-table-text" -->
 
 [NEXT]
-```bash
+### Running the Code
+
+```
 > python3 -m find_outliers_purepy \
     --input isdlite.hdf5 \
     --output outliers.csv \
     --measurement wind_speed_rate
-Found TODO outliers in TODO stations
+
+Determining range of each station time series
+Found time series for 5183 ranges
+Removing time series that don't have enough data
+Kept 4695 / 5183 station time series
+Computing outliers
+Computed outliers in 14499.84 seconds
+Writing outliers to outliers.csv
 ```
 
 [NEXT]
+### The Output CSV
+
+| **station_id** | **timestsamp**      | **wind_speed_rate** |
+| -------------- | ------------------- | ------------------- |
+| ...            | ...                 | ...                 |
+| 720346         | 1996-04-25 11:00:00 | 110.0               |
+| 720358         | 1997-01-31 09:00:00 | 40.0                |
+| 997375         | 1993-01-29 15:00:00 | 100.0               |
+| ...            | ...                 | ...                 |
+
+
+[NEXT]
+### Outliers Found
+
+Total outliers: 4982
+
 ```bash
-> cat outliers.csv | head
-TODO
+> wc -l outliers.csv
+4982
+```
+
+[NEXT]
+### Outliers Found
+
+Detected outliers in 1313 weather stations.
+
+On average, those stations had 3.8 outliers.
+
+```bash
+> cat outliers.csv | cut -d ',' -f 1 | sort | uniq | wc -l
+1313
+```
+
+[NEXT]
+Some detected outliers:
+
+```bash
+997299,2006-09-01 09:00:00,400.0
+997299,2006-09-01 12:00:00,400.0
+```
+
+The affected weather station is:
+```bash
+> grep 997299 stations.csv
+"997299","99999","CHEASAPEAKE BRIDGE","US","VA","","+36.970","-076.120","+0016.0","20050217","20161231"
 ```
 
 [NEXT]
 ### Success!
+![detected_hurricane](images/detected_hurricane1.png)
 
-```bash
-TODO: single outlier
-```
+[NEXT]
+![detected_hurricane](images/detected_hurricane2.png)
 
+[NEXT]
+![detected_hurricane](images/detected_hurricane3.png)
+
+[NEXT]
 TODO: show news report of actual incident
 
 [NEXT]
