@@ -578,23 +578,25 @@ What went wrong?
 [NEXT]
 ### Profiling the Code
 
-Let's find out which step(s) were the performance bottlenecks.
+Use `cProfile` to find out which steps were the performance bottlenecks.
 
-```bash
-> python3 -m cProfile -o profile_output \
+<pre class="large"><code data-noescape class="python"><mark>&gt; python3 -m cProfile -o profile_output \</mark>
      find_outliers_purepy.py \
      --input isdlite.hdf5 \
      --output outliers.csv \
      --measurement wind_speed_rate
-```
+</code></pre>
 
 [NEXT]
 ### Visualising Performance Bottlenecks
+
+`snakeviz` generates visualisations of profiling data.
 
 ```bash
 > pip3 install snakeviz
 > snakeviz profile_output
 ```
+<!-- .element class="large" -->
 
 [NEXT]
 ![snakeviz](images/snakeviz.png)
