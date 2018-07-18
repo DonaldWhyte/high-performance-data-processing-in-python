@@ -1690,7 +1690,6 @@ share a segment of data between all the worker processes.
 [NEXT]
 ![joblib_memmap](images/joblib_memmap.svg)
 
-
 [NEXT]
 **Total time:** 1.37 mins ⟶ 0.78 mins
 
@@ -1844,6 +1843,29 @@ Otherwise, you can get **very** far with basic vecorisation or sprinkling some
 
 [NEXT SECTION]
 ## Appendix
+
+[NEXT]
+## Parallelisation
+### What about Memory?
+
+[NEXT]
+Full dataset is > 600GB large.
+
+600GB **exceeds main memory limit** of most machines.
+
+You need to parallelise across **several machines**.
+
+[NEXT]
+`dask.distributed`
+
+TODO
+
+[NEXT]
+### How to Use
+
+```bash
+pip3 install dask distributed --upgrade
+```
 
 [NEXT]
 ### References
