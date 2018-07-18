@@ -1555,10 +1555,16 @@ def compute_outliers(time_series: np.ndarray) -> np.ndarray:
 <pre><code data-noescape class="python">from multiprocessing import cpu_count
 from joblib import delayed, Parallel
 
+def compute_outliers(station_data: np.ndarray) -> np.ndarray:
+    station_data = fill_forward(station_data)
+    avg = rolling_average(station_data, 30)
+    std = rolling_std(station_data, avg, 30)
+    return find_outliers(station_data, avg, std)
+
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
-outliers = processor(
-    delayed(compute_outliers)(measurements[start:end])
-    for start, end in series_ranges)
+<mark>outliers = processor(</mark>
+<mark>    delayed(compute_outliers)(measurements[start:end])</mark>
+<mark>    for start, end in series_ranges)</mark>
 </code></pre>
 
 [NEXT]
@@ -1592,18 +1598,40 @@ _Map in-process memory to data stored on disk._
 
 
 [NEXT]
-<pre><code data-noescape class="python"># Pass full array into function, but also pass the index range
-# that contains the data for a single weather station.
-def compute_outliers(all_measurements: np.ndarray,
-                     start: int,
-                     end: int) -> np.ndarray:
-    pass
+`np.memmap`
 
-# If the data size of input numpy arrays is more than 1MB, store
-# the array on a memmap'd file on disk.
-processor = Parallel(n_jobs=cpu_count(), <mark>max_nbytes='1M')</mark>
+Write the measurement data to an memmap'd file.
+
+<pre><code data-noescape class="python"># Open handle to temporary memmap file.
+with NamedTemporaryFile() as tmpfile:
+    data = np.memmap(
+        tmpfile.name,
+        dtype=np.float64,
+        shape=(len(input_file[measurement]),),
+        mode='w+')
+
+    # Load all wind_speed_rate measurements into the memmap file.
+    data[:] = input_file[measurement][:]
+
+    # Flushes contents to disk.
+    del data
+</code></pre>
+
+[NEXT]
+The memmap file is shared across all worker subprocesses.
+
+<pre><code data-noescape class="python">def compute_outliers(fname: str,
+                     start_idx: int,
+                     end_idx: int) -> np.ndarray:
+    # Only load desired sub-array from the memmap file.
+<mark>    memmap = np.memmap(fname, dtype=np.float64, mode='r')</mark>
+<mark>    station_data = memmap[start_idx:end_idx]</mark>
+    return ...  # rest of code same as before
+
+# Pass the filename of the temp memmap file to the workers.
+processor = Parallel(n_jobs=cpu_count())
 outliers = processor(
-    delayed(compute_outliers)(measurements, start, end)
+<mark>    delayed(compute_outliers)(tmpfile.name, start, end)</mark>
     for start, end in series_ranges)
 </code></pre>
 

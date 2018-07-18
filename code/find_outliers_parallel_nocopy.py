@@ -64,7 +64,7 @@ def _run(input_fname: str, measurement: str, output_fname: Optional[str]):
 
     processor = Parallel(n_jobs=cpu_count())
     results = processor(
-        delayed(compute_outliers)(tmpfile.name, measurement, start, end, _ROLLING_WINDOW)
+        delayed(compute_outliers)(tmpfile.name, start, end, _ROLLING_WINDOW)
         for start, end in ranges_with_enough_data)
 
     station_outliers = {
@@ -125,9 +125,9 @@ def series_ranges(station_ids):
     return np.column_stack((series_starts, series_ends))
 
 
-def compute_outliers(input_fname, measurement, start, end, n):
+def compute_outliers(memmap_fname, start, end, n):
     data = fill_forward(
-        np.memmap(input_fname, dtype=np.float64, mode='r')[start:end])
+        np.memmap(memmap_fname, dtype=np.float64, mode='r')[start:end])
     series_with_averages = data[n - 1:]
     avg = rolling_average(data, n)
     std = rolling_std(data, avg, n)
