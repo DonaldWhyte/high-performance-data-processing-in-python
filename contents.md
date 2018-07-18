@@ -141,7 +141,7 @@ Models larger and more complex.
 ### The Reality
 1. Researcher builds model that works on their machine
 2. Programmer attempts to rewrite model for production
-3. Programmer can't to replicate the researcher's results
+3. Programmer can't replicate the researcher's results
 4. Everything spends tons of time figuring out why
 
 [NEXT]
@@ -1680,8 +1680,8 @@ outliers = processor(
 
 _note_
 As this problem can often occur in scientific computing with numpy based
-data structures, `joblib.Parallel` provides a special handling for large
-numpy arrays to automatically dump them on the filesystem and pass a reference
+data structures, `joblib.Parallel` provides a special handling for large numpy
+arrays to automatically dump them on the filesystem and pass a reference to the
 to the worker to open them as memory map on that file using.
 
 `numpy.memmap` is a subclass of `numpy.ndarray`. This makes it possible to
@@ -1700,13 +1700,15 @@ share a segment of data between all the worker processes.
 
 
 [NEXT SECTION]
-## Fin
-![fin](images/fin.svg)
+## 7. The Final Timings
+![final_timings](images/final_timings.svg)
 
 [NEXT]
+## Current Timings
 <div id="total-times"></div>
 
 [NEXT]
+## Current Speedups
 <div id="total-speedups"></div>
 
 [NEXT]
@@ -1744,11 +1746,73 @@ What if we ran the same outlier detection code on the full dataset?
 <!-- .slide: class="large-slide" -->
 **27 days** ⟶ **38 minutes**
 
-[NEXT]
-TODO: conclusion
+
+[NEXT SECTION]
+## Fin
+![fin](images/fin.svg)
 
 [NEXT]
-TODO: be sure to emphasise the importance of numerical computation optimisation
+Python is great for research.
+
+Out of the box Python is **slow**.
+
+[NEXT]
+**Increasing demands for faster/real-time data processing.**
+
+Processing large volumes of data or training complex machine learning models.
+
+Standard Python in prod **isn't viable** for many use cases.
+
+[NEXT]
+Could research in Python then convert the code to a faster language.
+
+Can cause **more problems** than it solves.
+
+[NEXT]
+Use Python for research _and_ production.
+
+Possible by using Python's large ecosystem of scientific computing packages.
+
+[NEXT]
+Keep computation in **native code** as much possible.
+
+**Vectorise** using NumPy where possible.
+
+Use Numba to optimise **unvectorisable** code.
+
+[NEXT]
+Identify opportunities to **parallelise**.
+
+Parallelise using `joblib` to abstract parallisation details from code.
+
+[NEXT]
+`joblib` abstracts the worker backend.
+
+Workers can be CPU cores or a machine cluster.
+
+Run on single machine with multiple CPU cores **first**.
+
+Run on cluster of machines **only when necessary**.
+
+Either way, code is **almost identical**.
+
+_note_
+This abstracts the worker backend. Workers can be CPU cores or machines. Either
+way, **the code remains the same**.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+`numpy`/`numba`/`joblib` alone can yield 1000X speedup.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Don't throw the problem to dev ops.
+
+[NEXT]
+If RAM or disk is your bottleneck, parallelise using a cluster.
+
+Otherwise, you can get **very** far with basic vecorisation or sprinkling some
+`@jit` magic.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
