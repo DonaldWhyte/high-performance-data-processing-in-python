@@ -547,9 +547,6 @@ The affected weather station is:
 ![detected_hurricane](images/detected_hurricane3.png)
 
 [NEXT]
-TODO: show news report of actual incident
-
-[NEXT]
 <!-- .slide: class="large-slide" -->
 ## Time Taken
 4 hours.
