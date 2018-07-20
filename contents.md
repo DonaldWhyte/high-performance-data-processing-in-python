@@ -743,7 +743,6 @@ code.
 ### Fragmented Memory Access
 
 [NEXT]
-TODO: change diag to C array
 ![python_slow_2](images/python_slow_2.png)
 
 [NEXT]

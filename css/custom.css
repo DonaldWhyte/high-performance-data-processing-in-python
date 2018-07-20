@@ -282,6 +282,10 @@ img[alt="python_slow_1"] {
     width: 500px;
 }
 
+img[alt="python_slow_2"] {
+    width: 750px;
+}
+
 img[alt="numpy_add_loop"],
 img[alt="numpy_add_native"]
 {
