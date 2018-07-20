@@ -59,7 +59,11 @@ General-purpose language useful outside of data analysis.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-**What about production?**
+Great language for **research**.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+What about **production?**
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -69,7 +73,7 @@ General-purpose language useful outside of data analysis.
 ![research_use_case](images/research.svg)
 ![research_use_case](images/one_off_batch_job.svg)
 
-Large data analysis/processing typically isolated to research.
+Large data analysis/processing used to be isolated to research.
 
 One-off batch jobs to produce insight for research and decision making.
 
@@ -85,13 +89,18 @@ production systems.
 <!-- .slide: data-background="images/ml_landscape_dec15.jpg" class="background" -->
 ### Things Have Changed
 
-More data than ever before.
+Exponential growth of data.
 
-Machine learning and other statistical models are being run in live, production systems.
+Need real-time insights into this data.
+
+Machine learning/stats models are running in live production systems.
+
+_note_
+Source: https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Artificial Intelligence
+## Artificial Intelligence
 ### Projected Global Revenue
 <div id="deep-learning-revenue"></div>
 
@@ -144,6 +153,9 @@ Models larger and more complex.
 3. Programmer can't replicate the researcher's results
 4. Everything spends tons of time figuring out why
 
+_note_
+Useful link discussing deplyoying models to prod: https://www.quora.com/How-do-you-take-a-machine-learning-model-to-production
+
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Results in...
@@ -163,9 +175,13 @@ They can be configured differently, but the code which pre-processes the data,
 trains the models and executes it in prod should be the same.
 
 [NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Problem
-Pure Python is slow.
+Want to use Python.
+
+Enables researchers to run experiments quickly.
+
+But Pure Python is **slow**.
 
 _note_
 But we like Python because it's easy to use for research.
@@ -173,7 +189,18 @@ But we like Python because it's easy to use for research.
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Python vs. C Performance
-<div id="python-vs-c"></div>
+<div id="python-vs-c-times"></div>
+
+<div class="source">
+  <p>
+    Source: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/python3-gcc.html)
+  </p>
+</div>
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+### Speedup using C
+<div id="python-vs-c-speedups"></div>
 
 <div class="source">
   <p>
@@ -198,8 +225,8 @@ Python's ecosystem for data science.
 
 <div class="left-col">
   <ul>
-    <li>Heart of scientific computing in Python.</li>
-    <li>Stores and operates date in C/FORTRAN structures</li>
+    <li>Heart of scientific computing in Python</li>
+    <li>Stores and operates on data in C structures</li>
     <li>Avoids slowness of Python</li>
   </ul>
 </div>
@@ -239,7 +266,7 @@ Exploring how NumPy leverages vectorisation to dramatically boost performance.
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
 ## Final Optimised Solution
 
-1000 times faster than pure Python.
+1145 times faster than pure Python.
 
 
 [NEXT SECTION]
@@ -251,10 +278,10 @@ Exploring how NumPy leverages vectorisation to dramatically boost performance.
 ![isd](images/isd.gif)
 
 _note_
-Global database of atmospheric data.
+Global database of atmospheric weather data.
 
 This map shows the spatial distribution of Integrated Surface Database
-stations for all time periods.
+stations. Data has been collected from 35,000 weather stations scattered across the globe.
 
 Source: https://www.ncdc.noaa.gov/isd
 
@@ -322,12 +349,16 @@ http://www.polmontweather.co.uk/windspd.htm
 
 [NEXT]
 ### Tabriz Wind Speed Rate
-##### (2011-12-29 to 2011-12-31)
+### Over Two Days
+
 ![tabriz_wind_speed_rate](images/tabriz_wind_speed_rate.png)
+
+(2011-12-29 to 2011-12-31)
+<!-- .element class="source" -->
 
 [NEXT]
 # Research Goal
-Use IDS data to detect all extreme weather events that happen anywhere on the planet.
+Use IDS data to detect extreme weather events that happen anywhere on the planet.
 
 [NEXT]
 ## Initial Goal
@@ -423,11 +454,25 @@ _note_
 [NEXT]
 ### Input
 
-* HDF5 file containing three columns:
-  - `timestamp`
+**HDF5** file containing three columns:
   - `station_id`
+  - `timestamp`
   - `wind_speed_rate`
-* Rows already sorted by station and time
+
+[NEXT]
+### Input
+Rows sorted by:
+  - `station_id`
+  - `timestamp`
+
+Each station's rows are **grouped together**.
+
+Ordered by time.
+
+[NEXT]
+## HDF5
+
+TODO
 
 _note_
 HDF5 is an open source file format for storing huge amounts of numerical data.
@@ -489,11 +534,10 @@ Writing outliers to outliers.csv
 ```
 
 [NEXT]
-### The Output CSV
+### Output Outliers CSV
 
 | **station_id** | **timestsamp**      | **wind_speed_rate** |
 | -------------- | ------------------- | ------------------- |
-| ...            | ...                 | ...                 |
 | 720346         | 1996-04-25 11:00:00 | 110.0               |
 | 720358         | 1997-01-31 09:00:00 | 40.0                |
 | 997375         | 1993-01-29 15:00:00 | 100.0               |
@@ -537,7 +581,6 @@ The affected weather station is:
 ```
 
 [NEXT]
-### Success!
 ![detected_hurricane](images/detected_hurricane1.png)
 
 [NEXT]
@@ -547,13 +590,18 @@ The affected weather station is:
 ![detected_hurricane](images/detected_hurricane3.png)
 
 [NEXT]
+### Success!
+
+TODO: gif
+
+[NEXT]
 <!-- .slide: class="large-slide" -->
 ## Time Taken
 4 hours.
 
 [NEXT]
 ## The Ultimate Goal
-Use IDS data to detect all extreme weather events that happen anywhere on the planet.
+Use IDS data to detect extreme weather events that happen anywhere on the planet.
 
 [NEXT]
 ### Detecting Outliers in the Full Dataset
@@ -660,7 +708,8 @@ _note_
 Source for upcoming sections: https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/
 
 [NEXT]
-## Reason 1: Dynamic Typing
+## Reason 1
+### Dynamic Typing
 
 [NEXT]
 When a Python program executes, the interpreter doesn't know the type of the
@@ -675,7 +724,8 @@ More instructions needed for any operation.
 for processing numerical data.
 
 [NEXT]
-### Reason 2: Interpreted, not Compiled
+## Reason 2
+### Interpreted, not Compiled
 
 [NEXT]
 Python code is interpreted at runtime.
@@ -689,9 +739,11 @@ See section 5 to learn see how compiling Python code can dramatically speed up
 code.
 
 [NEXT]
-## Reason 3: Fragmented Memory Access
+## Reason 3
+### Fragmented Memory Access
 
 [NEXT]
+TODO: change diag to C array
 ![python_slow_2](images/python_slow_2.png)
 
 [NEXT]
@@ -720,7 +772,7 @@ Many libraries/frameworks are built on top of NumPy.
   - mathematical, logical, sorting, selecting
 * statistical operations
 * efficient loading/saving of numerical data to disk
-* random simulation
+  - including HDF5
 
 [NEXT]
 `numpy.ndarray`
@@ -1727,7 +1779,7 @@ Computing rolling standard deviation.
 
 [NEXT]
 ## The Ultimate Goal
-Use IDS data to detect all extreme weather events that happen anywhere on the planet.
+Use IDS data to detect extreme weather events that happen anywhere on the planet.
 
 [NEXT]
 ### Detecting Outliers in the Full Dataset

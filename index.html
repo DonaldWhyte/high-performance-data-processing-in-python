@@ -140,12 +140,17 @@
           }
         };
         if (show_value_labels) {
+          if (theme === 'light') {
+            value_label_colour = 'white';
+          } else {
+            value_label_colour = 'black';
+          }
           plot_options.series =  {
             dataLabels: {
               enabled: true,
               formatter: value_label_formatter,
               align: 'center',
-              color: 'black',
+              color: value_label_colour,
               shadow: false
             }
           };
@@ -211,47 +216,77 @@
             }
         });
 
-        const secondsLabelFormatter = function() {
+        const seconds_label_formatter = function() {
           return Highcharts.numberFormat(this.y, 2) + 's';
         };
-        const speedupLabelFormatter = function() {
+        const speedup_label_formatter = function() {
           return Highcharts.numberFormat(this.y, 1) + 'X';
         };
 
+        const time_axis_label = 'execution time (secs)';
+        const time_axis_formatter = function () { return this.value + 's'; };
+
+        const speedup_axis_label = 'speedup factor';
+        const speedup_axis_formatter = function () { return this.value + 'x'; };
+
+        const benchmark_sections = [
+          'pidigits',
+          'regex-redux',
+          'r-complement',
+          'k-nucleotide',
+          'binary-trees',
+          'fasta'
+        ];
+        const cpython_times = [3.52, 15.57, 21.71, 79.61, 92.78, 61.81];
+        const c_times = [ 1.75, 1.5, 1.75, 5.07, 2.54, 1.32 ];
+        const cpython_vs_c_speedups = [];
+        for (var i in cpython_times) {
+          cpython_vs_c_speedups.push(cpython_times[i] / c_times[i]);
+        }
+
         create_bar_chart(
-          'python-vs-c',
+          'python-vs-c-times',
           [
-            {
-              name: 'CPython 3.7',
-              color: '#44AA44',
-              data: [ 3.52, 15.57, 21.71, 79.61, 92.78, 61.81 ]
-            },
-            {
-              name: 'C (gcc)',
-              color: '#FF0000',
-              data: [ 1.75, 1.5, 1.75, 5.07, 2.54, 1.32 ]
-            }
+            {name: 'CPython 3.7', color: '#44AA44', data: cpython_times},
+            {name: 'C (gcc)', color: '#FF0000', data: c_times}
           ],
-          [
-            'pidigits',
-            'regex-redux',
-            'r-complement',
-            'k-nucleotide',
-            'binary-trees',
-            'fasta'
-          ],
-          'execution time (secs)',
-          function () { return this.value + 's'; },
+          benchmark_sections,
+          time_axis_label,
+          time_axis_formatter,
           'light',
           false,
           false);
+
+        create_bar_chart(
+          'python-vs-c-speedups',
+          [
+            {name: 'C Speedups', color: '#FF0000', data: cpython_vs_c_speedups}
+          ],
+          benchmark_sections,
+          speedup_axis_label,
+          speedup_axis_formatter,
+          'light',
+          false,
+          true,
+          speedup_label_formatter);
 
         create_bar_chart(
           'deep-learning-revenue',
           [
             {
               name: 'Global Revenue',
-              data: [2000, 3500, 8000, 10500, 18000, 25000, 38000, 52000, 70500, 9000]
+              data: [
+                2000,
+                3500,
+                8000,
+                10500,
+                18000,
+                25000,
+                38000,
+                52000,
+                70500,
+                {y: 90000, color: 'red'},
+              ]
             }
           ],
           [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
@@ -299,45 +334,39 @@
           data: [3.919, 3.43, 0.84, 41.33, 0.35]
         };
 
-        const time_axis_label = 'execution time (secs)';
-        const time_axis_formatter = function () { return this.value + 's'; };
-
-        const speedup_axis_label = 'speedup factor';
-        const speedup_axis_formatter = function () { return this.value + 'x'; };;
-
         create_bar_chart(
           'purepython-times', [pure_python_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter);
+          true, true, seconds_label_formatter);
         create_bar_chart(
           'purepython-times-log', [pure_python_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter, true);
+          true, true, seconds_label_formatter, true);
         create_bar_chart(
           'numpy-times', [pure_python_times, numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter, true);
+          true, true, seconds_label_formatter, true);
         create_bar_chart(
           'vectorised-times', [pure_python_times, numpy_times, vectorised_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter, true);
+          true, true, seconds_label_formatter, true);
         create_bar_chart(
           'numba-times-log', [vectorised_times, numba_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter, true);
+          true, true, seconds_label_formatter, true);
         create_bar_chart(
           'numba-times', [vectorised_times, numba_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter);
+          true, true, seconds_label_formatter);
         create_bar_chart(
           'parallelised-times', [numba_times, parallelised_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter);
+          true, true, seconds_label_formatter);
         create_bar_chart(
           'parallelised-times-memmap',
           [numba_times, parallelised_times, parallelised_times_memmap],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, secondsLabelFormatter);
+          true, true, seconds_label_formatter);
 
         const total_time_sections = [
           'Pure Python',
@@ -365,7 +394,7 @@
           ],
           total_time_sections,
           time_axis_label, time_axis_formatter, 'dark',
-          false, true, secondsLabelFormatter, true);
+          false, true, seconds_label_formatter, true);
 
         const total_speedups = [
           original_total_time / original_total_time,
@@ -380,13 +409,13 @@
           [{data: total_speedups}],
           total_time_sections,
           speedup_axis_label, speedup_axis_formatter, 'dark',
-          false, true, speedupLabelFormatter, false);
+          false, true, speedup_label_formatter, false);
 
         numba_times.color = 'blue';
         create_bar_chart(
           'numba-times2', [numba_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          false, true, secondsLabelFormatter);
+          false, true, seconds_label_formatter);
 
         create_bar_chart(
           'numba-rolling-std-times',
@@ -395,7 +424,7 @@
           time_axis_label,
           time_axis_formatter,
           'dark',
-          false, true, secondsLabelFormatter);
+          false, true, seconds_label_formatter);
 
         total_speedups.push({y: 1144.9, color: 'red'});
         total_time_sections.push('Final');
@@ -404,7 +433,7 @@
           [{data: total_speedups}],
           total_time_sections,
           speedup_axis_label, speedup_axis_formatter, 'dark',
-          false, true, speedupLabelFormatter, false);
+          false, true, speedup_label_formatter, false);
 
         create_bar_chart(
           'basic-numpy-benchmark-times',
@@ -421,7 +450,7 @@
           'dark',
           false,
           true,
-          secondsLabelFormatter);
+          seconds_label_formatter);
         create_bar_chart(
           'basic-numpy-benchmark-speedup',
           [
@@ -442,7 +471,7 @@
           'dark',
           false,
           true,
-          speedupLabelFormatter);
+          speedup_label_formatter);
 
         create_bar_chart(
           'vectorise-benchmark',
@@ -477,7 +506,7 @@
           'dark',
           false,
           true,
-          secondsLabelFormatter);
+          seconds_label_formatter);
         create_bar_chart(
           'numba-benchmark-speedup1',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(0, 2)}],
@@ -487,7 +516,7 @@
           'dark',
           false,
           true,
-          speedupLabelFormatter);
+          speedup_label_formatter);
         create_bar_chart(
           'numba-benchmark-times2',
           [{name: 'timings', color: 'blue', data: numba_benchmark_times.slice(1, 4)}],
@@ -497,7 +526,7 @@
           'dark',
           false,
           true,
-          secondsLabelFormatter);
+          seconds_label_formatter);
         create_bar_chart(
           'numba-benchmark-speedup2',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(1, 4)}],
@@ -507,7 +536,7 @@
           'dark',
           false,
           true,
-          speedupLabelFormatter);
+          speedup_label_formatter);
       });
     </script>
 
