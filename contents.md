@@ -791,24 +791,7 @@ n-dimensional arrays of homogeneous data types, with many operations being
 performed in compiled code for performance.
 
 [NEXT]
-`numpy.ndarray`
-
-![ndarray](images/ndarray_0.svg)
-
-_note_
-`data` is pointer indicating the memory address of the first byte in the array.
-
-`dtype` indicates the type of elements stored in the array.
-
-`shape` indicates the shape of the array. That is, it defines the dimensionality
-of the data in the array and how many elements the array stores for each dimension.
-
-The `strides` are the number of bytes that should be skipped in memory to go to the next element. If your strides are (32, 8), you need to proceed 8 bytes to get to the next column and 32 bytes to move to the next row.
-
-`flags` is a set of configurable flags we don't need to cover here.
-
-[NEXT]
-### Code Examples
+## Examples
 
 ```python
 import numpy as np
@@ -816,7 +799,7 @@ import numpy as np
 <!-- .element: class="large" -->
 
 [NEXT]
-### Example
+### Creating an Array
 
 ```python
 >>> a = np.arange(9, dtype=np.float64)
@@ -836,6 +819,17 @@ array([0., 1., 2., 3., 4., 5., 6., 7., 8.])
 _note_
 A NumPy array in its simplest form is a Python object build around a C array.
 That is, it has a pointer to a contiguous data buffer of values.
+
+`data` is pointer indicating the memory address of the first byte in the array.
+
+`dtype` indicates the type of elements stored in the array.
+
+`shape` indicates the shape of the array. That is, it defines the dimensionality
+of the data in the array and how many elements the array stores for each dimension.
+
+The `strides` are the number of bytes that should be skipped in memory to go to the next element. If your strides are (32, 8), you need to proceed 8 bytes to get to the next column and 32 bytes to move to the next row.
+
+`flags` is a set of configurable flags we don't need to cover here.
 
 ### Python View
 ![python_view](images/python_view.svg)
