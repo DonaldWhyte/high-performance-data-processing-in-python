@@ -524,7 +524,7 @@ optional arguments:
 
 [NEXT]
 TODO: create this diagram
-[outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
+![outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
 
 [NEXT]
 ### Running the Code
@@ -1022,8 +1022,9 @@ We want to use NumPy's built-in operations...
 [NEXT]
 ### Adding 1 to an Array
 
-TODO
 ![adding_one_to_array](images/adding_one_to_array.svg)
+
+Adding 1 to **N** elements would take **N -1** copies!
 
 [NEXT]
 ### Broadcasting
@@ -1066,26 +1067,75 @@ Broadcasting does **not** copy.
 <!-- .element class="medium-table-text" -->
 
 [NEXT]
-[outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
+![outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
 
 [NEXT]
 `station_ranges()`
 
 ```python
-def station_ranges(station_ids: np.ndarray) -> List[Tuple[int, int]]:
-    is_end_of_series = (
-        station_ids[:-1] != station_ids[1:])
-    series_ends = np.where(is_end_of_series == True)[0]
+def station_ranges(station_ids: np.ndarray) -> np.ndarray:
+    is_end_of_series = station_ids[:-1] != station_ids[1:]
+    indices_where_stations_change = np.where(
+      is_end_of_series == True)[0] + 1
     series_starts = np.concatenate((
-        [0],
-        series_ends + 1
+        np.array([0]),
+        indices_where_stations_change
+    ))
+    series_ends = np.concatenate((
+        indices_where_stations_change,
+        np.array([len(station_ids) - 1])
     ))
     return np.column_stack((series_starts, series_ends))
 ```
-<!-- .element class="large" -->
 
 [NEXT]
-TODO: diagrams to breakdown station_ranges
+```python
+station_ids = np.array([123, 123, 124, 245, 999, 999])
+```
+<!-- .element class="large" -->
+![station_ranges](images/station_ranges0.svg)
+
+[NEXT]
+```python
+is_end_of_series = station_ids[:-1] != station_ids[1:]
+```
+<!-- .element class="large" -->  
+![station_ranges](images/station_ranges1.svg)
+
+[NEXT]
+```python
+indices_where_stations_change = (
+    np.where(is_end_of_series == True)[0] + 1)
+```
+<!-- .element class="large" -->
+![station_ranges](images/station_ranges2.svg)
+
+[NEXT]
+```python
+series_starts = np.concatenate((
+    np.array([0]),
+    indices_where_stations_change
+))
+```
+<!-- .element class="large" -->
+![station_ranges](images/station_ranges3.svg)
+
+[NEXT]
+```python
+series_ends = np.concatenate((
+    indices_where_stations_change,
+    np.array([len(station_ids) - 1])
+))
+```
+<!-- .element class="large" -->
+![station_ranges](images/station_ranges4.svg)
+
+[NEXT]
+```python
+np.column_stack((series_starts, series_ends))
+```
+<!-- .element class="large" -->
+![station_ranges](images/station_ranges5.svg)
 
 [NEXT]
 `fill_forward()`
@@ -1307,11 +1357,6 @@ def fill_forward(arr: np.ndarray):
 [NEXT]
 **Vectorised `fill_forward()`**
 
-TODO: add diagram(s) for this
-
-[NEXT]
-**Vectorised `fill_forward()`**
-
 ```python
 def fill_forward(arr: np.ndarray) -> np.ndarray:
     mask = np.isnan(arr)
@@ -1326,6 +1371,47 @@ def fill_forward(arr: np.ndarray) -> np.ndarray:
     return arr[indices_to_use]
 ```
 <!-- .element: class="large" -->
+
+[NEXT]
+```python
+wind_speed_rates = np.array([
+  20, 5, 3, 8, np.nan, np.nan, 6, np.nan, 25, 5
+])
+```
+<!-- .element: class="large" -->
+![vectorised_fill_forward](images/vectorised_fill_forward0.svg)
+
+[NEXT]
+```python
+mask = np.isnan(wind_speed_rates)
+indices = np.arange(len(wind_speed_rates))
+```
+<!-- .element: class="large" -->
+![vectorised_fill_forward](images/vectorised_fill_forward1.svg)
+
+[NEXT]
+```python
+indices_to_use = np.where(~mask, indices, 0)
+```
+<!-- .element: class="large" -->
+![vectorised_fill_forward](images/vectorised_fill_forward2.svg)
+
+[NEXT]
+```python
+indices_to_use = np.maximum.accumulate(
+    indices_to_use,
+    axis=0,
+    out=indices_to_use)
+```
+<!-- .element: class="large" -->
+![vectorised_fill_forward](images/vectorised_fill_forward2.svg)
+
+[NEXT]
+```python
+return wind_speed_rates[indices_to_use]
+```
+<!-- .element: class="large" -->
+![vectorised_fill_forward](images/vectorised_fill_forward3.svg)
 
 [NEXT]
 **Unvectorised `rolling_average()`**
@@ -1678,7 +1764,7 @@ measurements = input_file['wind_speed_rate'][:]
 
 # Compute (start_index, end_index) ranges for all stations in
 # input file.
-series_ranges = series_ranges(station_ids)
+index_ranges = station_ranges(station_ids)
 
 # Function that takes an individual measurement time series
 # for a single weather station and returns the indices of its
@@ -1696,7 +1782,7 @@ from joblib import delayed, Parallel
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
 <mark>outliers = processor(</mark>
 <mark>    delayed(compute_outliers)(measurements[start:end])</mark>
-<mark>    for start, end in series_ranges)</mark>
+<mark>    for start, end in index_ranges)</mark>
 </code></pre>
 
 [NEXT]
@@ -1764,7 +1850,7 @@ The memmap file is shared across all worker subprocesses.
 processor = Parallel(n_jobs=cpu_count())
 outliers = processor(
 <mark>    delayed(compute_outliers)(tmpfile.name, start, end)</mark>
-    for start, end in series_ranges)
+    for start, end in index_ranges)
 </code></pre>
 
 _note_
