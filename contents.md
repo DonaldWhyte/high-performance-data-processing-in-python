@@ -592,7 +592,7 @@ The affected weather station is:
 [NEXT]
 ### Success!
 
-TODO: gif
+![success_programmer](images/success_programmer.jpg)
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -618,6 +618,8 @@ What if we ran the same outlier detection code on the full dataset?
 [NEXT]
 <!-- .slide: class="large-slide" -->
 It would take **27 days**.
+
+![waiting_skeleton](images/waiting_skeleton.jpg)
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -998,11 +1000,19 @@ For arrays with the same size, operations are performed element-by-element.
 
 Sometimes we want to apply smaller scalars or vectors to larger arrays.
 
+_e.g. adding one to all elements in an array_
+
 [NEXT]
 ### A Problem...
 We want to use NumPy's built-in operations...
 
 ...but we don't want to perform loads of copies to match up the array sizes.
+
+[NEXT]
+### Adding 1 to an Array
+
+TODO
+![adding_one_to_array](images/adding_one_to_array.svg)
 
 [NEXT]
 ### Broadcasting
@@ -1027,6 +1037,9 @@ Allows us to apply smaller arrays to larger arrays.
 ![broadcasting](images/broadcasting_2d_1.svg)
 
 [NEXT]
+Broadcasting does **not** copy.
+
+[NEXT]
 ### Using NumPy for Outlier Detection
 
 [NEXT]
@@ -1046,11 +1059,19 @@ Allows us to apply smaller arrays to larger arrays.
 
 ```python
 def station_ranges(station_ids: np.ndarray) -> List[Tuple[int, int]]:
-    is_end_of_series = station_ids[:-1] != station_ids[1:]
+    is_end_of_series = (
+        station_ids[:-1] != station_ids[1:])
     series_ends = np.where(is_end_of_series == True)[0]
-    series_starts = np.concatenate([np.array([0]), series_ends + 1])
-    return list(zip(series_starts, series_ends))
+    series_starts = np.concatenate((
+        [0],
+        series_ends + 1
+    ))
+    return np.column_stack((series_starts, series_ends))
 ```
+<!-- .element class="large" -->
+
+[NEXT]
+TODO: diagrams to breakdown station_ranges
 
 [NEXT]
 `fill_forward()`
@@ -1135,8 +1156,9 @@ _note_
 Source: https://software.intel.com/en-us/articles/vectorization-a-key-tool-to-improve-performance-on-modern-cpus
 
 [NEXT]
-Modern CPUs provide direct support for vector operations, where a
-single instruction is applied to multiple data.
+Modern CPUs provide direct support for vector operations.
+
+A **single instruction** is applied to **multiple** data points.
 
 [NEXT]
 ### Adding Two Vectors
@@ -1182,7 +1204,8 @@ to handle threads and race conditions to gain this parallelism.
   <ul>
     <li>SIMD on steroids</li>
     <li>Can process thousands of floats in one "instruction"</li>
-    <li>Enables neural nets to be trained with massive amounts of data</li>
+    <li>Originally made for rendering graphics.</li>
+    <li>Enables neural nets to be trained with massive amounts of data.</li>
   </ul>
 </div>
 <div class="right-col">
@@ -1198,7 +1221,7 @@ to handle threads and race conditions to gain this parallelism.
 ### Non-Vectorised
 
 ```c
-void add(int len, float* a, float* b, float* out) {
+void add(float* a, float* b, float* out, int len) {
     for (int i = 0; i < len; ++i) {
         out[i] = a[i] + b[i];
     }
@@ -1209,7 +1232,7 @@ void add(int len, float* a, float* b, float* out) {
 ### Vectorised
 
 ```c
-void add_vectorised(int len, float* a, float* b, float* out) {
+void add_vectorised(float* a, float* b, float* out, int len) {
     int i = 0;
     for (; i < len - 4; i += 4) {
         out[i] = a[i] + b[i];
@@ -1254,7 +1277,7 @@ Vectorization describes the absence of any explicit looping, indexing, etc., in 
 * vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
 
 [NEXT]
-### Using Vectorisation for Outlier Detection
+### Vectorisation for Outlier Detection
 
 [NEXT]
 **Unvectorised `fill_forward()`**
@@ -1266,6 +1289,11 @@ def fill_forward(arr: np.ndarray):
             arr[i] = arr[i - 1]
 ```
 <!-- .element: class="large" -->
+
+[NEXT]
+**Vectorised `fill_forward()`**
+
+TODO: add diagram(s) for this
 
 [NEXT]
 **Vectorised `fill_forward()`**
@@ -1289,7 +1317,8 @@ def fill_forward(arr: np.ndarray) -> np.ndarray:
 **Unvectorised `rolling_average()`**
 
 ```python
-def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
+def rolling_average(arr: np.ndarray,
+                    n: int) -> np.ndarray:
     avg = np.zeros(len(arr) - n + 1)
     for i in range(len(avg)):
         avg[i] = arr[i:i+n].sum() / n
@@ -1297,11 +1326,16 @@ def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
 ```
 <!-- .element: class="large" -->
 
+_note_
+Glance over this and the next slide. Just state that this one has
+a for loop. We can vectorised and eliminate 
+
 [NEXT]
 **Vectorised `rolling_average()`**
 
 ```python
-def rolling_average(arr: np.ndarray, n: int) -> np.ndarray:
+def rolling_average(arr: np.ndarray,
+                    n: int) -> np.ndarray:
     ret = np.cumsum(arr, dtype=float)
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
@@ -1337,7 +1371,9 @@ Compile non-vectorisable Python code to native machine instructions.
 [NEXT]
 ### Numba
 
-Python functions annotated with Numba decorators are compiled at runtime.
+Annotate Python functions with **decorators**.
+
+Compiles them to optimised machine code at runtime.
 
 **Just-in-time (JIT)** compilation.
 
@@ -1357,7 +1393,7 @@ Decorator that tells Numba to compile a function to native instructions.
 
 ```python
 def sum_array(arr):
-    result = 0.0
+    result = 0
     for i in range(len(arr)):
         result += arr[i]
     return result
@@ -1371,7 +1407,7 @@ def sum_array(arr):
 
 <mark>@jit(nopython=True)</mark>
 def sum_array(arr):
-    result = 0.0
+    result = 0
     for i in range(len(arr)):
         result += arr[i]
     return result
@@ -1398,10 +1434,8 @@ Uses types of arguments in function's first invocation.
 ```python
 print('DEDUCED TYPES BEFORE CALL')
 sum_array.inspect_types()
-
 print('EXECUTING sum_array()')
 sum_array(np.arange(10000))
-
 print('DEDUCED TYPES AFTER CALL')
 sum_array.inspect_types()
 ```
@@ -1482,7 +1516,7 @@ return result
 
 <mark>@jit(int64(int64[:]), nopython=True)</mark>
 def sum_array(arr):
-    result = 0.0
+    result = 0
     for i in range(len(arr)):
         result += arr[i]
     return result
@@ -1533,6 +1567,8 @@ https://numba.pydata.org/numba-doc/dev/user/faq.html
 [NEXT]
 ### Using Numba for Outlier Detection
 Added `@jit(nopython=True)` to all functions.
+
+Explicitly specified types.
 
 [NEXT]
 **Total time:** 48 mins ⟶ 2.46 mins
@@ -1602,7 +1638,7 @@ Outliers in each station time series are calculated **independently**.
 
 **Split** stations into _N_ groups.
 
-Process each group on a different CPU core.
+Process each group on a **different CPU core**.
 
 [NEXT]
 ![joblib](images/joblib.svg)
@@ -1633,7 +1669,7 @@ series_ranges = series_ranges(station_ids)
 # Function that takes an individual measurement time series
 # for a single weather station and returns the indices of its
 # outliers.
-def compute_outliers(time_series: np.ndarray) -> np.ndarray:
+def compute_outliers(station_data: np.ndarray) -> np.ndarray:
     pass
 ```
 
@@ -1642,12 +1678,6 @@ def compute_outliers(time_series: np.ndarray) -> np.ndarray:
 
 <pre><code data-noescape class="python">from multiprocessing import cpu_count
 from joblib import delayed, Parallel
-
-def compute_outliers(station_data: np.ndarray) -> np.ndarray:
-    station_data = fill_forward(station_data)
-    avg = rolling_average(station_data, 30)
-    std = rolling_std(station_data, avg, 30)
-    return find_outliers(station_data, avg, std)
 
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
 <mark>outliers = processor(</mark>
@@ -1658,7 +1688,7 @@ def compute_outliers(station_data: np.ndarray) -> np.ndarray:
 [NEXT]
 **Total time:** 2.46 mins ⟶ 1.37 mins
 
-**Speedup:** 177x
+**Speedup:** 1.8x
 
 <div id="parallelised-times"></div>
 
@@ -1736,9 +1766,9 @@ share a segment of data between all the worker processes.
 ![joblib_memmap](images/joblib_memmap.svg)
 
 [NEXT]
-**Total time:** 1.37 mins ⟶ 0.78 mins
+**Total time:** 1.37 mins ⟶ 0.83 mins
 
-**Speedup:** 309x
+**Speedup:** 291x
 
 <div id="parallelised-times-memmap"></div>
 
@@ -1789,6 +1819,9 @@ What if we ran the same outlier detection code on the full dataset?
 [NEXT]
 <!-- .slide: class="large-slide" -->
 **27 days** ⟶ **38 minutes**
+
+[NEXT]
+TODO
 
 
 [NEXT SECTION]
@@ -1845,8 +1878,7 @@ This abstracts the worker backend. Workers can be CPU cores or machines. Either
 way, **the code remains the same**.
 
 [NEXT]
-<!-- .slide: class="large-slide" -->
-`numpy`/`numba`/`joblib` alone can yield 1000X speedup.
+`numpy`/`numba`/`joblib` alone can yield 1000x speedup.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -1855,8 +1887,8 @@ Don't throw the problem to dev ops.
 [NEXT]
 If RAM or disk is your bottleneck, parallelise using a cluster.
 
-Otherwise, you can get **very** far with basic vecorisation or sprinkling some
-`@jit` magic.
+Otherwise, you can get **very** far with vecorisation and sprinling
+`@numba.jit` magic.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->

@@ -311,7 +311,7 @@
         const numpy_times = {
           name: 'NumPy V1',
           color: 'red',
-          data: [3.919, 501.64, 1214.92, 3303.79, 3.919]
+          data: [3.919, 501.64, 1214.92, 3303.79, 1.0893]
         };
         const vectorised_times = {
           name: 'NumPy V2',
@@ -497,6 +497,10 @@
             1.6818 / 1.6818, 1.6818 / 0.0674, 1.6818 / 0.0084, 1.6818 / 0.0058
         ];
 
+        const high_precision_seconds_label_formatter = function() {
+          return Highcharts.numberFormat(this.y, 4) + 's';
+        };
+
         create_bar_chart(
           'numba-benchmark-times1',
           [{name: 'timings', color: 'blue', data: numba_benchmark_times.slice(0, 2)}],
@@ -506,7 +510,7 @@
           'dark',
           false,
           true,
-          seconds_label_formatter);
+          high_precision_seconds_label_formatter);
         create_bar_chart(
           'numba-benchmark-speedup1',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(0, 2)}],
@@ -526,7 +530,7 @@
           'dark',
           false,
           true,
-          seconds_label_formatter);
+          high_precision_seconds_label_formatter);
         create_bar_chart(
           'numba-benchmark-speedup2',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(1, 4)}],
