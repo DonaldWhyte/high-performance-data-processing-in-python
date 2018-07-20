@@ -452,7 +452,7 @@ _note_
 3. generate CSV containing all outliers in each station's data
 
 [NEXT]
-### Input
+### The Input
 
 **HDF5** file containing three columns:
   - `station_id`
@@ -460,19 +460,16 @@ _note_
   - `wind_speed_rate`
 
 [NEXT]
-### Input
-Rows sorted by:
-  - `station_id`
-  - `timestamp`
-
-Each station's rows are **grouped together**.
-
-Ordered by time.
-
-[NEXT]
 ## HDF5
 
-TODO
+* **H**ierarchical **D**ata **F**ormat
+* Designed to store large amounts of binary data
+* No text parsing required
+* Efficient to load
+
+<div class="source">
+[more information on this format here](https://www.hdfgroup.org/HDF5/)
+</div>
 
 _note_
 HDF5 is an open source file format for storing huge amounts of numerical data.
@@ -480,6 +477,16 @@ HDF5 is an open source file format for storing huge amounts of numerical data.
 It’s typically used in research applications (meteorology, astronomy, genomics etc.) to distribute and access very large datasets without using a database.
 
 It lets you store huge amounts of numerical data, and easily manipulate that data from NumPy. For example, you can slice into multi-terabyte datasets stored on disk, as if they were real NumPy arrays. Thousands of datasets can be stored in a single file, categorized and tagged however you want.
+
+[NEXT]
+### Invariants
+
+Rows sorted by `(station_id, timestamp)`.
+
+Each station's rows are **grouped together**.
+
+Ordered by time.
+
 
 [NEXT]
 ### The Code
@@ -514,6 +521,10 @@ optional arguments:
 | `rolling_std`     | computing rolling stdev at every time point             |
 | `find_outliers`   | get indices of outliers using deviance from rolling avg |
 <!-- .element class="medium-table-text" -->
+
+[NEXT]
+TODO: create this diagram
+[outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
 
 [NEXT]
 ### Running the Code
@@ -1053,6 +1064,9 @@ Broadcasting does **not** copy.
 | `rolling_std`     | computing rolling stdev at every time point             |
 | `find_outliers`   | get indices of outliers using deviance from rolling avg |
 <!-- .element class="medium-table-text" -->
+
+[NEXT]
+[outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
 
 [NEXT]
 `station_ranges()`
@@ -1821,7 +1835,7 @@ What if we ran the same outlier detection code on the full dataset?
 **27 days** ⟶ **38 minutes**
 
 [NEXT]
-TODO
+On a single Macbook pro.
 
 
 [NEXT SECTION]
