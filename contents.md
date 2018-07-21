@@ -1102,7 +1102,7 @@ station_ids = np.array([123, 123, 124, 245, 999, 999])
 is_end_of_series = station_ids[:-1] != station_ids[1:]
 ```
 <!-- .element class="large" -->  
-![station_ranges](images/station_ranges1.svg)
+![station_ranges1](images/station_ranges1.svg)
 
 [NEXT]
 ```python
@@ -1110,34 +1110,37 @@ indices_where_stations_change = (
     np.where(is_end_of_series == True)[0] + 1)
 ```
 <!-- .element class="large" -->
-![station_ranges](images/station_ranges2.svg)
+![station_ranges2](images/station_ranges2.svg)
 
 [NEXT]
 ```python
 series_starts = np.concatenate((
-    np.array([0]),
+    [0],
     indices_where_stations_change
 ))
 ```
 <!-- .element class="large" -->
-![station_ranges](images/station_ranges3.svg)
+![station_ranges3](images/station_ranges3.svg)
 
 [NEXT]
 ```python
 series_ends = np.concatenate((
     indices_where_stations_change,
-    np.array([len(station_ids) - 1])
+    [len(station_ids) - 1]
 ))
 ```
 <!-- .element class="large" -->
-![station_ranges](images/station_ranges4.svg)
+![station_ranges4](images/station_ranges4.svg)
 
 [NEXT]
 ```python
 np.column_stack((series_starts, series_ends))
 ```
 <!-- .element class="large" -->
-![station_ranges](images/station_ranges5.svg)
+![station_ranges5](images/station_ranges5.svg)
+
+[NEXT]
+![station_ranges6](images/station_ranges6.svg)
 
 [NEXT]
 `fill_forward()`
