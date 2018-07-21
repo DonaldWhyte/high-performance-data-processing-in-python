@@ -605,7 +605,7 @@ The affected weather station is:
 [NEXT]
 ### Success!
 
-![success_programmer](images/success_programmer.jpg)
+<span style="font-size: 140px">🎉</span>
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
