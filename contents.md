@@ -1095,7 +1095,7 @@ def station_ranges(station_ids: np.ndarray) -> np.ndarray:
 station_ids = np.array([123, 123, 124, 245, 999, 999])
 ```
 <!-- .element class="large" -->
-![station_ranges](images/station_ranges0.svg)
+![station_ranges0](images/station_ranges0.svg)
 
 [NEXT]
 ```python

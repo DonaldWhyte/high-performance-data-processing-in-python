@@ -292,6 +292,40 @@ img[alt="numpy_add_native"]
     width: 600px;
 }
 
+img[alt="station_ranges0"] {
+    width: 400px;
+    margin-top: 32px !important;
+}
+
+img[alt="station_ranges1"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges2"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges3"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges4"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges5"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges6"] {
+    width: 650px;
+}
+
 img[alt="sisd"],
 img[alt="simd"] {
     width: 500px;
@@ -327,7 +361,7 @@ img[alt="vectorised_fill_forward3"] {
 }
 
 img[alt="vectorised_fill_forward4"] {
-    width: 600px;
+    width: 550px;
     margin-top: 16px !important;
 }
 
