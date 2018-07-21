@@ -534,7 +534,9 @@ TODO: create this diagram
     --input isdlite.hdf5 \
     --output outliers.csv \
     --measurement wind_speed_rate
+```
 
+```
 Determining range of each station time series
 Found time series for 5183 ranges
 Removing time series that don't have enough data
@@ -1359,59 +1361,51 @@ def fill_forward(arr: np.ndarray):
 
 ```python
 def fill_forward(arr: np.ndarray) -> np.ndarray:
-    mask = np.isnan(arr)
-    indices_to_use = np.where(
-        ~mask,
-        np.arange(mask.shape[0]),
-        0)
-    np.maximum.accumulate(
-        indices_to_use,
-        axis=0,
-        out=indices_to_use)
+    mask = ~np.isnan(arr)
+    indices = np.arange(len(arr))
+    indices_to_use = np.where(mask, indices, 0)
+    np.maximum.accumulate(indices_to_use, out=indices_to_use)
     return arr[indices_to_use]
 ```
 <!-- .element: class="large" -->
 
 [NEXT]
 ```python
-wind_speed_rates = np.array([
-  20, 5, 3, 8, np.nan, np.nan, 6, np.nan, 25, 5
+# wind_speed_rate measurements for a single weather station.
+arr = np.array([
+    20, 5, 3, 8, np.nan, np.nan, 6, np.nan, 25, 5
 ])
 ```
-<!-- .element: class="large" -->
-![vectorised_fill_forward](images/vectorised_fill_forward0.svg)
+![vectorised_fill_forward0](images/vectorised_fill_forward0.svg)
 
 [NEXT]
 ```python
-mask = np.isnan(wind_speed_rates)
-indices = np.arange(len(wind_speed_rates))
+mask = ~np.isnan(wind_speed_rates)
 ```
 <!-- .element: class="large" -->
-![vectorised_fill_forward](images/vectorised_fill_forward1.svg)
+![vectorised_fill_forward1](images/vectorised_fill_forward1.svg)
 
 [NEXT]
 ```python
-indices_to_use = np.where(~mask, indices, 0)
+mask = ~np.isnan(wind_speed_rates)
 ```
 <!-- .element: class="large" -->
-![vectorised_fill_forward](images/vectorised_fill_forward2.svg)
+![vectorised_fill_forward2](images/vectorised_fill_forward2.svg)
 
 [NEXT]
 ```python
-indices_to_use = np.maximum.accumulate(
-    indices_to_use,
-    axis=0,
-    out=indices_to_use)
+indices_to_use = np.where(mask, indices, 0)
 ```
 <!-- .element: class="large" -->
-![vectorised_fill_forward](images/vectorised_fill_forward2.svg)
+![vectorised_fill_forward3](images/vectorised_fill_forward3.svg)
 
 [NEXT]
 ```python
+np.maximum.accumulate(indices_to_use, out=indices_to_use)
 return wind_speed_rates[indices_to_use]
 ```
 <!-- .element: class="large" -->
-![vectorised_fill_forward](images/vectorised_fill_forward3.svg)
+![vectorised_fill_forward4](images/vectorised_fill_forward4.svg)
 
 [NEXT]
 **Unvectorised `rolling_average()`**

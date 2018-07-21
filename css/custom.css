@@ -292,7 +292,8 @@ img[alt="numpy_add_native"]
     width: 600px;
 }
 
-img[alt="sisd"], img[alt="simd"] {
+img[alt="sisd"],
+img[alt="simd"] {
     width: 500px;
     margin: 32px !important;
 }
@@ -303,6 +304,31 @@ img[alt="cpu"] {
 
 img[alt="gpu"] {
     width: 400px;
+}
+
+img[alt="vectorised_fill_forward0"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward1"] {
+    width: 375px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward2"] {
+    width: 375px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward3"] {
+    width: 750px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward4"] {
+    width: 600px;
+    margin-top: 16px !important;
 }
 
 img[alt="joblib"] {
