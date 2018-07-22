@@ -439,10 +439,6 @@ At each point `i` in the time series:
   <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
 </table>
 
-[NEXT]
-## Complete Process
-![complete_process](images/complete_process.svg)
-
 _note_
 1. Split full dataset into separate station time series
 2. For each weather station time series, detect outliers by:
@@ -511,6 +507,15 @@ optional arguments:
 </code></pre>
 
 [NEXT]
+## Complete Process
+
+[NEXT]
+![outlier_detection_pipeline0](images/outlier_detection_pipeline0.svg)
+
+[NEXT]
+![outlier_detection_pipeline1](images/outlier_detection_pipeline1.svg)
+
+[NEXT]
 ### Code Breakdown
 
 |                   |                                                         |
@@ -521,10 +526,6 @@ optional arguments:
 | `rolling_std`     | computing rolling stdev at every time point             |
 | `find_outliers`   | get indices of outliers using deviance from rolling avg |
 <!-- .element class="medium-table-text" -->
-
-[NEXT]
-TODO: create this diagram
-![outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
 
 [NEXT]
 ### Running the Code

@@ -270,8 +270,12 @@ img[alt="outlier_detection"] {
     width: 650px;
 }
 
-img[alt="complete_process"] {
-    width: 600px;
+img[alt="outlier_detection_pipeline0"] {
+    width: 670px;
+}
+
+img[alt="outlier_detection_pipeline1"] {
+    width: 670px;
 }
 
 img[alt="snakeviz"] {
