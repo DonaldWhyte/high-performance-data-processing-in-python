@@ -17,8 +17,8 @@
                         <tspan x="44.6442871" y="32">123</tspan>
                     </text>
                     <path d="M87,1 L87,44 L130,44 L130,1 L87,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
-                    <text id="124" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                        <tspan x="87.6442871" y="32">124</tspan>
+                    <text id="123" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
+                        <tspan x="87.6442871" y="32">123</tspan>
                     </text>
                     <path d="M130,1 L130,44 L173,44 L173,1 L130,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
                     <text id="245" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
@@ -26,11 +26,11 @@
                     </text>
                     <path d="M173,1 L173,44 L216,44 L216,1 L173,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
                     <text id="999" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                        <tspan x="173.644287" y="30">999</tspan>
+                        <tspan x="173.644287" y="31">999</tspan>
                     </text>
                     <path d="M216,1 L216,44 L259,44 L259,1 L216,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
                     <text id="999" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                        <tspan x="216.644287" y="30">999</tspan>
+                        <tspan x="216.644287" y="31">999</tspan>
                     </text>
                 </g>
                 <text id="station_ids" font-family="AndaleMono, Andale Mono" font-size="42" font-weight="normal" fill="#0000DD">
