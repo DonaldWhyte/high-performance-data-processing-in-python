@@ -58,8 +58,8 @@
                         <tspan x="59.0480957" y="75">4</tspan>
                     </text>
                     <path d="M44,87 L44,130 L87,130 L87,87 L44,87 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
-                    <text id="5" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                        <tspan x="59.0480957" y="118">5</tspan>
+                    <text id="6" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
+                        <tspan x="59.0480957" y="118">6</tspan>
                     </text>
                     <g id="Group-62" transform="translate(43.000000, 0.000000)">
                         <path d="M1,1 L1,44 L44,44 L44,1 L1,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
@@ -74,8 +74,8 @@
                 <text id="station_ids[3:4]" font-family="AndaleMono, Andale Mono" font-size="25" font-weight="normal" fill="#0000DD">
                     <tspan x="171" y="72">station_ids[3:4]</tspan>
                 </text>
-                <text id="station_ids[4:5]" font-family="AndaleMono, Andale Mono" font-size="25" font-weight="normal" fill="#0000DD">
-                    <tspan x="171" y="117">station_ids[4:5]</tspan>
+                <text id="station_ids[4:6]" font-family="AndaleMono, Andale Mono" font-size="25" font-weight="normal" fill="#0000DD">
+                    <tspan x="171" y="117">station_ids[4:6]</tspan>
                 </text>
                 <g id="Group-74" transform="translate(498.000000, 0.000000)">
                     <g id="Group-72">

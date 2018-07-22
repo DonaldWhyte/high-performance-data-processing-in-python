@@ -1349,7 +1349,7 @@ mask = ~np.isnan(wind_speed_rates)
 
 [NEXT]
 ```python
-mask = ~np.isnan(wind_speed_rates)
+indices = np.arange(len(arr))
 ```
 <!-- .element: class="large" -->
 ![vectorised_fill_forward2](images/vectorised_fill_forward2.svg)
@@ -1507,65 +1507,6 @@ sum_array (array(int64, 1d, C),)
 ```
 
 [NEXT]
-### Inspect Compiled Code
-
-```python
-sum_array.inspect_types()
-```
-
-<div class="left-col">
-  <pre class="small"><code data-noescape class="python"># --- LINE 6 ---
-def sum_array(arr):
-    # --- LINE 7 ---
-    #   arr = arg(0, name=arr)  :: array(float64, 1d, C)
-    #   $const0.1 = const(int, 0)  :: int64
-    #   result = $const0.1  :: float64
-    #   jump 4
-    # label 4
-    result = 0
-    # --- LINE 8 ---
-    #   jump 6
-    # label 6
-    #   $6.1 = global(range: <class 'range'>)  :: Function(<class 'range'>)
-    #   $6.2 = global(len: <built-in function len>)  :: Function(<built-in function len>)
-    #   $6.4 = call $6.2(arr, func=$6.2, args=[Var(arr, numba_type_inference.py (7))], kws=(), vararg=None)  :: (array(float64, 1d, C),) -> int64
-    #   del $6.2
-    #   $6.5 = call $6.1($6.4, func=$6.1, args=[Var($6.4, numba_type_inference.py (8))], kws=(), vararg=None)  :: (int64,) -> range_state_int64
-    #   del $6.4
-    #   del $6.1
-    #   $6.6 = getiter(value=$6.5)  :: range_iter_int64
-    #   del $6.5
-    # ...
-  </code></pre>
-</div>
-<div class="right-col">
-  <pre class="small"><code data-noescape class="python">for i in range(len(arr)):
-    # --- LINE 9 ---
-    #   $20.5 = getitem(value=arr, index=i)  :: float64
-    #   $20.6 = inplace_binop(fn=+=, immutable_fn=+, lhs=result, rhs=$20.5, static_lhs=<object object at 0x1065ab690>, static_rhs=<object object at 0x1065ab690>)  :: float64
-    #   result = $20.6  :: float64
-    #   jump 18
-    # label 36
-    #   del arr
-    #   del $phi20.1
-    #   del $phi18.1
-    #   del $18.4
-    #   jump 38
-    # label 38
-    #   del result
-
-    result += arr[i]
-
-# --- LINE 10 ---
-#   $38.2 = cast(value=result)  :: float64
-#   return $38.2
-
-return result
-  </code></pre>
-</div>
-<div class="clear-col"></div>
-
-[NEXT]
 ### Explicitly Set Types
 
 <pre class="large"><code data-noescape class="python">from numba import int64, jit
@@ -1612,7 +1553,7 @@ _(speedup is relative to pure Python implementation)_
 * Numba type inference sometimes fails
 * You might need to specify types manually
   - arguably makes code more verbose / harder to read
-* Less Python features available in `@jit(nopython=True)` functions
+* Restricted language features using `nopython=True`
   - variable types are fixed
   - cannot use arbitrary classes
 
@@ -1744,7 +1685,7 @@ from joblib import delayed, Parallel
 [NEXT]
 **Total time:** 2.46 mins ⟶ 1.37 mins
 
-**Speedup:** 1.8x
+**Speedup:** 177x
 
 <div id="parallelised-times"></div>
 

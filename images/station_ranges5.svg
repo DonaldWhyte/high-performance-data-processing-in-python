@@ -26,8 +26,8 @@
                     <tspan x="59.0480957" y="75">4</tspan>
                 </text>
                 <path d="M44,87 L44,130 L87,130 L87,87 L44,87 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
-                <text id="5" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                    <tspan x="59.0480957" y="118">5</tspan>
+                <text id="6" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
+                    <tspan x="59.0480957" y="118">6</tspan>
                 </text>
                 <g id="Group-62" transform="translate(43.000000, 0.000000)">
                     <path d="M1,1 L1,44 L44,44 L44,1 L1,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
@@ -66,8 +66,8 @@
                         <tspan x="59.0480957" y="31">4</tspan>
                     </text>
                     <path d="M87,1 L87,44 L130,44 L130,1 L87,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
-                    <text id="5" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
-                        <tspan x="102.048096" y="31">5</tspan>
+                    <text id="6" font-family="Helvetica" font-size="25" font-weight="normal" fill="#000000">
+                        <tspan x="102.048096" y="31">6</tspan>
                     </text>
                     <g id="Group-62">
                         <path d="M1,1 L1,44 L44,44 L44,1 L1,1 Z" id="Rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>
