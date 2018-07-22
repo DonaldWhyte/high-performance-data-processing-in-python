@@ -296,6 +296,10 @@ img[alt="numpy_add_native"]
     width: 600px;
 }
 
+img[alt="station_ranges_focus"] {
+    width: 475px;
+}
+
 img[alt="station_ranges0"] {
     width: 400px;
     margin-top: 32px !important;

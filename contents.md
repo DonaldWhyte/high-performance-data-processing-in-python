@@ -409,36 +409,6 @@ At each point `i` in the time series:
 [NEXT]
 ![rolling_mean_and_std](images/rolling_mean_and_std.png)
 
-[NEXT]
-### Problem: Null Values
-<table>
-  <tr>
-    <th>timestamp</th>
-    <th>station_id</th>
-    <th>wind_speed_rate</th>
-  </tr>
-  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
-  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr class="bad-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>null</td></tr>
-  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
-</table>
-
-[NEXT]
-### Solution: Fill Forward
-<table>
-  <tr>
-    <th>timestamp</th>
-    <th>station_id</th>
-    <th>wind_speed_rate</th>
-  </tr>
-  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
-  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr class="good-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
-</table>
-
 _note_
 1. Split full dataset into separate station time series
 2. For each weather station time series, detect outliers by:
@@ -483,31 +453,41 @@ Each station's rows are **grouped together**.
 
 Ordered by time.
 
+[NEXT]
+### Problem: Null Values
+<table>
+  <tr>
+    <th>timestamp</th>
+    <th>station_id</th>
+    <th>wind_speed_rate</th>
+  </tr>
+  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
+  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr class="bad-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>null</td></tr>
+  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
+</table>
 
 [NEXT]
-### The Code
-
-Source file: `find_outliers_purepy.py`
-
-<pre class="medium"><code data-noescape class="bash">&gt; git clone https://github.com/DonaldWhyte/high-performance-data-processing-in-python/
-&gt; cd high-performance-data-processing-in-python/
-&gt; cd code/
-&gt; python3 -m find_outliers_purepy --help
-usage: find_outliers_numpy.py [-h] -i INPUT -m MEASUREMENT -o OUTPUT
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUT, --input INPUT
-                        path to input HDF5 file containing data to find
-                        outliers in
-  -m MEASUREMENT, --measurement MEASUREMENT
-                        measurement to find outliers in
-  -o OUTPUT, --output OUTPUT
-                        name of output CSV file that contains outliers
-</code></pre>
+### Solution: Fill Forward
+<table>
+  <tr>
+    <th>timestamp</th>
+    <th>station_id</th>
+    <th>wind_speed_rate</th>
+  </tr>
+  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
+  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr class="good-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
+  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
+</table>
 
 [NEXT]
-## Complete Process
+## The Code
+
+Source file on GitHub: [find_outliers_purepython.py](https://github.com/DonaldWhyte/high-performance-data-processing-in-python/blob/master/code/find_outliers_purepython.py)
+</div>
 
 [NEXT]
 ![outlier_detection_pipeline0](images/outlier_detection_pipeline0.svg)
@@ -556,29 +536,6 @@ Writing outliers to outliers.csv
 | 720358         | 1997-01-31 09:00:00 | 40.0                |
 | 997375         | 1993-01-29 15:00:00 | 100.0               |
 | ...            | ...                 | ...                 |
-
-
-[NEXT]
-### Outliers Found
-
-Total outliers: 4982
-
-```bash
-> wc -l outliers.csv
-4982
-```
-
-[NEXT]
-### Outliers Found
-
-Detected outliers in 1313 weather stations.
-
-On average, those stations had 3.8 outliers.
-
-```bash
-> cat outliers.csv | cut -d ',' -f 1 | sort | uniq | wc -l
-1313
-```
 
 [NEXT]
 Some detected outliers:
@@ -696,6 +653,7 @@ def _sum(a):
 def _divide(a, d):
     return [x / d for x in a]
 ```
+<!-- .slide: class="small" -->
 
 [NEXT]
 ### Snakeviz Output
@@ -1070,7 +1028,7 @@ Broadcasting does **not** copy.
 <!-- .element class="medium-table-text" -->
 
 [NEXT]
-![outlier_detection_pipeline](images/outlier_detection_pipeline.svg)
+![station_ranges_focus](images/station_ranges_focus.svg)
 
 [NEXT]
 `station_ranges()`
@@ -2032,8 +1990,6 @@ You need to parallelise across **several machines**.
 
 [NEXT]
 `dask.distributed`
-
-TODO
 
 [NEXT]
 ### How to Use
