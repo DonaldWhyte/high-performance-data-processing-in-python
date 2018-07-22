@@ -407,13 +407,13 @@ At each point `i` in the time series:
   - more than **6 standard deviations** away from the mean
 
 [NEXT]
-![rolling_mean_and_std](images/rolling_mean_and_std.png)
+![moving_mean_and_std](images/moving_mean_and_std.png)
 
 _note_
 1. Split full dataset into separate station time series
 2. For each weather station time series, detect outliers by:
-  1. calculate rolling mean and stdev at each point
-  2. check if a point is > 6 stdevs away from its rolling mean value
+  1. calculate moving mean and stdev at each point
+  2. check if a point is > 6 stdevs away from its moving mean value
   3. if so, mark point as outlier
 3. generate CSV containing all outliers in each station's data
 
@@ -490,21 +490,18 @@ Source file on GitHub: [find_outliers_purepython.py](https://github.com/DonaldWh
 </div>
 
 [NEXT]
-![outlier_detection_pipeline0](images/outlier_detection_pipeline0.svg)
-
-[NEXT]
-![outlier_detection_pipeline1](images/outlier_detection_pipeline1.svg)
+![complete_process](images/complete_process.svg)
 
 [NEXT]
 ### Code Breakdown
 
-|                   |                                                         |
-| ----------------- | ------------------------------------------------------- |
-| `station_ranges`  | partition full dataset into per-station time series     |
-| `fill_forward`    | fill in missing data with previous values               |
-| `rolling_average` | computing rolling average at every time point           |
-| `rolling_std`     | computing rolling stdev at every time point             |
-| `find_outliers`   | get indices of outliers using deviance from rolling avg |
+|                  |                                                           |
+| ---------------- | --------------------------------------------------------- |
+| `station_ranges` | _**partition full dataset into per-station time series**_ |
+| `fill_forward`   | fill in missing data with previous values                 |
+| `moving_average` | computing moving average at every time point              |
+| `moving_std`     | computing moving stdev at every time point                |
+| `find_outliers`  | get indices of outliers using deviance from moving avg    |
 <!-- .element class="medium-table-text" -->
 
 [NEXT]
@@ -562,8 +559,7 @@ The affected weather station is:
 
 [NEXT]
 ### Success!
-
-<span style="font-size: 140px">🎉</span>
+<span style="font-size: 120px">🎉</span>
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -753,10 +749,6 @@ Many libraries/frameworks are built on top of NumPy.
 * class encapsulating n-dimensional arrays
 * fixed size
 * elements must be the same type
-* no memory overhead
-  - elements stored in single contiguous memory block
-* fast logical and mathematical operations
-  - executed in heavily optimised compiled code
 
 _note_
 At the core of the NumPy package, is the ndarray object. This encapsulates
@@ -821,18 +813,6 @@ array([[0., 1., 2.],
 ![ndarray](images/ndarray_2.svg)
 
 [NEXT]
-### Transpose
-
-```python
->>> b.T
-array([[0., 3., 6.],
-       [1., 4., 7.],
-       [2., 5., 8.]])
-```
-
-![ndarray](images/ndarray_3.svg)
-
-[NEXT]
 ### Slicing One Dimension
 
 ```python
@@ -856,17 +836,6 @@ array([[0., 1.],
 ![ndarray](images/ndarray_5.svg)
 
 [NEXT]
-### Only Examine Every Nth Element
-
-```python
->>> b[::2, ::2]
-array([[0., 2.],
-       [6., 8.]])
-```
-
-![ndarray](images/ndarray_6.svg)
-
-[NEXT]
 Reshaping or slicing arrays creates a **view**.
 
 No copies are made.
@@ -875,8 +844,11 @@ No copies are made.
 ### Performance Benefits
 
 * Data stored contiguously
-* Cache locality
+  - no memory overhead
+  - Cache locality
 * No copies for common reshaping/slicing operations
+* Fast logical and mathematical operations
+  - executed in heavily optimised compiled code
 
 [NEXT]
 ### Benchmark
@@ -891,9 +863,6 @@ b = list(range(10000000))
 
 # 1. indexing
 c = [a[i] + b[i] for i in range(len(a))]
-
-# 2. zip
-d = [x + y for x, y in zip(a, b)]
 ```
 <!-- .element: class="large" -->
 
@@ -906,12 +875,12 @@ import numpy as np
 a = np.arange(10000000)
 b = np.arange(10000000)
 
-# 3. loop
+# 2. loop
 c = np.zeros(len(a))
 for i in range(len(a)):
     c[i] = a[i] + b[i]
 
-# 4. built-in numpy addition operator
+# 3. built-in numpy addition operator
 d = a + b
 ```
 <!-- .element: class="large" -->
@@ -974,11 +943,8 @@ Sometimes we want to apply smaller scalars or vectors to larger arrays.
 
 _e.g. adding one to all elements in an array_
 
-[NEXT]
-### A Problem...
-We want to use NumPy's built-in operations...
-
-...but we don't want to perform loads of copies to match up the array sizes.
+_note_
+We want to use NumPy's built-in operations, but we don't want to perform loads of copies to match up the array sizes.
 
 [NEXT]
 ### Adding 1 to an Array
@@ -1010,9 +976,6 @@ Allows us to apply smaller arrays to larger arrays.
 ![broadcasting](images/broadcasting_2d_1.svg)
 
 [NEXT]
-Broadcasting does **not** copy.
-
-[NEXT]
 ### Using NumPy for Outlier Detection
 
 [NEXT]
@@ -1022,13 +985,13 @@ Broadcasting does **not** copy.
 | ----------------- | ------------------------------------------------------- |
 | `station_ranges`  | partition full dataset into per-station time series     |
 | `fill_forward`    | fill in missing data with previous values               |
-| `rolling_average` | computing rolling average at every time point           |
-| `rolling_std`     | computing rolling stdev at every time point             |
-| `find_outliers`   | get indices of outliers using deviance from rolling avg |
+| `moving_average`  | computing moving average at every time point            |
+| `moving_std`      | computing moving stdev at every time point              |
+| `find_outliers`   | get indices of outliers using deviance from moving avg |
 <!-- .element class="medium-table-text" -->
 
 [NEXT]
-![station_ranges_focus](images/station_ranges_focus.svg)
+![complete_process](images/complete_process_highlighted.svg)
 
 [NEXT]
 `station_ranges()`
@@ -1102,59 +1065,6 @@ np.column_stack((series_starts, series_ends))
 ![station_ranges6](images/station_ranges6.svg)
 
 [NEXT]
-`fill_forward()`
-
-```python
-def fill_forward(arr: np.ndarray):
-    for i in range(1, len(arr)):
-        if np.isnan(arr[i]):
-            arr[i] = arr[i - 1]
-```
-<!-- .element: class="large" -->
-
-[NEXT]
-`rolling_average()`
-
-```python
-def rolling_average(arr: np.ndarray,
-                    n: int) -> np.ndarray:
-    avg = np.zeros(len(arr) - n + 1)
-    for i in range(len(avg)):
-        avg[i] = arr[i:i+n].sum() / n
-    return avg
-```
-<!-- .element: class="large" -->
-
-[NEXT]
-`rolling_std()`
-
-```python
-def rolling_std(arr: np.ndarray,
-                rolling_avg: np.ndarray,
-                n: int) -> np.ndarray:
-    variance = np.zeros(len(arr) - n + 1)
-    assert len(variance) == len(rolling_avg)
-    for i in range(len(variance)):
-        variance[i] = (
-            np.sum(np.square(arr[i:i+n] - rolling_avg[i])) / n
-        )
-    return np.sqrt(variance)
-```
-
-[NEXT]
-`find_outliers()`
-
-```python
-def find_outliers(data: np.ndarray,
-                  rolling_avg: np.ndarray,
-                  rolling_std: np.ndarray) -> np.ndarray:
-    outlier_indices = np.where(
-        np.absolute(data - rolling_avg) >
-        (rolling_std * _OUTLIER_STD_THRESHOLD))
-    return outlier_indices[0]
-```
-
-[NEXT]
 **Total time:** 4 hours ⟶ 1.4 hours
 
 **Speedup:** 2.85x
@@ -1222,22 +1132,6 @@ to handle threads and race conditions to gain this parallelism.
 </div>
 <div class="right-col">
   <img src="images/cpu.jpg" alt="cpu" />
-</div>
-<div class="clear-col"></div>
-
-[NEXT]
-### SIMD on GPUs
-
-<div class="left-col">
-  <ul>
-    <li>SIMD on steroids</li>
-    <li>Can process thousands of floats in one "instruction"</li>
-    <li>Originally made for rendering graphics.</li>
-    <li>Enables neural nets to be trained with massive amounts of data.</li>
-  </ul>
-</div>
-<div class="right-col">
-  <img src="images/gpu.jpg" alt="gpu" />
 </div>
 <div class="clear-col"></div>
 
@@ -1312,9 +1206,12 @@ Vectorization describes the absence of any explicit looping, indexing, etc., in 
 
 ```python
 def fill_forward(arr: np.ndarray):
+    prev_val = arr[0]
     for i in range(1, len(arr)):
         if np.isnan(arr[i]):
-            arr[i] = arr[i - 1]
+            arr[i] = prev_val
+        else:
+            prev_val = arr[i]
 ```
 <!-- .element: class="large" -->
 
@@ -1326,7 +1223,9 @@ def fill_forward(arr: np.ndarray) -> np.ndarray:
     mask = ~np.isnan(arr)
     indices = np.arange(len(arr))
     indices_to_use = np.where(mask, indices, 0)
-    np.maximum.accumulate(indices_to_use, out=indices_to_use)
+    np.maximum.accumulate(
+        indices_to_use,
+        out=indices_to_use)
     return arr[indices_to_use]
 ```
 <!-- .element: class="large" -->
@@ -1370,10 +1269,10 @@ return wind_speed_rates[indices_to_use]
 ![vectorised_fill_forward4](images/vectorised_fill_forward4.svg)
 
 [NEXT]
-**Unvectorised `rolling_average()`**
+**Unvectorised `moving_average()`**
 
 ```python
-def rolling_average(arr: np.ndarray,
+def moving_average(arr: np.ndarray,
                     n: int) -> np.ndarray:
     avg = np.zeros(len(arr) - n + 1)
     for i in range(len(avg)):
@@ -1387,10 +1286,10 @@ Glance over this and the next slide. Just state that this one has
 a for loop. We can vectorised and eliminate 
 
 [NEXT]
-**Vectorised `rolling_average()`**
+**Vectorised `moving_average()`**
 
 ```python
-def rolling_average(arr: np.ndarray,
+def moving_average(arr: np.ndarray,
                     n: int) -> np.ndarray:
     ret = np.cumsum(arr, dtype=float)
     ret[n:] = ret[n:] - ret[:-n]
@@ -1401,7 +1300,7 @@ def rolling_average(arr: np.ndarray,
 [NEXT]
 **Total time:** 1.4 hours ⟶ 48 mins
 
-**Speedup:** 5x
+**Speedup:** 2.85x ⟶ 5x
 
 <div id="vectorised-times"></div>
 
@@ -1570,39 +1469,16 @@ Explicitly specified types.
 [NEXT]
 **Total time:** 48 mins ⟶ 2.46 mins
 
-**Speedup:** 98x
+**Speedup:** 5x ⟶ 98x
 
 <div id="numba-times-log"></div>
 
 [NEXT]
 **Total time:** 48 mins ⟶ 2.46 mins
 
-**Speedup:** 98x
+**Speedup:** 5x ⟶ 98x
 
 <div id="numba-times"></div>
-
-[NEXT]
-### Numba Has Much More
-
-* Tight integration with numpy
-* Disable the GIL to run functions in parallel:
-  - `@jit(nogil=True)`
-* Automatically parallelise loops in functions:
-  - `@jit(parallel=True)`
-* Automatically vectorise code:
-  - `@vectorize`
-* Compiling vectorised code to <span class="big-emphasis">GPUs</span>:
-  - `@jit(target='cuda')`
-
-_note_
-`parallel=True` will attempt to allocate chunks of loop iterations to different
-CPU cores for true parallelism. Note that this means the loop's logic cannot
-have any dependencies between iterations./
-
-You can pass parallel=True to any numba jitted function but that doesn't mean
-it's always utilizing all cores. You have to understand that numba uses some
-heuristics to make the code execute in parallel, sometimes these heuristics
-simply don't find anything to parallelise in the code.
 
 [NEXT]
 ### To Summarise
@@ -1651,41 +1527,21 @@ Handles spawning of new Python processes and storing intermittent results for
 you.
 
 [NEXT]
-### Example
-
-```python
-# Load station IDs and their measurements from the file.
-input_file = ...
-station_ids = input_file['station_usaf'][:]
-measurements = input_file['wind_speed_rate'][:]
-
-# Compute (start_index, end_index) ranges for all stations in
-# input file.
-index_ranges = station_ranges(station_ids)
-
-# Function that takes an individual measurement time series
-# for a single weather station and returns the indices of its
-# outliers.
-def compute_outliers(station_data: np.ndarray) -> np.ndarray:
-    pass
-```
-
-[NEXT]
-### Process Station Time Series in Parallel
+## Process Each Station Time Series in Parallel
 
 <pre><code data-noescape class="python">from multiprocessing import cpu_count
 from joblib import delayed, Parallel
 
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
-<mark>outliers = processor(</mark>
-<mark>    delayed(compute_outliers)(measurements[start:end])</mark>
-<mark>    for start, end in index_ranges)</mark>
+outliers = processor(
+    delayed(compute_outliers)(wind_speeds[start:end])
+    for start, end in station_index_ranges)
 </code></pre>
 
 [NEXT]
 **Total time:** 2.46 mins ⟶ 1.37 mins
 
-**Speedup:** 177x
+**Speedup:** 98x ⟶ 177x
 
 <div id="parallelised-times"></div>
 
@@ -1711,61 +1567,35 @@ _Map in-process memory to data stored on disk._
 
 ![memmap](images/memmap.svg)
 
-
 [NEXT]
 `np.memmap`
 
 Write the measurement data to an memmap'd file.
 
-<pre><code data-noescape class="python"># Open handle to temporary memmap file.
-with NamedTemporaryFile() as tmpfile:
-    data = np.memmap(
-        tmpfile.name,
-        dtype=np.float64,
-        shape=(len(input_file[measurement]),),
-        mode='w+')
+<pre class="large"><code data-noescape class="python"># Open handle to temporary memmap file.
+data = np.memmap(
+    'wind_speeds',
+    dtype=np.float64,
+    shape=(len(input_file['wind_speed_rate']),),
+    mode='w+')
 
-    # Load all wind_speed_rate measurements into the memmap file.
-    data[:] = input_file[measurement][:]
+# Load all wind_speed_rates into memmap file.
+data[:] = input_file['wind_speed_rate'][:]
 
-    # Flushes contents to disk.
-    del data
+# Flushes contents to disk.
+del data
 </code></pre>
-
-[NEXT]
-The memmap file is shared across all worker subprocesses.
-
-<pre><code data-noescape class="python">def compute_outliers(fname: str,
-                     start_idx: int,
-                     end_idx: int) -> np.ndarray:
-    # Only load desired sub-array from the memmap file.
-<mark>    memmap = np.memmap(fname, dtype=np.float64, mode='r')</mark>
-<mark>    station_data = memmap[start_idx:end_idx]</mark>
-    return ...  # rest of code same as before
-
-# Pass the filename of the temp memmap file to the workers.
-processor = Parallel(n_jobs=cpu_count())
-outliers = processor(
-<mark>    delayed(compute_outliers)(tmpfile.name, start, end)</mark>
-    for start, end in index_ranges)
-</code></pre>
-
-_note_
-As this problem can often occur in scientific computing with numpy based
-data structures, `joblib.Parallel` provides a special handling for large numpy
-arrays to automatically dump them on the filesystem and pass a reference to the
-to the worker to open them as memory map on that file using.
-
-`numpy.memmap` is a subclass of `numpy.ndarray`. This makes it possible to
-share a segment of data between all the worker processes.
 
 [NEXT]
 ![joblib_memmap](images/joblib_memmap.svg)
 
+_note_
+mmap is great if you have multiple processes accessing data in a read only fashion from the same file, which is common in the kind of server systems I write. mmap allows all those processes to share the same physical memory pages, saving a lot of memory.
+
 [NEXT]
 **Total time:** 1.37 mins ⟶ 0.83 mins
 
-**Speedup:** 291x
+**Speedup:** 177x ⟶ 291x
 
 <div id="parallelised-times-memmap"></div>
 
@@ -1784,13 +1614,13 @@ share a segment of data between all the worker processes.
 
 [NEXT]
 ### Main Bottleneck
-Computing rolling standard deviation.
-<div id="numba-times2"></div>
+Computing moving standard deviation.
+<div id="parallel-memmap-times2"></div>
 
 [NEXT]
 ### Vectorised Rolling STD
 **Speedup:** 10x
-<div id="numba-rolling-std-times"></div>
+<div id="numba-moving-std-times"></div>
 
 [NEXT]
 ### Final Speedup
@@ -1884,7 +1714,7 @@ Don't throw the problem to dev ops.
 [NEXT]
 If RAM or disk is your bottleneck, parallelise using a cluster.
 
-Otherwise, you can get **very** far with vecorisation and sprinling
+Otherwise, you can get **very** far with vectorisation and sprinkling
 `@numba.jit` magic.
 
 [NEXT]

@@ -266,6 +266,10 @@ img[alt="tabriz_wind_speed_rate"] {
     width: 500px;
 }
 
+img[alt="complete_process"] {
+    width: 650px;
+}
+
 img[alt="outlier_detection"] {
     width: 650px;
 }

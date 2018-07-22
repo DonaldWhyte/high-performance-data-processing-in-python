@@ -299,8 +299,8 @@
         const timing_sections = [
           'station_ranges',
           'fill_forward',
-          'rolling_average',
-          'rolling_std',
+          'moving_average',
+          'moving_std',
           'find_outliers'
         ];
         const pure_python_times = {
@@ -347,7 +347,7 @@
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter, true);
         create_bar_chart(
-          'vectorised-times', [pure_python_times, numpy_times, vectorised_times],
+          'vectorised-times', [numpy_times, vectorised_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter, true);
         create_bar_chart(
@@ -413,12 +413,12 @@
 
         numba_times.color = 'blue';
         create_bar_chart(
-          'numba-times2', [numba_times],
+          'parallel-memmap-times2', [parallelised_times_memmap],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           false, true, seconds_label_formatter);
 
         create_bar_chart(
-          'numba-rolling-std-times',
+          'numba-moving-std-times',
           [{color: 'blue', data: [129.7377, {y: 13.0642, color: 'red'}]}],
           ['non-vectorised', 'vectorised'],
           time_axis_label,
@@ -441,10 +441,10 @@
             {
               name: 'timings',
               color: 'blue',
-              data: [1.0996, 0.8266, 3.4815, 0.0305]
+              data: [1.0996, 3.4815, 0.0305]
             }
           ],
-          ['python (indexing)', 'python (zip)', 'numpy (loop)', 'numpy (built-in)'],
+          ['python (indexing)', 'numpy (loop)', 'numpy (built-in)'],
           'execution time (secs)',
           function () { return this.value + 's'; },
           'dark',
@@ -459,7 +459,6 @@
               color: 'red',
               data: [
                 1.0996 / 1.0996,
-                1.0996 / 0.8266,
                 1.0996 / 3.4815,
                 1.0996 / 0.0305
               ]
