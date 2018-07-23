@@ -419,7 +419,7 @@
 
         create_bar_chart(
           'numba-moving-std-times',
-          [{color: 'blue', data: [129.7377, {y: 13.0642, color: 'red'}]}],
+          [{color: 'blue', data: [41.33, {y: 4.1618, color: 'red'}]}],
           ['non-vectorised', 'vectorised'],
           time_axis_label,
           time_axis_formatter,
@@ -514,26 +514,6 @@
           'numba-benchmark-speedup1',
           [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(0, 2)}],
           numba_sections.slice(0, 2),
-          'speedup factor',
-          function () { return this.value; },
-          'dark',
-          false,
-          true,
-          speedup_label_formatter);
-        create_bar_chart(
-          'numba-benchmark-times2',
-          [{name: 'timings', color: 'blue', data: numba_benchmark_times.slice(1, 4)}],
-          numba_sections.slice(1, 4),
-          'execution time (secs)',
-          function () { return this.value + 's'; },
-          'dark',
-          false,
-          true,
-          high_precision_seconds_label_formatter);
-        create_bar_chart(
-          'numba-benchmark-speedup2',
-          [{name: 'speedup', color: 'red', data: numba_benchmark_speedups.slice(1, 4)}],
-          numba_sections.slice(1, 4),
           'speedup factor',
           function () { return this.value; },
           'dark',

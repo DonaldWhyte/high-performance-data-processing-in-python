@@ -1435,8 +1435,6 @@ Use vectorised NumPy code where possible.
 
 Fall back to Numba if code cannot be vectorised.
 
-Or if you want to run your code on a GPU.
-
 
 [NEXT SECTION]
 ## 6. Parallel Computation
