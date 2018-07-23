@@ -4,7 +4,12 @@
 
 Talk demonstrating how to massively optimise data processing and numerical computation in Python.
 
-TODO: more detailed description of talk contents
+* motivations for fast numerical processing in Python
+* why Python is a slow programming language
+* fast numerical processing in `numpy`
+* vectorisation
+* using `numba` to optimise non-vectorised code
+* parallelising computation using `joblib`
 
 ## Running Presentation
 
