@@ -1,8 +1,10 @@
-# High Performance Data Processing In Python
+# High Performance Data Processing in Python
 
 ### [View Presentation Slides](http://donaldwhyte.github.io/high-performance-data-processing-in-python)
 
-Talk demonstrating how to massively optimise data processing and numerical computation in Python.
+Talk demonstrating how to massively optimise data processing and numerical computation in Python. We perform outlier detection on a large time-series weather dataset ([ISD](https://www.ncdc.noaa.gov/isd)). We take detecting outliers in 600GBs worth of data in Python down from 28 days to 38 minutes.
+
+Topics covered:
 
 * motivations for fast numerical processing in Python
 * why Python is a slow programming language
