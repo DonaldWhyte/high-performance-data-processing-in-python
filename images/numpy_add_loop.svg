@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="660px" height="559px" viewBox="0 0 660 559" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 21</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-21">
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="5" x="2.5" y="2.5" width="655" height="554"></rect>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="55.5" y="82.5" width="337" height="127"></rect>
+            <text id="numpy/c/native-code" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="21.734375" y="509">numpy/c/native code</tspan>
+            </text>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="560.5" y="67.5" width="74" height="465"></rect>
+            <text id="memory" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="511.25" y="46">memory</tspan>
+            </text>
+            <g id="Group-17" transform="translate(560.000000, 190.000000)">
+                <path d="M74.5,48.5 L0.493243552,48.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M74.5,1.5 L0.493243552,1.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="28.1015625" y="35">a</tspan>
+                </text>
+            </g>
+            <g id="Group-16" transform="translate(560.000000, 253.000000)">
+                <path d="M74.5,48.5 L0.493243552,48.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M74.5,1.5 L0.493243552,1.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <text id="b" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="27.2265625" y="35">b</tspan>
+                </text>
+            </g>
+            <g id="Group-18" transform="translate(560.000000, 334.000000)">
+                <path d="M74.5,48.5 L0.493243552,48.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <path d="M74.5,1.5 L0.493243552,1.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <text id="c" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="28.1015625" y="34">c</tspan>
+                </text>
+            </g>
+            <text id="python" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="28.1796875" y="68">python</tspan>
+            </text>
+            <text id="for-i-in-range(len(a" font-family="Helvetica" font-size="28" font-weight="normal" fill="#000000">
+                <tspan x="98" y="138">for i in range(len(a)):</tspan>
+                <tspan x="98" y="172">    c[i] = a[i] + b[i]</tspan>
+            </text>
+            <text id="__getitem__" font-family="Helvetica-Oblique, Helvetica" font-size="18" font-style="italic" font-weight="normal" fill="#000000">
+                <tspan x="293.464844" y="240">__getitem__</tspan>
+            </text>
+            <path d="M152.5,185.5 L152.5,436.5" id="Line-12" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M332.5,436.5 L154.5,436.5" id="Line-13" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M215.5,185.5 L215.5,318.5" id="Line-12" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M329.5,318.5 L217.5,318.5" id="Line-13" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M285.5,185.5 L285.5,377.5" id="Line-12" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M331.5,377.5 L287.5,377.5" id="Line-13" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <text id="__setitem__" font-family="Helvetica-Oblique, Helvetica" font-size="18" font-style="italic" font-weight="normal" fill="#000000">
+                <tspan x="48.9404297" y="251">__setitem__</tspan>
+            </text>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="56.5" y="279.5" width="337" height="195"></rect>
+            <g id="Group-20" transform="translate(331.000000, 293.000000)">
+                <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="1" y="1" width="47" height="47"></rect>
+                <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="15.1015625" y="33">a</tspan>
+                </text>
+                <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="1" y="1" width="47" height="47"></rect>
+                <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="15.1015625" y="33">a</tspan>
+                </text>
+            </g>
+            <g id="Group-19" transform="translate(331.000000, 352.000000)">
+                <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="1" y="1" width="47" height="47"></rect>
+                <text id="b" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="14.2265625" y="35">b</tspan>
+                </text>
+            </g>
+            <g id="Group-19" transform="translate(331.000000, 411.000000)">
+                <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="1" y="1" width="47" height="47"></rect>
+                <text id="c" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                    <tspan x="15.1015625" y="35">c</tspan>
+                </text>
+            </g>
+            <path d="M381,317 L559,216" id="Line-17" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+            <path d="M380.5,376.5 L560,279" id="Line-18" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+            <path d="M380.5,436.5 L559,360" id="Line-19" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

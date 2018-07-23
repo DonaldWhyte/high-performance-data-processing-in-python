@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="660px" height="559px" viewBox="0 0 660 559" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 22</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-22">
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="5" x="2.5" y="2.5" width="655" height="554"></rect>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="55.5" y="82.5" width="337" height="127"></rect>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="55.5" y="279.5" width="337" height="195"></rect>
+            <text id="numpy/c/native-code" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="21.234375" y="509">numpy/c/native code</tspan>
+            </text>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="560.5" y="67.5" width="74" height="465"></rect>
+            <text id="memory" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="511.25" y="46">memory</tspan>
+            </text>
+            <path d="M634.5,238.5 L560.493244,238.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M634.5,191.5 L560.493244,191.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="588.101562" y="225">a</tspan>
+            </text>
+            <path d="M634.5,301.5 L560.493244,301.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M634.5,254.5 L560.493244,254.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <text id="b" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="587.226562" y="288">b</tspan>
+            </text>
+            <path d="M634.5,382.5 L560.493244,382.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M634.5,335.5 L560.493244,335.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <text id="c" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="588.101562" y="368">c</tspan>
+            </text>
+            <text id="python" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="28.1796875" y="68">python</tspan>
+            </text>
+            <text id="c-=-a-+-b" font-family="Helvetica" font-size="28" font-weight="normal" fill="#000000">
+                <tspan x="170" y="150">c = a + b</tspan>
+            </text>
+            <path d="M220.5,162.497283 L220.5,346.5" id="Line-11" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M277.5,368.5 L331.5,316.5" id="Line-10" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M278.5,378.5 L330.5,378.5" id="Line-15" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M279.5,388.5 L330.5,438.5" id="Line-16" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="331" y="294" width="47" height="47"></rect>
+            <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="345.101562" y="326">a</tspan>
+            </text>
+            <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="331" y="294" width="47" height="47"></rect>
+            <text id="a" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="345.101562" y="326">a</tspan>
+            </text>
+            <text id="optimised-addition-c" font-family="Helvetica" font-size="18" font-weight="normal" fill="#000000">
+                <tspan x="182.481934" y="370">optimised</tspan>
+                <tspan x="167.457031" y="392">addition code</tspan>
+            </text>
+            <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="331" y="353" width="47" height="47"></rect>
+            <text id="b" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="344.226562" y="387">b</tspan>
+            </text>
+            <rect id="Rectangle-3" stroke="#000000" stroke-width="2" fill="#D8D8D8" x="331" y="412" width="47" height="47"></rect>
+            <text id="c" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="345.101562" y="446">c</tspan>
+            </text>
+            <path d="M380,317 L558,216" id="Line-17" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+            <path d="M379.5,376.5 L559,279" id="Line-18" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+            <path d="M379.5,436.5 L558,360" id="Line-19" stroke="#000000" stroke-width="4" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="893px" height="434px" viewBox="0 0 893 434" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 39</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-39" transform="translate(0.000000, -13.000000)">
+            <g id="Group-38" transform="translate(538.000000, 165.000000)" fill="#000000">
+                <g id="file" fill-rule="nonzero">
+                    <path d="M125.200521,33.7165179 C126.792535,35.3727679 128.157118,37.6205357 129.294271,40.4598214 C130.431424,43.2991071 131,45.9017857 131,48.2678571 L131,150.482143 C131,152.848214 130.203993,154.859375 128.611979,156.515625 C127.019965,158.171875 125.086806,159 122.8125,159 L8.1875,159 C5.91319444,159 3.98003472,158.171875 2.38802083,156.515625 C0.796006944,154.859375 0,152.848214 0,150.482143 L0,8.51785714 C0,6.15178571 0.796006944,4.140625 2.38802083,2.484375 C3.98003472,0.828125 5.91319444,0 8.1875,0 L84.6041667,0 C86.8784722,0 89.3802083,0.591517857 92.109375,1.77455357 C94.8385417,2.95758929 96.9991319,4.37723214 98.5911458,6.03348214 L125.200521,33.7165179 Z M87.3333333,12.0669643 L87.3333333,45.4285714 L119.401042,45.4285714 C118.832465,43.7131696 118.207031,42.500558 117.52474,41.7907366 L90.8300781,14.0189732 C90.1477865,13.3091518 88.9822049,12.6584821 87.3333333,12.0669643 Z M120.083333,147.642857 L120.083333,56.7857143 L84.6041667,56.7857143 C82.3298611,56.7857143 80.3967014,55.9575893 78.8046875,54.3013393 C77.2126736,52.6450893 76.4166667,50.6339286 76.4166667,48.2678571 L76.4166667,11.3571429 L10.9166667,11.3571429 L10.9166667,147.642857 L120.083333,147.642857 Z" id="Shape"></path>
+                </g>
+                <text id="file-on-disk" font-family="Helvetica-Bold, Helvetica" font-size="40" font-weight="bold">
+                    <tspan x="145.537109" y="97">file on disk</tspan>
+                </text>
+            </g>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="5" x="2.5" y="54.5" width="434" height="390"></rect>
+            <rect id="Rectangle-2" stroke="#000000" stroke-width="3" x="339.5" y="100.5" width="74" height="326"></rect>
+            <text id="memory" font-family="Helvetica-Bold, Helvetica" font-size="26" font-weight="bold" fill="#000000">
+                <tspan x="312.421875" y="86">memory</tspan>
+            </text>
+            <path d="M413.5,298.5 L339.493244,298.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <path d="M413.5,211.5 L339.493244,211.5" id="Line-9" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+            <text id="virtual" font-family="Helvetica-Bold, Helvetica" font-size="20" font-weight="bold" fill="#000000">
+                <tspan x="346.490234" y="262">virtual</tspan>
+            </text>
+            <text id="process" font-family="Helvetica-Bold, Helvetica" font-size="32" font-weight="bold" fill="#000000">
+                <tspan x="10.1328125" y="31">process</tspan>
+            </text>
+            <text id="code" font-family="Helvetica" font-size="40" font-weight="normal" fill="#000000">
+                <tspan x="100.130859" y="267">code</tspan>
+            </text>
+            <g id="Line-26" transform="translate(414.000000, 244.000000)">
+                <path d="M0.5,11.5 L114.5,11.5" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <polygon id="Arrowhead" fill="#000000" transform="translate(114.500000, 11.500000) rotate(180.000000) translate(-114.500000, -11.500000) " points="125.5 22.5 103.5 11.5 125.5 0.5"></polygon>
+            </g>
+            <g id="Line-25" transform="translate(194.000000, 245.000000)">
+                <path d="M0.5,11.5 L135.503704,11.5" stroke="#000000" stroke-width="3" stroke-linecap="square"></path>
+                <polygon id="Arrowhead" fill="#000000" transform="translate(135.503704, 11.500000) rotate(180.000000) translate(-135.503704, -11.500000) " points="146.503704 22.5 124.503704 11.5 146.503704 0.5"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

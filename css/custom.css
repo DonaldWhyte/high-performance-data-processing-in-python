@@ -1,0 +1,409 @@
+.reveal section img {
+    border: 0px;
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.0);
+    margin: 0px;
+}
+
+/* Title */
+#logo-notice {
+    position: relative;
+    float: right;
+}
+
+#logo-notice p {
+    font-size: 18px;
+    text-align: center;
+}
+
+.highcharts-label text {
+    font-size: 26px !important;
+}
+
+img[alt="pycon_russia"] {
+    width: 130px;
+    margin: 0px !important;
+}
+
+/* Background Slides */
+.background h1,
+.background h2,
+.background h3,
+.background h4,
+.background h5,
+.background p,
+.background li,
+.background em,
+.background strong,
+.background td,
+.background tr,
+.background th
+.background
+{
+    color: white !important;
+}
+
+.background blockquote {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+.background a {
+    color: #4c98ff;
+}
+
+/* Multi-column Layout */
+
+.left-col {
+    width: 50%;
+    float: left;
+}
+
+.right-col {
+    width: 50%;
+    float: right;
+}2
+
+.left-col1of3 {
+    width: 33%;
+    float: left;
+}
+
+.right-col2of3 {
+    width: 66%;
+    float: left;
+}
+
+.clear-col {
+    float: none;
+    clear: both;
+}
+
+/* Font Styling */
+
+code {
+    color: #00D;
+    font-weight: bold !important;
+}
+
+.large code {
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.largish code {
+    font-size: 24px;
+    line-height: 26px;
+}
+
+.medium code {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.medium-large code {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.small p {
+    font-size: 36px;
+}
+
+.small code {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.small-table-text td, .small-table-text th {
+    font-size: 20px;
+}
+
+.medium-table-text td, .medium-table-text th {
+    font-size: 26px;
+}
+
+.bio-table td {
+    text-align: center !important;
+    border: 0px !important;
+    max-width: 400px;
+}
+
+.bad-row td {
+    color: red;
+    font-weight: bold;
+}
+
+.good-row td {
+    color: green;
+    font-weight: bold;
+}
+
+.big-emphasis {
+    color: red;
+    font-weight: bold !important;
+}
+
+/* Slide-wide styles. */
+.small-slide p,
+.small-slide ul,
+.small-slide li
+{
+    font-size: 32px !important;
+}
+
+.medium-slide p,
+.medium-slide ul,
+.medium-slide li
+{
+    font-size: 50px !important;
+}
+
+.large-slide p,
+.large-slide ul,
+.large-slide li
+{
+    font-size: 60px !important;
+}
+
+.highlighted-inline {
+    background-color: #888;
+}
+
+.highlighted {
+    background-color: #888;
+}
+
+.reference {
+    float: right;
+    text-align: right;
+    font-size: 32px !important;
+    margin-top: 32px !important;
+}
+
+.source {
+    margin-top: 32px !important;
+    font-size: 28px !important;
+}
+
+/* For highlighting specific lines in code formatted using hljs */
+code mark {
+    display: inline-block;
+    width: 100%;
+    background: yellow;
+    color: black;
+}
+
+code mark span {
+    background: none !important;
+    color: inherit !important;
+}
+
+/* Images */
+img[alt="portrait"] {
+    width: 250px;
+    border: 2px solid black !important;
+}
+
+img[alt="small_portrait"] {
+    width: 220px;
+    border: 2px solid black !important;
+}
+
+img[alt="research_use_case"] {
+    width: 100px;
+    padding: 16px;
+}
+
+img[alt="bad_construction"] {
+    width: 400px;
+    padding: 16px;
+}
+
+img[alt="anger"] {
+    width: 500px;
+}
+
+img[alt="ecosystem"] {
+    width: 500px;
+}
+
+img[alt="numpy_coloured"] {
+    width: 200px;
+}
+
+img[alt="scipy"] {
+    width: 110px;
+    padding: 16px;
+}
+
+img[alt="pandas"] {
+    width: 200px;
+    padding: 16px;
+}
+
+img[alt="sklearn"] {
+    width: 180px;
+    padding: 16px;
+}
+
+img[alt="matplotlib"] {
+    width: 300px;
+    padding: 16px;
+}
+
+img[alt="isd"] {
+    width: 600px;
+}
+
+img[alt="weather_measurements"] {
+    width: 320px;
+}
+
+img[alt="globe"] {
+    width: 300px;
+}
+
+img[alt="hurricanes"] {
+    width: 700px;
+}
+
+img[alt="tabriz_airport"] {
+    width: 600px;
+}
+
+img[alt="tabriz_wind_speed_rate"] {
+    width: 500px;
+}
+
+img[alt="complete_process"] {
+    width: 650px;
+}
+
+img[alt="outlier_detection"] {
+    width: 650px;
+}
+
+img[alt="outlier_detection_pipeline0"] {
+    width: 670px;
+}
+
+img[alt="outlier_detection_pipeline1"] {
+    width: 670px;
+}
+
+img[alt="snakeviz"] {
+    width: 900px;
+}
+
+img[alt="python_slow_1"] {
+    width: 500px;
+}
+
+img[alt="python_slow_2"] {
+    width: 750px;
+}
+
+img[alt="numpy_add_loop"],
+img[alt="numpy_add_native"]
+{
+    width: 600px;
+}
+
+img[alt="station_ranges_focus"] {
+    width: 475px;
+}
+
+img[alt="station_ranges0"] {
+    width: 400px;
+    margin-top: 32px !important;
+}
+
+img[alt="station_ranges1"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges2"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges3"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges4"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges5"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="station_ranges6"] {
+    width: 650px;
+}
+
+img[alt="sisd"],
+img[alt="simd"] {
+    width: 500px;
+    margin: 32px !important;
+}
+
+img[alt="cpu"] {
+    width: 250px;
+}
+
+img[alt="gpu"] {
+    width: 400px;
+}
+
+img[alt="vectorised_fill_forward0"] {
+    width: 575px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward1"] {
+    width: 375px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward2"] {
+    width: 375px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward3"] {
+    width: 750px;
+    margin-top: 16px !important;
+}
+
+img[alt="vectorised_fill_forward4"] {
+    width: 550px;
+    margin-top: 16px !important;
+}
+
+img[alt="joblib"] {
+    width: 150px;
+}
+
+img[alt="memmap"] {
+    width: 700px;
+}
+
+/* Section Heading Icons */
+img[alt="dataset"],
+img[alt="python"],
+img[alt="numpy"],
+img[alt="vectorisation"],
+img[alt="numba"],
+img[alt="parallel_computation"],
+img[alt="final_timings"],
+img[alt="fin"] {
+    width: 200px;
+    position: relative;
+    top: 30px !important;
+}
