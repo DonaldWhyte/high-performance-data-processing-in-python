@@ -464,7 +464,7 @@
               ]
             }
           ],
-          ['python (indexing)', 'python (zip)', 'numpy (loop)', 'numpy (built-in)'],
+          ['python (indexing)', 'numpy (loop)', 'numpy (built-in)'],
           'speedup factor',
           function () { return this.value; },
           'dark',
@@ -491,9 +491,9 @@
             'numba (explicit types)',
             'pure numpy'
         ];
-        const numba_benchmark_times = [1.6818, 0.0674, 0.0084, 0.0058];
+        const numba_benchmark_times = [1.7544, 0.0065, 0.0065, 0.0091];
         const numba_benchmark_speedups = [
-            1.6818 / 1.6818, 1.6818 / 0.0674, 1.6818 / 0.0084, 1.6818 / 0.0058
+            1.7544 / 1.7544, 1.7544 / 0.0065, 1.7544 / 0.0065, 1.7544 / 0.0091
         ];
 
         const high_precision_seconds_label_formatter = function() {

@@ -137,13 +137,13 @@ Models larger and more complex.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Success!
-![cheering](images/cheering.gif)
+# Success!
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### The Reality
-![bad_construction](images/bad_construction.gif)
+## The Reality
+![bad_construction](images/bad_construction0.jpg)
+![bad_construction](images/bad_construction1.jpg)
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -159,9 +159,9 @@ Useful link discussing deplyoying models to prod: https://www.quora.com/How-do-y
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Results in...
-![anger](images/anger.gif)
+![anger](images/anger.jpg)
 
-* Significant deployment delays
+* Deployment delays
 * Compromises on model accuracy to release it faster
 
 [NEXT]
@@ -739,7 +739,6 @@ Many libraries/frameworks are built on top of NumPy.
 * multi-dimensional array objects
 * routines for fast operations on arrays
   - mathematical, logical, sorting, selecting
-* statistical operations
 * efficient loading/saving of numerical data to disk
   - including HDF5
 
@@ -845,7 +844,7 @@ No copies are made.
 
 * Data stored contiguously
   - no memory overhead
-  - Cache locality
+  - cache locality
 * No copies for common reshaping/slicing operations
 * Fast logical and mathematical operations
   - executed in heavily optimised compiled code
@@ -1384,28 +1383,6 @@ Numba automatically deduces the types of JIT-compiled functions.
 Uses types of arguments in function's first invocation.
 
 [NEXT]
-### Type Deduction
-
-```python
-print('DEDUCED TYPES BEFORE CALL')
-sum_array.inspect_types()
-print('EXECUTING sum_array()')
-sum_array(np.arange(10000))
-print('DEDUCED TYPES AFTER CALL')
-sum_array.inspect_types()
-```
-<!-- .element: class="large" -->
-
-Output:
-
-```bash
-DEDUCED TYPES BEFORE CALL
-EXECUTING sum_array()
-DEDUCED TYPES AFTER CALL
-sum_array (array(int64, 1d, C),)
-```
-
-[NEXT]
 ### Explicitly Set Types
 
 <pre class="large"><code data-noescape class="python">from numba import int64, jit
@@ -1417,34 +1394,6 @@ def sum_array(arr):
         result += arr[i]
     return result
 </code></pre>
-
-[NEXT]
-### Pure NumPy Implementation
-
-```python
-import numpy as np
-
-def sum_array(arr: np.ndarray) -> float:
-    return arr.sum()
-```
-<!-- .element: class="large" -->
-
-[NEXT]
-### Timing (seconds)
-<div id="numba-benchmark-times2"></div>
-
-_note_
-Timings were produced on a Macbook Pro with the following specs:
-
-Processor: 2.3 GHz Intel Core i5
-Memory: 8 GB 2133 MHz LPDDR3
-
-[NEXT]
-### Speedup Factor
-<div id="numba-benchmark-speedup2"></div>
-
-_(speedup is relative to pure Python implementation)_
-<!-- .element style="font-size: 20px !important;" -->
 
 [NEXT]
 ### Drawbacks
@@ -1527,13 +1476,23 @@ Handles spawning of new Python processes and storing intermittent results for
 you.
 
 [NEXT]
-## Process Each Station Time Series in Parallel
+### Before: Sequential For Loop
+```python
+all_outliers = [
+    compute_outliers(wind_speeds[start:end])
+    for start, end in station_index_ranges
+]
+```
+<!-- .element class="large" -->
+
+[NEXT]
+### After: Process Each Station Time Series in Parallel
 
 <pre><code data-noescape class="python">from multiprocessing import cpu_count
 from joblib import delayed, Parallel
 
 <mark>processor = Parallel(n_jobs=cpu_count())</mark>
-outliers = processor(
+all_outliers = processor(
     delayed(compute_outliers)(wind_speeds[start:end])
     for start, end in station_index_ranges)
 </code></pre>
@@ -1696,7 +1655,7 @@ Workers can be CPU cores or a machine cluster.
 
 Run on single machine with multiple CPU cores **first**.
 
-Run on cluster of machines **only when necessary**.
+Run on cluster of machines **only when necessary** or if you already have the infrastructure.
 
 Either way, code is **almost identical**.
 
@@ -1747,27 +1706,6 @@ Otherwise, you can get **very** far with vectorisation and sprinkling
 
 [NEXT SECTION]
 ## Appendix
-
-[NEXT]
-## Parallelisation
-### What about Memory?
-
-[NEXT]
-Full dataset is > 600GB large.
-
-600GB **exceeds main memory limit** of most machines.
-
-You need to parallelise across **several machines**.
-
-[NEXT]
-`dask.distributed`
-
-[NEXT]
-### How to Use
-
-```bash
-pip3 install dask distributed --upgrade
-```
 
 [NEXT]
 ### References

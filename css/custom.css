@@ -214,6 +214,15 @@ img[alt="research_use_case"] {
     padding: 16px;
 }
 
+img[alt="bad_construction"] {
+    width: 400px;
+    padding: 16px;
+}
+
+img[alt="anger"] {
+    width: 500px;
+}
+
 img[alt="ecosystem"] {
     width: 500px;
 }

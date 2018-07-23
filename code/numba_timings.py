@@ -40,6 +40,8 @@ def sum_array(arr):
     return result
 
 a = np.arange(10000000)
+
+sum_array(a)
         ''',
         number=1,
         repeat=_NUM_TESTS)
