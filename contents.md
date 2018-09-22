@@ -1443,37 +1443,7 @@ Keep computation in **native code** as much possible.
 Use Numba to optimise **unvectorisable** code.
 
 [NEXT]
-Identify opportunities to **parallelise**.
-
-Parallelise using `joblib` to abstract parallisation details from code.
-
-[NEXT]
-`joblib` abstracts the worker backend.
-
-Workers can be CPU cores or a machine cluster.
-
-Run on single machine with multiple CPU cores **first**.
-
-Run on cluster of machines **only when necessary** or if you already have the infrastructure.
-
-Either way, code is **almost identical**.
-
-_note_
-This abstracts the worker backend. Workers can be CPU cores or machines. Either
-way, **the code remains the same**.
-
-[NEXT]
-`numpy`/`numba`/`joblib` alone can yield 1000x speedup.
-
-[NEXT]
-<!-- .slide: class="large-slide" -->
-Don't throw the problem to dev ops.
-
-[NEXT]
-If RAM or disk is your bottleneck, parallelise using a cluster.
-
-Otherwise, you can get **very** far with vectorisation and sprinkling
-`@numba.jit` magic.
+`numpy`/`numba` alone can yield 1000x speedup.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
