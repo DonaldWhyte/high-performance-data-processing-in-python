@@ -251,7 +251,7 @@ Foundation of most scientific computing packages.
 
 Showing how to use NumPy to process numerical data.
 
-Exploring how NumPy leverages vectorisation to dramatically boost performance.
+Exploring how NumPy uses vectorisation to dramatically boost performance.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
@@ -424,25 +424,6 @@ _note_
   - `station_id`
   - `timestamp`
   - `wind_speed_rate`
-
-[NEXT]
-## HDF5
-
-* **H**ierarchical **D**ata **F**ormat
-* Designed to store large amounts of binary data
-* No text parsing required
-* Efficient to load
-
-<div class="source">
-[more information on this format here](https://www.hdfgroup.org/HDF5/)
-</div>
-
-_note_
-HDF5 is an open source file format for storing huge amounts of numerical data.
-
-It’s typically used in research applications (meteorology, astronomy, genomics etc.) to distribute and access very large datasets without using a database.
-
-It lets you store huge amounts of numerical data, and easily manipulate that data from NumPy. For example, you can slice into multi-terabyte datasets stored on disk, as if they were real NumPy arrays. Thousands of datasets can be stored in a single file, categorized and tagged however you want.
 
 [NEXT]
 ### Invariants
@@ -1022,7 +1003,7 @@ station_ids = np.array([123, 123, 124, 245, 999, 999])
 ```python
 is_end_of_series = station_ids[:-1] != station_ids[1:]
 ```
-<!-- .element class="large" -->  
+<!-- .element class="large" -->
 ![station_ranges1](images/station_ranges1.svg)
 
 [NEXT]
@@ -1119,65 +1100,6 @@ Basically for you as a coder, SIMD allows to perform four operations
 reduction is enabled by vectorization and data-parallelism. You don’t even have
 to handle threads and race conditions to gain this parallelism.
 
-[NEXT]
-### SIMD on CPUs
-
-<div class="left-col">
-  <ul>
-    <li>Most modern CPUs support vectorisation.</li>
-    <li>CPU with a 512 bit register can hold 8 64-bit doubles.</li>
-    <li>One instruction for 8 doubles.</li>
-  </ul>
-</div>
-<div class="right-col">
-  <img src="images/cpu.jpg" alt="cpu" />
-</div>
-<div class="clear-col"></div>
-
-[NEXT]
-### Example in C
-#### Adding 10,000,000 Numbers
-
-[NEXT]
-### Non-Vectorised
-
-```c
-void add(float* a, float* b, float* out, int len) {
-    for (int i = 0; i < len; ++i) {
-        out[i] = a[i] + b[i];
-    }
-}
-```
-
-[NEXT]
-### Vectorised
-
-```c
-void add_vectorised(float* a, float* b, float* out, int len) {
-    int i = 0;
-    for (; i < len - 4; i += 4) {
-        out[i] = a[i] + b[i];
-        out[i + 1] = a[i + 1] + b[i + 1];
-        out[i + 2] = a[i + 2] + b[i + 2];
-        out[i + 3] = a[i + 3] + b[i + 3];
-    }
-    for (; i < len; ++i) {
-        out[i] = a[i] + b[i];
-    }
-}
-```
-
-[NEXT]
-Disable optimisations to prevent compiler auto-vectorising.
-
-```bash
-clang -O0 vectorised_timings.c
-```
-
-[NEXT]
-<!-- .slide: class="medium-slide" -->
-**Speedup: 1.4x**
-<div id="vectorise-benchmark"></div>
 
 [NEXT]
 ### Vectorised Definitions
@@ -1282,7 +1204,7 @@ def moving_average(arr: np.ndarray,
 
 _note_
 Glance over this and the next slide. Just state that this one has
-a for loop. We can vectorised and eliminate 
+a for loop. We can vectorised and eliminate
 
 [NEXT]
 **Vectorised `moving_average()`**
@@ -1434,127 +1356,6 @@ Explicitly specified types.
 Use vectorised NumPy code where possible.
 
 Fall back to Numba if code cannot be vectorised.
-
-
-[NEXT SECTION]
-## 6. Parallel Computation
-![parallel_computation](images/parallel_computation.svg)
-
-[NEXT]
-### Recap
-
-1. Moved data to contiguous buffers
-2. Run most computation in compiled/optimised machine instructions
-3. Vectorised computation to take advantage of CPU's SIMD feature
-
-**Current speedup: 98x**
-
-[NEXT]
-### Embarrassingly Parallel
-
-Full dataset is partitioned into different station time series.
-
-Outliers in each station time series are calculated **independently**.
-
-**Split** stations into _N_ groups.
-
-Process each group on a **different CPU core**.
-
-[NEXT]
-![joblib](images/joblib.svg)
-
-Library for building lightweight data pipelines.
-
-[NEXT]
-`joblib.Parallel`
-
-Parallelises Python loops.
-
-Handles spawning of new Python processes and storing intermittent results for
-you.
-
-[NEXT]
-### Before: Sequential For Loop
-```python
-all_outliers = [
-    compute_outliers(wind_speeds[start:end])
-    for start, end in station_index_ranges
-]
-```
-<!-- .element class="large" -->
-
-[NEXT]
-### After: Process Each Station Time Series in Parallel
-
-<pre><code data-noescape class="python">from multiprocessing import cpu_count
-from joblib import delayed, Parallel
-
-<mark>processor = Parallel(n_jobs=cpu_count())</mark>
-all_outliers = processor(
-    delayed(compute_outliers)(wind_speeds[start:end])
-    for start, end in station_index_ranges)
-</code></pre>
-
-[NEXT]
-**Total time:** 2.46 mins ⟶ 1.37 mins
-
-**Speedup:** 98x ⟶ 177x
-
-<div id="parallelised-times"></div>
-
-[NEXT]
-### Problem: Excessive Copies
-
-Worker processes receive copies of input data.
-
-Means all station time series are **copied**.
-
-Adds significant overhead to parallelisation.
-
-_note_
-By default the workers of the joblib pool are real Python processes forked
-using the `multiprocessing` module of the Python standard library. The
-arguments passed as input to the `Parallel` call are serialized and
-reallocated in the memory of each worker process.
-
-[NEXT]
-### Solution: Memmap
-
-_Map in-process memory to data stored on disk._
-
-![memmap](images/memmap.svg)
-
-[NEXT]
-`np.memmap`
-
-Write the measurement data to an memmap'd file.
-
-<pre class="large"><code data-noescape class="python"># Open handle to temporary memmap file.
-data = np.memmap(
-    'wind_speeds',
-    dtype=np.float64,
-    shape=(len(input_file['wind_speed_rate']),),
-    mode='w+')
-
-# Load all wind_speed_rates into memmap file.
-data[:] = input_file['wind_speed_rate'][:]
-
-# Flushes contents to disk.
-del data
-</code></pre>
-
-[NEXT]
-![joblib_memmap](images/joblib_memmap.svg)
-
-_note_
-mmap is great if you have multiple processes accessing data in a read only fashion from the same file, which is common in the kind of server systems I write. mmap allows all those processes to share the same physical memory pages, saving a lot of memory.
-
-[NEXT]
-**Total time:** 1.37 mins ⟶ 0.83 mins
-
-**Speedup:** 177x ⟶ 291x
-
-<div id="parallelised-times-memmap"></div>
 
 
 [NEXT SECTION]
