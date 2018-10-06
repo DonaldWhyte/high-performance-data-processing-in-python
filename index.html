@@ -180,6 +180,8 @@
           y_axis_config.min = 0;
         }
 
+        console.log('Creating chart in container ' + container_id);
+
         return Highcharts.chart(container_id, {
           chart: {
             type: 'column',
@@ -245,19 +247,6 @@
         }
 
         create_bar_chart(
-          'python-vs-c-times',
-          [
-            {name: 'CPython 3.7', color: '#44AA44', data: cpython_times},
-            {name: 'C (gcc)', color: '#FF0000', data: c_times}
-          ],
-          benchmark_sections,
-          time_axis_label,
-          time_axis_formatter,
-          'light',
-          false,
-          false);
-
-        create_bar_chart(
           'python-vs-c-speedups',
           [
             {name: 'C Speedups', color: '#FF0000', data: cpython_vs_c_speedups}
@@ -269,32 +258,6 @@
           false,
           true,
           speedup_label_formatter);
-
-        create_bar_chart(
-          'deep-learning-revenue',
-          [
-            {
-              name: 'Global Revenue',
-              data: [
-                2000,
-                3500,
-                8000,
-                10500,
-                18000,
-                25000,
-                38000,
-                52000,
-                70500,
-                {y: 90000, color: 'red'},
-              ]
-            }
-          ],
-          [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
-          'Revenue ($ millions)',
-          function () { return '$' + this.value; },
-          'light',
-          false,
-          false);
 
         const timing_sections = [
           'station_ranges',
@@ -356,15 +319,6 @@
           true, true, seconds_label_formatter, true);
         create_bar_chart(
           'numba-times', [vectorised_times, numba_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter);
-        create_bar_chart(
-          'parallelised-times', [numba_times, parallelised_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter);
-        create_bar_chart(
-          'parallelised-times-memmap',
-          [numba_times, parallelised_times, parallelised_times_memmap],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter);
 
@@ -471,19 +425,6 @@
           false,
           true,
           speedup_label_formatter);
-
-        create_bar_chart(
-          'vectorise-benchmark',
-          [{name: 'timings', color: 'blue', data: [0.023458, 0.015989]}],
-          ['non-vectorised', 'vectorised'],
-          'execution time (secs)',
-          function () { return this.value + 's'; },
-          'dark',
-          false,
-          true,
-          function() {
-            return Highcharts.numberFormat(this.y, 4) + 's';
-          });
 
         const numba_sections = [
             'python',

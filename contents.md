@@ -58,148 +58,35 @@ Wealth of tools for processing/analysing data.
 General-purpose language useful outside of data analysis.
 
 [NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-Great language for **research**.
+<!-- .slide: data-background="images/intro_background.png" class="background" -->
+## Suitable for **Research**
 
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-What about **production?**
+* TODO
+* TODO
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Isolated to Research?
+## Suitable for **Production**
 
-![research_use_case](images/chart.svg)
-![research_use_case](images/research.svg)
-![research_use_case](images/one_off_batch_job.svg)
-
-Large data analysis/processing used to be isolated to research.
-
-One-off batch jobs to produce insight for research and decision making.
-
-_note_
-Data analysis used to only be active in the realm of research. Analysts would
-write one-off jobs that cleaned up data and analysed it. The findings would
-then be included in research papers, presentations to management in firms and so on.
-
-It was very rare that you'd run such heavy data analysis frequently in live
-production systems.
-
-[NEXT]
-<!-- .slide: data-background="images/ml_landscape_dec15.jpg" class="background" -->
-### Things Have Changed
-
-Exponential growth of data.
-
-Need real-time insights into this data.
-
-Machine learning/stats models are running in live production systems.
-
-_note_
-Source: https://insidebigdata.com/2017/02/16/the-exponential-growth-of-data/
+* TODO
+* TODO
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-## Artificial Intelligence
-### Projected Global Revenue
-<div id="deep-learning-revenue"></div>
-
-<div class="source">
-  <p>
-    Source: [Tractica December 2017](https://www.tractica.com/newsroom/press-releases/artificial-intelligence-software-market-to-reach-89-8-billion-in-annual-worldwide-revenue-by-2025/)
-  </p>
-</div>
-
-_note_
-Artificial Intelligence software market projected to reach almost $90 billion
-by 2025.
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-More data to process.
-
-More numerical models being trained for live use.
-
-Models larger and more complex.
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-**Strict time requirements.**
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### The Traditional Process
-
-1. Researcher builds model in their tech of choice
-2. Programmer takes research code and rewrites it in heavily optimised C/C++
-3. Production code is deployed
-4. _Everything works fine_
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-# Success!
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-## The Reality
-![bad_construction](images/bad_construction0.jpg)
-![bad_construction](images/bad_construction1.jpg)
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### The Reality
-1. Researcher builds model that works on their machine
-2. Programmer attempts to rewrite model for production
-3. Programmer can't replicate the researcher's results
-4. Everything spends tons of time figuring out why
-
-_note_
-Useful link discussing deplyoying models to prod: https://www.quora.com/How-do-you-take-a-machine-learning-model-to-production
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Results in...
-![anger](images/anger.jpg)
-
-* Deployment delays
-* Compromises on model accuracy to release it faster
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### A Better Process
-Research and production code is **identical**.
-
-_note_
-A better process is to make the research and production code **identical**.
-They can be configured differently, but the code which pre-processes the data,
-trains the models and executes it in prod should be the same.
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Problem
-Want to use Python.
+## Python's Strengths
+Python suitable for **both use cases**.
 
 Enables researchers to run experiments quickly.
 
-But Pure Python is **slow**.
+Use same code in prod as research.
 
-_note_
-But we like Python because it's easy to use for research.
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+**Pure Python is slow.**
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Python vs. C Performance
-<div id="python-vs-c-times"></div>
-
-<div class="source">
-  <p>
-    Source: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/python3-gcc.html)
-  </p>
-</div>
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Speedup using C
 <div id="python-vs-c-speedups"></div>
 
 <div class="source">
@@ -209,9 +96,21 @@ But we like Python because it's easy to use for research.
 </div>
 
 [NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Solution
-Python's ecosystem for data science.
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+## Bad for Research
+
+TODO
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+## Bad for Production
+
+TODO
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+## Solution
+Python's data processing ecosystem.
 
 [NEXT]
 <!-- .slide: data-background="images/ecosystem.png" -->
@@ -1359,7 +1258,7 @@ Fall back to Numba if code cannot be vectorised.
 
 
 [NEXT SECTION]
-## 7. The Final Timings
+## 6. The Final Timings
 ![final_timings](images/final_timings.svg)
 
 [NEXT]
