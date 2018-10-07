@@ -235,19 +235,26 @@ We leverage **two fundamental behaviours** about stock prices.
 ![reversion_example_aapl](images/reversion_example_aapl_price.svg)
 
 [NEXT]
-### Stock's Profit/Return on a Specific Day
+### Stock's Absolute Daily Return
 
-![equation](images/equation_returns.svg)
-
-where:
+<div>
+Stock's price is:
 
 ![equation](images/equation_stockprice.svg)
+</div> <!-- .element: class="fragment" data-fragment-index="0" -->
+
+<div>
+Stock's absolute daily return (in USD) on day _t_ is:
+
+![equation](images/equation_absolute_returns.svg)
+</div> <!-- .element: class="fragment" data-fragment-index="1" -->
+
 
 _note_
 equation is today's price - yesterday's price / yesterday's price
 
 [NEXT]
-![reversion_example_aapl](images/reversion_example_aapl_return.svg)
+![reversion_example_aapl](images/reversion_example_aapl_abs_return.svg)
 
 [NEXT]
 TODO: return graph with outlier boundary lines
@@ -284,7 +291,7 @@ TODO: what these mean together
 
 
 [NEXT SECTION]
-## 2. The Strategy in Action
+## 2. Pure Python Implementation
 ![python](images/python.svg)
 
 [NEXT]
@@ -343,11 +350,10 @@ Use pricing data we already have to do this.
 TODO
 
 [NEXT]
-![python](images/python.svg)
+<!-- .slide: class="large-slide" -->
+Let's write the strategy in
 
-<br />
-
-Let's write the strategy in **Pure Python**.
+**Pure Python**.
 
 [NEXT]
 ### Running the Code
