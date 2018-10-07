@@ -169,220 +169,122 @@ Exploring how NumPy uses vectorisation to dramatically boost performance.
 
 
 [NEXT SECTION]
-## 1. The Dataset
-![dataset](images/dataset.svg)
+## 1. Let's Make Some Cash
+![upward_trend](images/upward_trend.svg)
 
 [NEXT]
-### Integrated Surface Database (ISD)
-![isd](images/isd.gif)
+![quant](images/quant.jpg)
 
-_note_
-Global database of atmospheric weather data.
-
-This map shows the spatial distribution of Integrated Surface Database
-stations. Data has been collected from 35,000 weather stations scattered across the globe.
-
-Source: https://www.ncdc.noaa.gov/isd
-
-[NEXT]
-## Measurements
-
-<div class="left-col" style="text-center: center;">
-  <p>wind speed and direction</p>
-  <p>temperature</p>
-  <p>sea level pressure</p>
-  <p>sky visibility</p>
-</div>
-<div class="right-col">
-  <img src="images/weather_measurements.svg" alt="weather_measurements" />
-</div>
-<div class="clear-col"></div>
-
-_note_
-Detailed list of fields:
-
-wind speed and direction, wind gust, temperature, dew point, cloud data, sea level pressure, altimeter setting, station pressure, present weather, visibility, precipitation amounts for various time periods, snow depth, and various other elements as observed by each station.
-
-[NEXT]
-## Coverage
-
-<div class="left-col">
-  <img src="images/globe.svg" alt="globe" />
-</div>
-<div class="right-col" style="text-center: left; padding-top: 12px">
-  <p>7 continents</p>
-  <p>35,000 weather stations</p>
-  <p>1901 to now</p>
-  <p>from over 100 data sources</p>
-</div>
-<div class="clear-col"></div>
+TODO
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-**Total Data Volume > 600GB**
+**Prices of 7000+ US stocks.**
 
-_note_
-ISD integrates data from over 100 original data sources, including numerous data formats that were key-entered from paper forms during the 1950s–1970s time frame
-
-[NEXT]
-### Example
-![tabriz_airport](images/tabriz_airport.png)
+**From 1962 to 2017.**
 
 [NEXT]
-| **timestamp**       | **station_id** | **wind_speed_rate** | *...* |
-| ------------------- | -------------- | ------------------- | ----- |
-| 1995-01-06 03:00:00 | 407060         | 50.0                | ...   |
-| 1995-01-06 06:00:00 | 407060         | 70.0                | ...   |
-| 1995-01-06 09:00:00 | 407060         | null                | ...   |
-| 1995-01-06 12:00:00 | 407060         | 60.0                | ...   |
-| 1995-01-06 16:00:00 | 407060         | 20.0                | ...   |
+<!-- .slide: class="medium-slide" -->
+Collection of **CSV** files.
 
-_note_
-Wind speed rate = the rate of horizontal travel of air past a fixed point.
-
-UNITS: meters per second
-SCALING FACTOR: 10
-MISSING VALUE: -9999
-
-http://www.polmontweather.co.uk/windspd.htm
+<img src="images/daily_price_list.svg" alt="daily_price_files" />
 
 [NEXT]
-### Tabriz Wind Speed Rate
-### Over Two Days
+`aapl.us.txt`
 
-![tabriz_wind_speed_rate](images/tabriz_wind_speed_rate.png)
-
-(2011-12-29 to 2011-12-31)
-<!-- .element class="source" -->
+![price_csv](images/price_csv.png)
 
 [NEXT]
-# Research Goal
-Use IDS data to detect extreme weather events that happen anywhere on the planet.
+![aapl_price_graph](images/aapl_price_graph.svg)
 
 [NEXT]
-## Initial Goal
-### Detecting hurricanes
+<!-- .slide: class="large-slide" -->
+## Total Dataset Size
 
-![hurricanes](images/hurricanes.jpg)
+Over 6,000,000 rows.
+
+1 gigabyte.
+
 
 [NEXT]
-### ISD-Lite Dataset
+# Goal
+Build an automated program for TODO.
 
-Let's test our approach on a smaller dataset.
+[NEXT]
+## How?
+We leverage **two fundamental behaviours** about stock prices.
 
-|                 |                          |
-| --------------- | ------------------------ |
-|**Dates**        | 1991-01-01 to 2011-12-31 |
-|**Measurement**  | Wind Speed Rate          |
-|**Stations**     | ~6000                    |
-|**Rows**         | ~400,000,000             |
 
-_note_
-Total stations: 5,700
-Total rows: 391,908,527
+[NEXT]
+## 1. Prices Revert to the Mean
+
+[NEXT]
+![mean_reversion](images/mean_reversion.png)
+
+[NEXT]
+![reversion_example_aapl_price](images/reversion_example_aapl_price.svg)
+
+[NEXT]
+![reversion_example_aapl_return](images/reversion_example_aapl_return.svg)
+
+`return = price_today - price_yesterday`
+
+^--- highlight this better
+
+[NEXT]
+TODO: return graph with outlier boundary lines
+
+[NEXT]
+TODO: return graph with first outlier highlighted (buy)
+
+[NEXT]
+TODO: return graph with sell point highlighted
+
+[NEXT]
+TODO: return graph with second outlier highlighted (sell)
+
+[NEXT]
+TODO: return graph with second outlier highlighted (buy back)
+
+[NEXT]
+show total profit made
+
+
+[NEXT]
+## 2. Stocks are Correlated
+
+[NEXT]
+TODO: positively correlated stock graph
+![positive_corr_prices](images/positive_corr_prices.svg)
+
+[NEXT]
+TODO: negatively correlated stock graph
+![negative_corr_prices](images/negative_corr_prices.svg)
+
+[NEXT]
+TODO: what these mean together
 
 
 [NEXT SECTION]
-## 2. Pure Python
+## 2. The Strategy
 ![python](images/python.svg)
 
 [NEXT]
-How do we detect hurricanes?
-
-Finding data points with unusually low/high `wind_speed_rate` values.
+Choose 3000 stocks to trade.
 
 [NEXT]
-### Detecting Outliers
-![outlier_detection](images/outlier_detection.png)
+Every day before the stock market opens:
 
-[NEXT]
-### Detecting Outliers
-
-At each point `i` in the time series:
-
-1. Take values in time series between points `i - 30` and `i`
-2. Calculate mean and standard deviation
-3. Value at `i` is an outlier if it's:
-  - more than **6 standard deviations** away from the mean
-
-[NEXT]
-![moving_mean_and_std](images/moving_mean_and_std.png)
+1. calculate each stock's daily returns for each day over last yea
+  - 3000 * 252 matrix
+2. TODO
+3. calculate correlation matrix
 
 _note_
-1. Split full dataset into separate station time series
-2. For each weather station time series, detect outliers by:
-  1. calculate moving mean and stdev at each point
-  2. check if a point is > 6 stdevs away from its moving mean value
-  3. if so, mark point as outlier
-3. generate CSV containing all outliers in each station's data
+TODO: animate this as per Grig's advice
 
 [NEXT]
-### The Input
 
-**HDF5** file containing three columns:
-  - `station_id`
-  - `timestamp`
-  - `wind_speed_rate`
-
-[NEXT]
-### Invariants
-
-Rows sorted by `(station_id, timestamp)`.
-
-Each station's rows are **grouped together**.
-
-Ordered by time.
-
-[NEXT]
-### Problem: Null Values
-<table>
-  <tr>
-    <th>timestamp</th>
-    <th>station_id</th>
-    <th>wind_speed_rate</th>
-  </tr>
-  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
-  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr class="bad-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>null</td></tr>
-  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
-</table>
-
-[NEXT]
-### Solution: Fill Forward
-<table>
-  <tr>
-    <th>timestamp</th>
-    <th>station_id</th>
-    <th>wind_speed_rate</th>
-  </tr>
-  <tr><td>1995-01-06 03:00:00</td><td>407060</td><td>50.0</td></tr>
-  <tr><td>1995-01-06 06:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr class="good-row"><td>1995-01-06 09:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 12:00:00</td><td>407060</td><td>70.0</td></tr>
-  <tr><td>1995-01-06 17:00:00</td><td>407060</td><td>20.0</td></tr>
-</table>
-
-[NEXT]
-## The Code
-
-Source file on GitHub: [find_outliers_purepython.py](https://github.com/DonaldWhyte/high-performance-data-processing-in-python/blob/master/code/find_outliers_purepython.py)
-</div>
-
-[NEXT]
-![complete_process](images/complete_process.svg)
-
-[NEXT]
-### Code Breakdown
-
-|                  |                                                           |
-| ---------------- | --------------------------------------------------------- |
-| `station_ranges` | _**partition full dataset into per-station time series**_ |
-| `fill_forward`   | fill in missing data with previous values                 |
-| `moving_average` | computing moving average at every time point              |
-| `moving_std`     | computing moving stdev at every time point                |
-| `find_outliers`  | get indices of outliers using deviance from moving avg    |
-<!-- .element class="medium-table-text" -->
 
 [NEXT]
 ### Running the Code
@@ -472,69 +374,6 @@ It would take **27 days**.
 <!-- .slide: class="large-slide" -->
 What went wrong?
 
-[NEXT]
-### Profiling the Code
-
-Use `cProfile` to find out which steps were the performance bottlenecks.
-
-<pre class="large"><code data-noescape class="python"><mark>&gt; python3 -m cProfile -o profile_output \</mark>
-     find_outliers_purepy.py \
-     --input isdlite.hdf5 \
-     --output outliers.csv \
-     --measurement wind_speed_rate
-</code></pre>
-
-[NEXT]
-### Visualising Performance Bottlenecks
-
-`snakeviz` generates visualisations of profiling data.
-
-```bash
-> pip3 install snakeviz
-> snakeviz profile_output
-```
-<!-- .element class="large" -->
-
-[NEXT]
-### Example
-
-Calculating standard deviation of 100 million integers.
-
-```python
-def _main():
-    a = list(range(100000000))
-    _std(a)
-
-def _std(a):
-    mean = _mean(a)
-    squared_differences = _square(_differences(a, mean))
-    sum_of_sq_diffs = _sum(squared_differences)
-    return math.sqrt(sum_of_sq_diffs / len(a) - 1)
-
-def _mean(a):
-    return _sum(a) / len(a)
-
-def _differences(a, mean):
-    return [x - mean for x in a]
-
-def _square(a):
-    return [x * x for x in a]
-
-def _sum(a):
-    s = 0
-    for x in a:
-        s += x
-    return s
-
-def _divide(a, d):
-    return [x / d for x in a]
-```
-<!-- .slide: class="small" -->
-
-[NEXT]
-### Snakeviz Output
-
-![snakeviz](images/snakeviz.png)
 
 [NEXT]
 ## Finding Outliers
