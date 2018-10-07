@@ -270,7 +270,7 @@
           'fasta'
         ];
         const cpython_times = [3.52, 15.57, 21.71, 79.61, 92.78, 61.81];
-        const c_times = [ 1.75, 1.5, 1.75, 5.07, 2.54, 1.32 ];
+        const c_times = [1.75, 1.5, 1.75, 5.07, 2.54, 1.32];
         const cpython_vs_c_speedups = [];
         for (var i in cpython_times) {
           cpython_vs_c_speedups.push(cpython_times[i] / c_times[i]);
@@ -317,11 +317,16 @@
         create_bar_chart(
           'numpy-times', [pure_python_times, numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter, true);
+          true, true, seconds_label_formatter);
         create_bar_chart(
-          'numba-times', [vectorised_times, numba_times],
+          'numpy-times-unvectorisable-highlighted', [pure_python_times, numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter);
+        create_bar_chart(
+          'numba-times', [numpy_times, numba_times],
+          timing_sections, time_axis_label, time_axis_formatter, 'dark',
+          true, true, seconds_label_formatter);
+
 
         const total_time_sections = [
           'Pure Python',
@@ -438,6 +443,19 @@
           false,
           true,
           speedup_label_formatter);
+
+        create_bar_chart(
+          'vectorise-benchmark',
+          [{name: 'timings', color: 'blue', data: [0.023458, 0.015989]}],
+          ['non-vectorised', 'vectorised'],
+          'execution time (secs)',
+          function () { return this.value + 's'; },
+          'dark',
+          false,
+          true,
+          function() {
+            return Highcharts.numberFormat(this.y, 4) + 's';
+          });
       });
     </script>
 

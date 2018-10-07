@@ -8,7 +8,7 @@
 </p>
 
 <div id="logo-notice">
-  <img src="images/pycon_russia.png" alt="pycon_russia" />
+  <img src="images/pycon.png" alt="pycon_russia" />
 </div>
 
 [NEXT]
@@ -217,7 +217,9 @@ Over 6,000,000 rows.
 
 [NEXT]
 ## Goal
-Build an automated program for TODO.
+Build an program that generates lists of trades to make.
+
+One trade list **every day!**
 
 [NEXT]
 ## How?
@@ -311,7 +313,7 @@ This is our **trading universe**. We only ever trade these stocks.
 2. calculate correlation between each stock's returns <!-- .element: class="fragment" data-fragment-index="2" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="fragment" data-fragment-index="3" -->
 4. buy/sell decided stocks <!-- .element: class="fragment" data-fragment-index="4" -->
-5. keep stocks for one day, then get rid of them <!-- .element: class="fragment" data-fragment-index="5" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="fragment" data-fragment-index="5" -->
 
 _note_
 TODO: cross out + grey out other lines
@@ -390,11 +392,6 @@ TODO: why this is bad for research
 <!-- .slide: class="large-slide" -->
 What went wrong?
 
-
-[NEXT]
-## Trading Simulation
-### Execution Time Breakdown
-
 [NEXT]
 <span class="highlighted">Three steps</span> are computationally heavy:
 
@@ -403,27 +400,28 @@ What went wrong?
 2. <span class="highlighted">calculate correlation between each stock's returns</span>
 3. <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
 4. buy/sell decided stocks
-5. keep stocks for one day, then get rid of them
+5. wait until tomorrow, then get rid of stocks bought/borrowed
 
 [NEXT]
 ### Computationally Heavy Steps
 
-1. Returns:
-  - <span class="highlighted">calculate each stock's daily returns for the past year</span>
-2. Correlation:
-  - <span class="highlighted">calculate correlation between each stock's returns</span>
-3. Decision:
-  - <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
+Every day, these steps are run:
+
+|                 |                                                        |
+| --------------- | ------------------------------------------------------ |
+| **Returns**     | calculate each stock's daily returns for the past year |
+| **Correlation** | calculate correlation between each stock's returns     |
+| **Decision**    | use correlations and yesterday's returns to decide how much to buy/sell of each stock |
 
 [NEXT]
 ### How Much Computation is Required?
 
 [NEXT]
-| Step        | \# Operations Required |
-| ----------- | ---------------------- |
-| Returns     | TODO |
-| Correlation | TODO |
-| Decision    | TODO |
+| Step            | \# Operations Required |
+| --------------- | ---------------------- |
+| **Returns**     | TODO |
+| **Correlation** | TODO |
+| **Decision**    | TODO |
 
 <div class="source">
   <p>
@@ -432,6 +430,10 @@ What went wrong?
     assignment, add, subtract, multiply, divide or comparison
   </p>
 </div>
+
+[NEXT]
+## Trading Simulation
+### Execution Time Breakdown
 
 [NEXT]
 **Total time:** 4 hours (14530 secs)
@@ -743,93 +745,25 @@ Allows us to apply smaller arrays to larger arrays.
 ![broadcasting](images/broadcasting_2d_1.svg)
 
 [NEXT]
-### Using NumPy for Outlier Detection
+### Using NumPy for Trading Simulation
 
 [NEXT]
 ### Recap
 
-|                   |                                                         |
-| ----------------- | ------------------------------------------------------- |
-| `station_ranges`  | partition full dataset into per-station time series     |
-| `fill_forward`    | fill in missing data with previous values               |
-| `moving_average`  | computing moving average at every time point            |
-| `moving_std`      | computing moving stdev at every time point              |
-| `find_outliers`   | get indices of outliers using deviance from moving avg |
-<!-- .element class="medium-table-text" -->
+|                 |                                                        |
+| --------------- | ------------------------------------------------------ |
+| **Returns**     | calculate each stock's daily returns for the past year |
+| **Correlation** | calculate correlation between each stock's returns     |
+| **Decision**    | use correlations and yesterday's returns to decide how much to buy/sell of each stock |
 
 [NEXT]
-![complete_process](images/complete_process_highlighted.svg)
+TODO: focus on returns, how to calculate w/ example
 
 [NEXT]
-`station_ranges()`
-
-```python
-def station_ranges(station_ids: np.ndarray) -> np.ndarray:
-    is_end_of_series = station_ids[:-1] != station_ids[1:]
-    indices_where_stations_change = np.where(
-      is_end_of_series == True)[0] + 1
-    series_starts = np.concatenate((
-        np.array([0]),
-        indices_where_stations_change
-    ))
-    series_ends = np.concatenate((
-        indices_where_stations_change,
-        np.array([len(station_ids) - 1])
-    ))
-    return np.column_stack((series_starts, series_ends))
-```
+TODO: numpy code
 
 [NEXT]
-```python
-station_ids = np.array([123, 123, 124, 245, 999, 999])
-```
-<!-- .element class="large" -->
-![station_ranges0](images/station_ranges0.svg)
-
-[NEXT]
-```python
-is_end_of_series = station_ids[:-1] != station_ids[1:]
-```
-<!-- .element class="large" -->
-![station_ranges1](images/station_ranges1.svg)
-
-[NEXT]
-```python
-indices_where_stations_change = (
-    np.where(is_end_of_series == True)[0] + 1)
-```
-<!-- .element class="large" -->
-![station_ranges2](images/station_ranges2.svg)
-
-[NEXT]
-```python
-series_starts = np.concatenate((
-    [0],
-    indices_where_stations_change
-))
-```
-<!-- .element class="large" -->
-![station_ranges3](images/station_ranges3.svg)
-
-[NEXT]
-```python
-series_ends = np.concatenate((
-    indices_where_stations_change,
-    [len(station_ids) - 1]
-))
-```
-<!-- .element class="large" -->
-![station_ranges4](images/station_ranges4.svg)
-
-[NEXT]
-```python
-np.column_stack((series_starts, series_ends))
-```
-<!-- .element class="large" -->
-![station_ranges5](images/station_ranges5.svg)
-
-[NEXT]
-![station_ranges6](images/station_ranges6.svg)
+We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.
 
 [NEXT]
 **Total time:** 4 hours ⟶ 1.4 hours
@@ -887,6 +821,50 @@ Basically for you as a coder, SIMD allows to perform four operations
 reduction is enabled by vectorization and data-parallelism. You don’t even have
 to handle threads and race conditions to gain this parallelism.
 
+[NEXT]
+### Example in C
+#### Adding 10,000,000 Numbers
+
+[NEXT]
+### Non-Vectorised
+
+```c
+void add(float* a, float* b, float* out, int len) {
+    for (int i = 0; i < len; ++i) {
+        out[i] = a[i] + b[i];
+    }
+}
+```
+
+[NEXT]
+### Vectorised
+
+```c
+void add_vectorised(float* a, float* b, float* out, int len) {
+    int i = 0;
+    for (; i < len - 4; i += 4) {
+        out[i] = a[i] + b[i];
+        out[i + 1] = a[i + 1] + b[i + 1];
+        out[i + 2] = a[i + 2] + b[i + 2];
+        out[i + 3] = a[i + 3] + b[i + 3];
+    }
+    for (; i < len; ++i) {
+        out[i] = a[i] + b[i];
+    }
+}
+```
+
+[NEXT]
+Disable optimisations to prevent compiler auto-vectorising.
+
+```bash
+clang -O0 vectorised_timings.c
+```
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+**Speedup: 1.4x**
+<div id="vectorise-benchmark"></div>
 
 [NEXT]
 ### Vectorised Definitions
@@ -907,110 +885,41 @@ Vectorization describes the absence of any explicit looping, indexing, etc., in 
 * vectorization results in more “Pythonic” code. Without vectorization, our code would be littered with inefficient and difficult to read for loops.
 
 [NEXT]
-### Vectorisation for Outlier Detection
+## Vectorisation for Trading Simulation
 
 [NEXT]
-**Unvectorised `fill_forward()`**
-
-```python
-def fill_forward(arr: np.ndarray):
-    prev_val = arr[0]
-    for i in range(1, len(arr)):
-        if np.isnan(arr[i]):
-            arr[i] = prev_val
-        else:
-            prev_val = arr[i]
-```
-<!-- .element: class="large" -->
+<!-- .slide: class="large-slide" -->
+We already got vectorisation for free.
 
 [NEXT]
-**Vectorised `fill_forward()`**
-
-```python
-def fill_forward(arr: np.ndarray) -> np.ndarray:
-    mask = ~np.isnan(arr)
-    indices = np.arange(len(arr))
-    indices_to_use = np.where(mask, indices, 0)
-    np.maximum.accumulate(
-        indices_to_use,
-        out=indices_to_use)
-    return arr[indices_to_use]
-```
-<!-- .element: class="large" -->
+<!-- .slide: class="large-slide" -->
+Using native NumPy operations often vectorises the code already.
 
 [NEXT]
-```python
-# wind_speed_rate measurements for a single weather station.
-arr = np.array([
-    20, 5, 3, 8, np.nan, np.nan, 6, np.nan, 25, 5
-])
-```
-![vectorised_fill_forward0](images/vectorised_fill_forward0.svg)
+<!-- .slide: class="large-slide" -->
+But not always...
 
 [NEXT]
-```python
-mask = ~np.isnan(wind_speed_rates)
-```
-<!-- .element: class="large" -->
-![vectorised_fill_forward1](images/vectorised_fill_forward1.svg)
+<!-- .slide: class="large-slide" -->
+You might need to rewrite your algorithm.
+
+This is **non-trivial**.
 
 [NEXT]
-```python
-indices = np.arange(len(arr))
-```
-<!-- .element: class="large" -->
-![vectorised_fill_forward2](images/vectorised_fill_forward2.svg)
+<!-- .slide: class="large-slide" -->
+Also...
 
 [NEXT]
-```python
-indices_to_use = np.where(mask, indices, 0)
-```
-<!-- .element: class="large" -->
-![vectorised_fill_forward3](images/vectorised_fill_forward3.svg)
+<!-- .slide: class="large-slide" -->
+Not all algorithms are vectorisable.
 
 [NEXT]
-```python
-np.maximum.accumulate(indices_to_use, out=indices_to_use)
-return wind_speed_rates[indices_to_use]
-```
-<!-- .element: class="large" -->
-![vectorised_fill_forward4](images/vectorised_fill_forward4.svg)
+**The "Decision" step is still very slow.**
 
-[NEXT]
-**Unvectorised `moving_average()`**
-
-```python
-def moving_average(arr: np.ndarray,
-                    n: int) -> np.ndarray:
-    avg = np.zeros(len(arr) - n + 1)
-    for i in range(len(avg)):
-        avg[i] = arr[i:i+n].sum() / n
-    return avg
-```
-<!-- .element: class="large" -->
+<div id="numpy-times-unvectorisable-highlighted"></div>
 
 _note_
-Glance over this and the next slide. Just state that this one has
-a for loop. We can vectorised and eliminate
-
-[NEXT]
-**Vectorised `moving_average()`**
-
-```python
-def moving_average(arr: np.ndarray,
-                    n: int) -> np.ndarray:
-    ret = np.cumsum(arr, dtype=float)
-    ret[n:] = ret[n:] - ret[:-n]
-    return ret[n - 1:] / n
-```
-<!-- .element: class="large" -->
-
-[NEXT]
-**Total time:** 1.4 hours ⟶ 48 mins
-
-**Speedup:** 2.85x ⟶ 5x
-
-<div id="vectorised-times"></div>
+TODO: highlight the Decision/unvectorisable section
 
 
 [NEXT SECTION]
@@ -1119,17 +1028,10 @@ Numba FAQ lists many of the drawbacks:
 https://numba.pydata.org/numba-doc/dev/user/faq.html
 
 [NEXT]
-### Using Numba for Outlier Detection
+### Using Numba for Trading Simulation
 Added `@jit(nopython=True)` to all functions.
 
 Explicitly specified types.
-
-[NEXT]
-**Total time:** 48 mins ⟶ 2.46 mins
-
-**Speedup:** 5x ⟶ 98x
-
-<div id="numba-times-log"></div>
 
 [NEXT]
 **Total time:** 48 mins ⟶ 2.46 mins
@@ -1150,22 +1052,15 @@ Fall back to Numba if code cannot be vectorised.
 ![final_timings](images/final_timings.svg)
 
 [NEXT]
-## Current Timings
+## Timing Summary
 <div id="total-times"></div>
 
 [NEXT]
-## Current Speedups
+## Speedup Summary
 <div id="total-speedups"></div>
 
 [NEXT]
-### Main Bottleneck
-Computing moving standard deviation.
-<div id="parallel-memmap-times2"></div>
-
-[NEXT]
-### Vectorised Rolling STD
-**Speedup:** 10x
-<div id="numba-moving-std-times"></div>
+TODO: add any extra optimisaitons here
 
 [NEXT]
 ### Final Speedup
@@ -1174,19 +1069,12 @@ Computing moving standard deviation.
 
 [NEXT]
 ## The Ultimate Goal
-Use IDS data to detect extreme weather events that happen anywhere on the planet.
+TODO
 
 [NEXT]
 ### Detecting Outliers in the Full Dataset
 
-All 8 measurements.
-
-All 35,000 weather stations.
-
-From 1901 to now.
-
-_note_
-What if we ran the same outlier detection code on the full dataset?
+TODO: scale
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -1228,6 +1116,9 @@ Keep computation in **native code** as much possible.
 **Vectorise** using NumPy where possible.
 
 Use Numba to optimise **unvectorisable** code.
+
+[NEXT]
+TODO: brief mention of parallelism, but mention that...
 
 [NEXT]
 `numpy`/`numba` alone can yield 1000x speedup.
