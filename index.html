@@ -14,15 +14,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <!-- HACK: I've imported MathJAX and manually tell it to re-render all
-         equations after the external markdown slides have loaded (see script
-         at bottom of this HTML file.
-         reveal.js support for MathJAX does not appear to extend to *external*
-         markdown files, so I needed to trigger the re-render when external
-         files are loaded.
-    -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/white.css" id="theme">
     <!--<link rel="stylesheet" href="css/print/pdf.css">-->
@@ -77,12 +68,6 @@
         center: true,
         transition: 'none', // none/fade/slide/convex/concave/zoom
 
-        // See http://docs.mathjax.org/en/latest/config-files.html
-        math: {
-            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
-            config: 'TeX-AMS_HTML-full'
-        },
-
         // Optional reveal.js plugins
         dependencies: [
           { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -96,19 +81,8 @@
             condition: function() {
               return !!document.querySelector('[data-external]');
             }
-          },
-          // MathJax
-          {
-            src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/math/math.js',
-            async: true
           }
         ]
-      });
-
-      // Force a re-render after slides have loaded to ensure all math
-      // equations are properly rendered.
-      Reveal.addEventListener('ready', function(event) {
-        MathJax.Hub.Rerender();
       });
 
       // FUNCTIONS
@@ -301,12 +275,12 @@
         };
         const numpy_times = {
           name: 'NumPy',
-          color: 'red',
+          color: 'blue',
           data: [3.919, 501.64, 1214.92]
         };
         const numba_times = {
           name: 'NumPy + Numba',
-          color: 'black',
+          color: 'purple',
           data: [3.919, 10.7664, 2.6358]
         };
 
@@ -318,10 +292,13 @@
           'numpy-times', [pure_python_times, numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter);
+
+        numpy_times.data[2] = {y: numpy_times.data[2], color: 'red'};
         create_bar_chart(
-          'numpy-times-unvectorisable-highlighted', [pure_python_times, numpy_times],
+          'numpy-times-unvectorisable-highlighted', [numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter);
+          false, true, seconds_label_formatter);
+
         create_bar_chart(
           'numba-times', [numpy_times, numba_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',

@@ -8,7 +8,7 @@
 </p>
 
 <div id="logo-notice">
-  <img src="images/pycon.png" alt="pycon_russia" />
+  <img src="images/moscow_python_confpp.png" alt="moscow_python_confpp" />
 </div>
 
 [NEXT]
@@ -156,8 +156,8 @@ Exploring how NumPy uses vectorisation to dramatically boost performance.
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ### Outline
 
-1. Analyse a large weather dataset
-2. Process dataset in **pure Python**
+1. Build auto trading strategy using stock price data
+2. Process the pricing data in **pure Python**
 3. Speed up processing using **NumPy** and vectorisation
 4. Speed up processing even more using **Numba**
 
@@ -165,7 +165,7 @@ Exploring how NumPy uses vectorisation to dramatically boost performance.
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
 ## Final Optimised Solution
 
-1145 times faster than pure Python.
+TIME times faster than pure Python.
 
 
 [NEXT SECTION]
@@ -217,14 +217,13 @@ Over 6,000,000 rows.
 
 [NEXT]
 ## Goal
-Build an program that generates lists of trades to make.
+Build an program that generates **lists of trades** to make.
 
 One trade list **every day!**
 
 [NEXT]
 ## How?
 We leverage **two fundamental behaviours** about stock prices.
-
 
 [NEXT]
 ## 1. Prices Revert to the Mean
@@ -335,7 +334,7 @@ Use pricing data we already have to do this.
 
 |                |                    |
 | -------------- | ------------------ |
-| **Start Date** | 2nd January 2000   |
+| **Start Date** | 2nd January 1990   |
 | **End Date**   | 10th November 2017 |
 
 [NEXT]
@@ -381,7 +380,7 @@ Let's write the strategy in **Pure Python**.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-# Time Taken: 4 Hours
+# Time Taken: TIME Hours
 
 ![waiting_skeleton](images/waiting_skeleton.jpg)
 
@@ -417,11 +416,11 @@ Every day, these steps are run:
 ### How Much Computation is Required?
 
 [NEXT]
-| Step            | \# Operations Required |
-| --------------- | ---------------------- |
-| **Returns**     | TODO |
-| **Correlation** | TODO |
-| **Decision**    | TODO |
+| Step            | **Per Day** | **Full Simulation** |
+| --------------- | ----------- | ------------------- |
+| **Returns**     | TIME        | TIME                |
+| **Correlation** | TIME        | TIME                |
+| **Decision**    | TIME        | TIME                |
 
 <div class="source">
   <p>
@@ -436,7 +435,7 @@ Every day, these steps are run:
 ### Execution Time Breakdown
 
 [NEXT]
-**Total time:** 4 hours (14530 secs)
+**Total time:** TIME hours (TIME secs)
 
 <div id="purepython-times"></div>
 
@@ -766,9 +765,9 @@ TODO: numpy code
 We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.
 
 [NEXT]
-**Total time:** 4 hours ⟶ 1.4 hours
+**Total time:** TIME hours ⟶ TIME hours
 
-**Speedup:** 2.85x
+**Speedup:** TIMEx
 
 <div id="numpy-times"></div>
 
@@ -918,9 +917,6 @@ Not all algorithms are vectorisable.
 
 <div id="numpy-times-unvectorisable-highlighted"></div>
 
-_note_
-TODO: highlight the Decision/unvectorisable section
-
 
 [NEXT SECTION]
 ## 5. Numba
@@ -1034,9 +1030,9 @@ Added `@jit(nopython=True)` to all functions.
 Explicitly specified types.
 
 [NEXT]
-**Total time:** 48 mins ⟶ 2.46 mins
+**Total time:** TIME mins ⟶ TIME mins
 
-**Speedup:** 5x ⟶ 98x
+**Speedup:** TIMEx ⟶ TIMEx
 
 <div id="numba-times"></div>
 
@@ -1060,7 +1056,7 @@ Fall back to Numba if code cannot be vectorised.
 <div id="total-speedups"></div>
 
 [NEXT]
-TODO: add any extra optimisaitons here
+TODO: add any extra optimisations here
 
 [NEXT]
 ### Final Speedup
