@@ -114,6 +114,7 @@ code {
     line-height: 18px;
 }
 
+
 .small-table-text td, .small-table-text th {
     font-size: 20px;
 }
@@ -170,7 +171,15 @@ code {
 }
 
 .highlighted {
-    background-color: #888;
+    color: red;
+    font-weight: bold !important;
+    font-style: italic !important;
+    background-color: #ddd;
+}
+
+code .highlighted {
+    border: 5px solid black;
+    padding: 8px;
 }
 
 .reference {
@@ -251,6 +260,10 @@ img[alt="matplotlib"] {
     padding: 16px;
 }
 
+img[alt="quant"] {
+    width: 500px;
+}
+
 img[alt="daily_prices"] {
     width: 600px;
 }
@@ -263,8 +276,16 @@ img[alt="aapl_price_graph"] {
     width: 800px;
 }
 
+img[alt="equation"] {
+    width: 750px;
+}
+
 img[alt="mean_reversion"] {
     width: 900px;
+}
+
+img[alt="reversion_example_aapl"] {
+    width: 720px;
 }
 
 img[alt="python_slow_1"] {

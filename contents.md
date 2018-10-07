@@ -173,9 +173,18 @@ Exploring how NumPy uses vectorisation to dramatically boost performance.
 ![upward_trend](images/upward_trend.svg)
 
 [NEXT]
-![quant](images/quant.jpg)
+<div class="left-col" style="text-center: left">
+  <br />
+  <p>Use our programmer skills to make money...</p>
+  <p>...by building an <strong>automated stock trading strategy!</strong></p>
+</div>
+<div class="right-col">
+  ![quant](images/quant.jpg)
+</div>
+<div class="clear-col"></div>
 
-TODO
+[NEXT]
+# The Data
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -207,7 +216,7 @@ Over 6,000,000 rows.
 
 
 [NEXT]
-# Goal
+## Goal
 Build an automated program for TODO.
 
 [NEXT]
@@ -222,14 +231,22 @@ We leverage **two fundamental behaviours** about stock prices.
 ![mean_reversion](images/mean_reversion.png)
 
 [NEXT]
-![reversion_example_aapl_price](images/reversion_example_aapl_price.svg)
+![reversion_example_aapl](images/reversion_example_aapl_price.svg)
 
 [NEXT]
-![reversion_example_aapl_return](images/reversion_example_aapl_return.svg)
+### Stock's Profit/Return on a Specific Day
 
-`return = price_today - price_yesterday`
+![equation](images/equation_returns.svg)
 
-^--- highlight this better
+where:
+
+![equation](images/equation_stockprice.svg)
+
+_note_
+equation is today's price - yesterday's price / yesterday's price
+
+[NEXT]
+![reversion_example_aapl](images/reversion_example_aapl_return.svg)
 
 [NEXT]
 TODO: return graph with outlier boundary lines
@@ -266,78 +283,95 @@ TODO: what these mean together
 
 
 [NEXT SECTION]
-## 2. The Strategy
+## 2. The Strategy in Action
 ![python](images/python.svg)
 
 [NEXT]
-Choose 3000 stocks to trade.
+### Short Term Strategy
+
+Whenever we buy or borrow a stock...
+
+...we only keep it for **one day**!
 
 [NEXT]
-Every day before the stock market opens:
+### Trading Universe
 
-1. calculate each stock's daily returns for each day over last yea
-  - 3000 * 252 matrix
-2. TODO
-3. calculate correlation matrix
+Every day, we choose 3000 out of the 7000 stocks to trade.
+
+Pick the 3000 most traded stocks.
+
+This is our **trading universe**. We only ever trade these stocks.
+
+
+[NEXT]
+**Every weekday just before the US stock market closes:**
+
+0. choose 3000 stocks to consider trading <!-- .element: class="fragment" data-fragment-index="0" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="fragment" data-fragment-index="1" -->
+2. calculate correlation between each stock's returns <!-- .element: class="fragment" data-fragment-index="2" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="fragment" data-fragment-index="3" -->
+4. buy/sell decided stocks <!-- .element: class="fragment" data-fragment-index="4" -->
+5. keep stocks for one day, then get rid of them <!-- .element: class="fragment" data-fragment-index="5" -->
 
 _note_
-TODO: animate this as per Grig's advice
+TODO: cross out + grey out other lines
+
+TODO: write text notes on each of these?
 
 [NEXT]
+TODO: refer back to AAPL example here for one day holdings
 
+[NEXT]
+### Simulation
+
+Simulate how much money our trading algo would have made historically.
+
+Use pricing data we already have to do this.
+
+[NEXT]
+### Simulation Date Range
+
+|                |                    |
+| -------------- | ------------------ |
+| **Start Date** | 2nd January 2000   |
+| **End Date**   | 10th November 2017 |
+
+[NEXT]
+### Calculating the Profits
+
+TODO
+
+[NEXT]
+![python](images/python.svg)
+
+<br />
+
+Let's write the strategy in **Pure Python**.
 
 [NEXT]
 ### Running the Code
 
 ```
-> python3 -m find_outliers_purepy \
-    --input isdlite.hdf5 \
-    --output outliers.csv \
-    --measurement wind_speed_rate
-```
-
-```
-Determining range of each station time series
-Found time series for 5183 ranges
-Removing time series that don't have enough data
-Kept 4695 / 5183 station time series
-Computing outliers
-Computed outliers in 14499.84 seconds
-Writing outliers to outliers.csv
+> python3 -m test_strategy_purepython \
+    --stock_price_dir data/stocks \
+    --start_date 2000-01-02
+    --end_date 2017-11-10
 ```
 
 [NEXT]
-### Output Outliers CSV
+## Profit
 
-| **station_id** | **timestsamp**      | **wind_speed_rate** |
-| -------------- | ------------------- | ------------------- |
-| 720346         | 1996-04-25 11:00:00 | 110.0               |
-| 720358         | 1997-01-31 09:00:00 | 40.0                |
-| 997375         | 1993-01-29 15:00:00 | 100.0               |
-| ...            | ...                 | ...                 |
+![pnl](images/pnl.svg)
 
 [NEXT]
-Some detected outliers:
+## Profit
 
-```bash
-997299,2006-09-01 09:00:00,400.0
-997299,2006-09-01 12:00:00,400.0
-```
-
-The affected weather station is:
-```bash
-> grep 997299 stations.csv
-"997299","99999","CHEASAPEAKE BRIDGE","US","VA","","+36.970","-076.120","+0016.0","20050217","20161231"
-```
-
-[NEXT]
-![detected_hurricane](images/detected_hurricane1.png)
-
-[NEXT]
-![detected_hurricane](images/detected_hurricane2.png)
-
-[NEXT]
-![detected_hurricane](images/detected_hurricane3.png)
+|                                |                    |
+| ------------------------------ | ------------------ |
+| **Initial Investment**         | $TODO              |
+| **Value at End of Simulation** | $TODO              |
+| **Total Profit**               | $TODO              |
+| **Return on Investment**       | %TODO              |
 
 [NEXT]
 ### Success!
@@ -345,30 +379,12 @@ The affected weather station is:
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-## Time Taken
-4 hours.
-
-[NEXT]
-## The Ultimate Goal
-Use IDS data to detect extreme weather events that happen anywhere on the planet.
-
-[NEXT]
-### Detecting Outliers in the Full Dataset
-
-All 8 measurements.
-
-All 35,000 weather stations.
-
-From 1901 to now.
-
-_note_
-What if we ran the same outlier detection code on the full dataset?
-
-[NEXT]
-<!-- .slide: class="large-slide" -->
-It would take **27 days**.
+# Time Taken: 4 Hours
 
 ![waiting_skeleton](images/waiting_skeleton.jpg)
+
+[NEXT]
+TODO: why this is bad for research
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -376,18 +392,51 @@ What went wrong?
 
 
 [NEXT]
-## Finding Outliers
+## Trading Simulation
 ### Execution Time Breakdown
+
+[NEXT]
+<span class="highlighted">Three steps</span> are computationally heavy:
+
+0. choose 3000 stocks to consider trading
+1. <span class="highlighted">calculate each stock's daily returns for the past year</span>
+2. <span class="highlighted">calculate correlation between each stock's returns</span>
+3. <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
+4. buy/sell decided stocks
+5. keep stocks for one day, then get rid of them
+
+[NEXT]
+### Computationally Heavy Steps
+
+1. Returns:
+  - <span class="highlighted">calculate each stock's daily returns for the past year</span>
+2. Correlation:
+  - <span class="highlighted">calculate correlation between each stock's returns</span>
+3. Decision:
+  - <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
+
+[NEXT]
+### How Much Computation is Required?
+
+[NEXT]
+| Step        | \# Operations Required |
+| ----------- | ---------------------- |
+| Returns     | TODO |
+| Correlation | TODO |
+| Decision    | TODO |
+
+<div class="source">
+  <p>
+    <strong>operation</strong> is defined as an:
+    <br />
+    assignment, add, subtract, multiply, divide or comparison
+  </p>
+</div>
 
 [NEXT]
 **Total time:** 4 hours (14530 secs)
 
 <div id="purepython-times"></div>
-
-[NEXT]
-**Total time:** 4 hours (14530 secs)
-
-<div id="purepython-times-log"></div>
 
 [NEXT]
 <!-- .slide: class="large-slide" -->

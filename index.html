@@ -14,6 +14,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
+    <!-- HACK: I've imported MathJAX and manually tell it to re-render all
+         equations after the external markdown slides have loaded (see script
+         at bottom of this HTML file.
+         reveal.js support for MathJAX does not appear to extend to *external*
+         markdown files, so I needed to trigger the re-render when external
+         files are loaded.
+    -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/white.css" id="theme">
     <!--<link rel="stylesheet" href="css/print/pdf.css">-->
@@ -68,6 +77,12 @@
         center: true,
         transition: 'none', // none/fade/slide/convex/concave/zoom
 
+        // See http://docs.mathjax.org/en/latest/config-files.html
+        math: {
+            mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
+            config: 'TeX-AMS_HTML-full'
+        },
+
         // Optional reveal.js plugins
         dependencies: [
           { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -81,8 +96,19 @@
             condition: function() {
               return !!document.querySelector('[data-external]');
             }
+          },
+          // MathJax
+          {
+            src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/math/math.js',
+            async: true
           }
         ]
+      });
+
+      // Force a re-render after slides have loaded to ensure all math
+      // equations are properly rendered.
+      Reveal.addEventListener('ready', function(event) {
+        MathJax.Hub.Rerender();
       });
 
       // FUNCTIONS
@@ -211,6 +237,10 @@
         });
       }
 
+      Reveal.addEventListener('fragmentshown', function(event) {
+         document.getElementById("postfragment").style.color="red";
+      });
+
       Reveal.addEventListener('ready', function(event) {
         Highcharts.setOptions({
             lang: {
@@ -260,41 +290,24 @@
           speedup_label_formatter);
 
         const timing_sections = [
-          'station_ranges',
-          'fill_forward',
-          'moving_average',
-          'moving_std',
-          'find_outliers'
+          'returns',
+          'correlation',
+          'decision'
         ];
         const pure_python_times = {
             name: 'Pure Python',
             color: 'green',
-            data: [42.33, 105.82, 188.12, 13912.75, 250.82]
+            data: [42.33, 105.82, 188.12]
         };
         const numpy_times = {
-          name: 'NumPy V1',
+          name: 'NumPy',
           color: 'red',
-          data: [3.919, 501.64, 1214.92, 3303.79, 1.0893]
-        };
-        const vectorised_times = {
-          name: 'NumPy V2',
-          color: 'blue',
-          data: [3.919, 10.7664, 2.6358, 3303.79, 1.0893]
+          data: [3.919, 501.64, 1214.92]
         };
         const numba_times = {
           name: 'NumPy + Numba',
           color: 'black',
-          data: [3.919, 10.7664, 2.6358, 129.7377, 1.0893]
-        };
-        const parallelised_times = {
-          name: 'Parallelised',
-          color: 'green',
-          data: [3.919, 6.01, 1.47, 72.42, 0.61]
-        };
-        const parallelised_times_memmap = {
-          name: 'Parallelised (memmap)',
-          color: 'red',
-          data: [3.919, 3.43, 0.84, 41.33, 0.35]
+          data: [3.919, 10.7664, 2.6358]
         };
 
         create_bar_chart(
@@ -302,19 +315,7 @@
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter);
         create_bar_chart(
-          'purepython-times-log', [pure_python_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter, true);
-        create_bar_chart(
           'numpy-times', [pure_python_times, numpy_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter, true);
-        create_bar_chart(
-          'vectorised-times', [numpy_times, vectorised_times],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          true, true, seconds_label_formatter, true);
-        create_bar_chart(
-          'numba-times-log', [vectorised_times, numba_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter, true);
         create_bar_chart(
@@ -324,11 +325,8 @@
 
         const total_time_sections = [
           'Pure Python',
-          'Numpy V1',
-          'Numpy V2',
-          'Numba',
-          'Parallel',
-          'Parallel (memmap)'
+          'Numpy',
+          'Numba'
         ];
         const original_total_time = sum(pure_python_times.data);
 
@@ -339,10 +337,7 @@
               data: [
                 original_total_time,
                 sum(numpy_times.data),
-                sum(vectorised_times.data),
                 sum(numba_times.data),
-                sum(parallelised_times.data),
-                sum(parallelised_times_memmap.data),
               ]
             }
           ],
@@ -353,10 +348,7 @@
         const total_speedups = [
           original_total_time / original_total_time,
           original_total_time / sum(numpy_times.data),
-          original_total_time / sum(vectorised_times.data),
           original_total_time / sum(numba_times.data),
-          original_total_time / sum(parallelised_times.data),
-          original_total_time / sum(parallelised_times_memmap.data)
         ];
         create_bar_chart(
           'total-speedups',
@@ -364,21 +356,6 @@
           total_time_sections,
           speedup_axis_label, speedup_axis_formatter, 'dark',
           false, true, speedup_label_formatter, false);
-
-        numba_times.color = 'blue';
-        create_bar_chart(
-          'parallel-memmap-times2', [parallelised_times_memmap],
-          timing_sections, time_axis_label, time_axis_formatter, 'dark',
-          false, true, seconds_label_formatter);
-
-        create_bar_chart(
-          'numba-moving-std-times',
-          [{color: 'blue', data: [41.33, {y: 4.1618, color: 'red'}]}],
-          ['non-vectorised', 'vectorised'],
-          time_axis_label,
-          time_axis_formatter,
-          'dark',
-          false, true, seconds_label_formatter);
 
         total_speedups.push({y: 1144.9, color: 'red'});
         total_time_sections.push('Final');
