@@ -51,34 +51,42 @@ https://www.jetbrains.com/research/python-developers-survey-2017/
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-High-level and easy to use.
-
-Wealth of tools for processing/analysing data.
-
-General-purpose language useful outside of data analysis.
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background" -->
 ## Suitable for **Research**
 
-* TODO
-* TODO
+High-level and easy to use.
+
+Doesn't require advanced programming knowledge.
+
+Enables researchers to iterate on ideas quickly.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
 ## Suitable for **Production**
 
-* TODO
-* TODO
+General-purpose language useful outside of data analysis.
+
+Huge ecosystem of packages for deploying prod systems.
+
+Deployment, logging, profiling and monitoring.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-## Python's Strengths
+## Python's Strength
 Python suitable for **both use cases**.
 
 Enables researchers to run experiments quickly.
 
-Use same code in prod as research.
+Good tools for building prod-ready systems.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+We want to use the same code
+
+for prod **and** research!
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+But...
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
@@ -97,19 +105,19 @@ Use same code in prod as research.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-## Bad for Research
+# Bad for Research
 
-TODO
-
-[NEXT]
-<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-## Bad for Production
-
-TODO
+Very slow experimentation cycles.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
-## Solution
+# Bad for Production
+
+Cannot run time-sensitive data processing or computational tasks.
+
+[NEXT]
+<!-- .slide: data-background="images/intro_background.png" class="background large-slide" -->
+# Solution
 Python's data processing ecosystem.
 
 [NEXT]
@@ -120,7 +128,7 @@ Python's data processing ecosystem.
 
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### NumPy
+## NumPy
 
 <div class="left-col">
   <ul>
@@ -152,12 +160,14 @@ Showing how to use NumPy to process numerical data.
 
 Exploring how NumPy uses vectorisation to dramatically boost performance.
 
+While still keeping Python productive.
+
 [NEXT]
 <!-- .slide: data-background="images/intro_background.png" class="background" -->
-### Outline
+## Outline
 
-1. Build auto trading strategy using stock price data
-2. Process the pricing data in **pure Python**
+1. Build algo trading strategy using stock price data
+2. Process stock price data in **pure Python**
 3. Speed up processing using **NumPy** and vectorisation
 4. Speed up processing even more using **Numba**
 
