@@ -194,6 +194,20 @@ code .highlighted {
     font-size: 28px !important;
 }
 
+li.hidden {
+    color: white !important;
+}
+
+li.focus {
+    color: black;
+    font-weight: bold;
+}
+
+li.crossed {
+    color: #aaa;
+    text-decoration: line-through;
+}
+
 /* For highlighting specific lines in code formatted using hljs */
 code mark {
     display: inline-block;

@@ -320,21 +320,75 @@ Pick the 3000 most traded stocks.
 
 This is our **trading universe**. We only ever trade these stocks.
 
+[NEXT]
+Every weekday just before the US stock market closes:
+
+0. choose 3000 stocks to consider trading <!-- .element: class="hidden" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="hidden" -->
+2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
+4. buy/sell decided stocks <!-- .element: class="hidden" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
 
 [NEXT]
-**Every weekday just before the US stock market closes:**
+Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="fragment" data-fragment-index="0" -->
-1. calculate each stock's daily returns for the past year  <!-- .element: class="fragment" data-fragment-index="1" -->
-2. calculate correlation between each stock's returns <!-- .element: class="fragment" data-fragment-index="2" -->
-3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="fragment" data-fragment-index="3" -->
-4. buy/sell decided stocks <!-- .element: class="fragment" data-fragment-index="4" -->
-5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="fragment" data-fragment-index="5" -->
+0. choose 3000 stocks to consider trading <!-- .element: class="focus" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="hidden" -->
+2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
+4. buy/sell decided stocks <!-- .element: class="hidden" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
 
-_note_
-TODO: cross out + grey out other lines
+[NEXT]
+Every weekday just before the US stock market closes:
 
-TODO: write text notes on each of these?
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="focus" -->
+2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
+4. buy/sell decided stocks <!-- .element: class="hidden" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
+
+[NEXT]
+Every weekday just before the US stock market closes:
+
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
+2. calculate correlation between each stock's returns <!-- .element: class="focus" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
+4. buy/sell decided stocks <!-- .element: class="hidden" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
+
+[NEXT]
+Every weekday just before the US stock market closes:
+
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
+2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="focus" -->
+4. buy/sell decided stocks <!-- .element: class="hidden" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
+
+[NEXT]
+Every weekday just before the US stock market closes:
+
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
+2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="crossed" -->
+4. buy/sell decided stocks <!-- .element: class="focus" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="hidden" -->
+
+[NEXT]
+Every weekday just before the US stock market closes:
+
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
+2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
+3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="crossed" -->
+4. buy/sell decided stocks <!-- .element: class="crossed" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="focus" -->
 
 [NEXT]
 TODO: refer back to AAPL example here for one day holdings
