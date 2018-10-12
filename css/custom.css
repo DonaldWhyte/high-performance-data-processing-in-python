@@ -302,89 +302,10 @@ img[alt="numpy_add_native"]
     width: 600px;
 }
 
-img[alt="station_ranges_focus"] {
-    width: 475px;
-}
-
-img[alt="station_ranges0"] {
-    width: 400px;
-    margin-top: 32px !important;
-}
-
-img[alt="station_ranges1"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="station_ranges2"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="station_ranges3"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="station_ranges4"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="station_ranges5"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="station_ranges6"] {
-    width: 650px;
-}
-
 img[alt="sisd"],
 img[alt="simd"] {
     width: 500px;
     margin: 32px !important;
-}
-
-img[alt="cpu"] {
-    width: 250px;
-}
-
-img[alt="gpu"] {
-    width: 400px;
-}
-
-img[alt="vectorised_fill_forward0"] {
-    width: 575px;
-    margin-top: 16px !important;
-}
-
-img[alt="vectorised_fill_forward1"] {
-    width: 375px;
-    margin-top: 16px !important;
-}
-
-img[alt="vectorised_fill_forward2"] {
-    width: 375px;
-    margin-top: 16px !important;
-}
-
-img[alt="vectorised_fill_forward3"] {
-    width: 750px;
-    margin-top: 16px !important;
-}
-
-img[alt="vectorised_fill_forward4"] {
-    width: 550px;
-    margin-top: 16px !important;
-}
-
-img[alt="joblib"] {
-    width: 150px;
-}
-
-img[alt="memmap"] {
-    width: 700px;
 }
 
 /* Section Heading Icons */
