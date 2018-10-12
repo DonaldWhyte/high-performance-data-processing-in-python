@@ -439,10 +439,10 @@ Let's write the strategy in
 
 |                                |                    |
 | ------------------------------ | ------------------ |
-| **Initial Investment**         | $TODO              |
-| **Value at End of Simulation** | $TODO              |
-| **Total Profit**               | $TODO              |
-| **Return on Investment**       | %TODO              |
+| **Initial Investment**         | $TIME              |
+| **Value at End of Simulation** | $TIME              |
+| **Total Profit**               | $TIME              |
+| **Return on Investment**       | %TIME              |
 
 [NEXT]
 ### Success!
@@ -472,15 +472,27 @@ What went wrong?
 5. wait until tomorrow, then get rid of stocks bought/borrowed
 
 [NEXT]
+<!-- .slide: class="hidden-table" -->
 ### Computationally Heavy Steps
 
 Every day, these steps are run:
 
-|                 |                                                        |
-| --------------- | ------------------------------------------------------ |
-| **Returns**     | calculate each stock's daily returns for the past year |
-| **Correlation** | calculate correlation between each stock's returns     |
-| **Decision**    | use correlations and yesterday's returns to decide how much to buy/sell of each stock |
+|        |                 |                                                        |
+| ------ | --------------- | ------------------------------------------------------ |
+| **1.** | **Returns**     | calculate each stock's daily returns for the past year |
+| **2.** | **Correlation** | calculate correlation between each stock's returns     |
+| **3.** | **Decision**    | use correlations and yesterday's returns to decide which stocks buy/sell |
+
+[NEXT]
+### Computationally Heavy Steps
+
+Every day, these steps are run:
+
+|        |                 |                                                        |
+| ------ | --------------- | ------------------------------------------------------ |
+| **1.** | **Returns**     | calculate each stock's daily returns for the past year |
+| **2.** | **Correlation** | calculate correlation between each stock's returns     |
+| **3.** | **Decision**    | use correlations and yesterday's returns to decide which stocks buy/sell |
 
 [NEXT]
 ### How Much Computation is Required?
@@ -499,6 +511,12 @@ Every day, these steps are run:
     assignment, add, subtract, multiply, divide or comparison
   </p>
 </div>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+## Total Operations
+
+TIME
 
 [NEXT]
 ## Trading Simulation

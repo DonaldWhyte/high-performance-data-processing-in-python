@@ -208,6 +208,16 @@ li.crossed {
     text-decoration: line-through;
 }
 
+.hidden-table td {
+    color: white;
+    border-bottom-color: black !important;
+}
+
+.hidden-table td strong {
+    color: black;
+    border: black;
+}
+
 /* For highlighting specific lines in code formatted using hljs */
 code mark {
     display: inline-block;
