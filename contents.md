@@ -450,12 +450,28 @@ Let's write the strategy in
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-# Time Taken: TIME Hours
+# Time Taken: 1 Month
 
 ![waiting_skeleton](images/waiting_skeleton.jpg)
 
+_note_
+TIME: fill in total time taken here
+
 [NEXT]
-TODO: why this is bad for research
+<!-- .slide: class="large-slide" -->
+# Bad for Research
+
+**Very slow** to explore different trading strategies.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+# Bad for Production
+
+Cannot run time-sensitive strategies that require real-time computation.
+
+_note_
+TODO: add note here to elaborate on example strategy
+
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -464,12 +480,12 @@ What went wrong?
 [NEXT]
 <span class="highlighted">Three steps</span> are computationally heavy:
 
-0. choose 3000 stocks to consider trading
+0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
 1. <span class="highlighted">calculate each stock's daily returns for the past year</span>
 2. <span class="highlighted">calculate correlation between each stock's returns</span>
 3. <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
-4. buy/sell decided stocks
-5. wait until tomorrow, then get rid of stocks bought/borrowed
+4. buy/sell decided stocks <!-- .element: class="crossed" -->
+5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="crossed" -->
 
 [NEXT]
 <!-- .slide: class="hidden-table" -->

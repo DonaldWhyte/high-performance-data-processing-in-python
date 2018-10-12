@@ -171,10 +171,8 @@ code {
 }
 
 .highlighted {
-    color: red;
+    color: black;
     font-weight: bold !important;
-    font-style: italic !important;
-    background-color: #ddd;
 }
 
 code .highlighted {
