@@ -853,20 +853,42 @@ Allows us to apply smaller arrays to larger arrays.
 [NEXT]
 ### Recap
 
-|                 |                                                        |
-| --------------- | ------------------------------------------------------ |
-| **Returns**     | calculate each stock's daily returns for the past year |
-| **Correlation** | calculate correlation between each stock's returns     |
-| **Decision**    | use correlations and yesterday's returns to decide how much to buy/sell of each stock |
+|        |                 |                                                        |
+| ------ | --------------- | ------------------------------------------------------ |
+| **1.** | **Returns**     | calculate each stock's daily returns for the past year |
+| **2.** | **Correlation** | calculate correlation between each stock's returns     |
+| **3.** | **Decision**    | use correlations and yesterday's returns to decide which stocks buy/sell |
 
 [NEXT]
-TODO: focus on returns, how to calculate w/ example
+<!-- .slide: class="medium-slide" -->
+## The First Step: Returns
+
+TODO: one sentence summary
 
 [NEXT]
-TODO: numpy code
+TODO: recap on how to calculate returns, the equation
+
+[NEXT]
+TODO: stock price matrix (X axis days, Y axis stocks)
+
+[NEXT]
+TODO: returns matrix
+
+[NEXT]
+TODO: highlight specific cell of metrix and show it's calculated
+
+[NEXT]
+TODO: pure python code for this
+
+[NEXT]
+TODO: numpy code for this
 
 [NEXT]
 We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.
+
+[NEXT]
+## Trading Simulation
+### Execution Time Breakdown
 
 [NEXT]
 **Total time:** TIME hours ⟶ TIME hours
@@ -1201,14 +1223,19 @@ Processing large volumes of data or training complex machine learning models.
 Standard Python in prod **isn't viable** for many use cases.
 
 [NEXT]
-Could research in Python then convert the code to a faster language.
+Bad for **research**.
 
-Can cause **more problems** than it solves.
+Very slow experimentation cycles.
 
 [NEXT]
-Use Python for research _and_ production.
+Bad for **production**.
 
-Possible by using Python's large ecosystem of scientific computing packages.
+Cannot run time-sensitive computational tasks.
+
+[NEXT]
+We can still use Python for research _and_ production.
+
+By using Python's large ecosystem of scientific computing packages.
 
 [NEXT]
 Keep computation in **native code** as much possible.
@@ -1218,10 +1245,35 @@ Keep computation in **native code** as much possible.
 Use Numba to optimise **unvectorisable** code.
 
 [NEXT]
-TODO: brief mention of parallelism, but mention that...
+<!-- .slide: class="large-slide" -->
+If this isn't enough...
 
 [NEXT]
-`numpy`/`numba` alone can yield 1000x speedup.
+<!-- .slide: class="large-slide" -->
+Identify opportunities to **parallelise**.
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+Split computation into chunks that are processed in parallel.
+
+Chunks can be processed by different **processes** or **machines**.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Don't throw the problem to dev ops.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Just using `numpy` and `numba`
+
+alone can yield 1000x speedup.
+
+[NEXT]
+If RAM or disk is your bottleneck, parallelise using a cluster.
+
+Otherwise, you can get **very** far with vectorisation and sprinkling
+`@numba.jit` magic.
+
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
