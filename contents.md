@@ -853,6 +853,8 @@ Allows us to apply smaller arrays to larger arrays.
 [NEXT]
 ### Recap
 
+Every day, these steps are run:
+
 |        |                 |                                                        |
 | ------ | --------------- | ------------------------------------------------------ |
 | **1.** | **Returns**     | calculate each stock's daily returns for the past year |
@@ -860,10 +862,9 @@ Allows us to apply smaller arrays to larger arrays.
 | **3.** | **Decision**    | use correlations and yesterday's returns to decide which stocks buy/sell |
 
 [NEXT]
-<!-- .slide: class="medium-slide" -->
-## The First Step: Returns
+### The First Step: Returns
 
-TODO: one sentence summary
+Calculate each stock's daily returns for the past year.
 
 [NEXT]
 ## Calculating Relative Return
@@ -873,47 +874,266 @@ Stock's relative daily return (in USD) on day _t_ is:
 ![equation](images/equation_returns.svg)
 
 [NEXT]
-TODO: relative return example
+## Example
+
+| **Date**   | **AAPL Stock Price** |
+| ---------- | -------------------- |
+| 2017-08-01 | 148.92               |
+| 2017-08-02 | 155.97               | 
+
+<div>
+  **What is AAPL's return at end of 2017-08-02?**
+</div>
+<!-- .element: style="font-size: 46px" class="fragment" data-fragment-index="0" -->
+<div>
+  **Return** = (155.97 - 148.92) / 148.92
+</div>
+<!-- .element: class="fragment" data-fragment-index="1" -->
+<div>
+  **Return** = 0.047
+</div>
+<!-- .element: class="fragment" data-fragment-index="2" -->
+<div>
+  **Return** = 4.7%
+</div>
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Need to calculate return for all
+
+stocks on all days.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+
+<pre class="large"><code data-noescape class="python">returns = {}
+
+for stock in stocks:
+    for date in dates:
+      todays_price = prices[stock, date]
+      yesterdays_price = prices[stock, date - 1day]
+      returns[stock] = (todays_price - yesterdays_price)
+                       / yesterdays_price
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+
+<pre class="large"><code data-noescape class="python"><mark>returns = {}</mark>
+
+for stock in stocks:
+    for date in dates:
+      todays_price = prices[stock, date]
+      yesterdays_price = prices[stock, date - 1day]
+      returns[stock] = (todays_price - yesterdays_price)
+                       / yesterdays_price
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+
+<pre class="large"><code data-noescape class="python">returns = {}
+
+<mark>for stock in stocks:</mark>
+    for date in dates:
+      todays_price = prices[stock, date]
+      yesterdays_price = prices[stock, date - 1day]
+      returns[stock] = (todays_price - yesterdays_price)
+                       / yesterdays_price
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+
+<pre class="large"><code data-noescape class="python">returns = {}
+
+for stock in stocks:
+    <mark>for date in dates:</mark>
+      todays_price = prices[stock, date]
+      yesterdays_price = prices[stock, date - 1day]
+      returns[stock] = (todays_price - yesterdays_price)
+                       / yesterdays_price
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+<pre class="large"><code data-noescape class="python">returns = {}
+
+for stock in stocks:
+    for date in dates:
+      <mark>todays_price = prices[stock, date]</mark>
+      <mark>yesterdays_price = prices[stock, date - 1day]</mark>
+      returns[stock] = (todays_price - yesterdays_price)
+                       / yesterdays_price
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Could use a nested for loop:
+<pre class="large"><code data-noescape class="python">returns = {}
+
+for stock in stocks:
+    for date in dates:
+      todays_price = prices[stock, date]
+      yesterdays_price = prices[stock, date - 1 day]
+      <mark>returns[stock] = (todays_price - yesterdays_price)</mark>
+                       <mark>/ yesterdays_price</mark>
+</code></pre>
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+**Inefficent.**
+
+Lots of copies and slow operations being run in Python code.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+**Using NumPy to compute returns:**
+
+1. pack all stock prices for all dates into NumPy matrix <!-- .element: class="fragment" data-fragment-index="0" -->
+2. perform bulk operations on matrix to keep computation in C <!-- .element: class="fragment" data-fragment-index="1" -->
 
 [NEXT]
 ## Stock Price Matrix
+![numpy_example_price_matrix](images/numpy_example_price_matrix.svg)
 
-TODO: stock price matrix (X axis days, Y axis stocks)
+[NEXT]
+## Stock Price Matrix
+![numpy_example_price_matrix](images/numpy_example_price_matrix_marked.svg)
 
 [NEXT]
 ## Stock Return Matrix
-TODO: returns matrix
+![numpy_example_price_matrix](images/numpy_example_returns_matrix_marked.svg)
 
 [NEXT]
-TODO: highlight specific cell of matrix and show it's calculated
-
-[NEXT}]
+![numpy_example_returns_matrix_detail](images/numpy_example_returns_matrix_detail.svg)
 
 [NEXT]
-TODO: mention nature of pure python code (cumbersome, verbose, etc.)
-
-TODO: lots of for loops
-
-[NEXT]
-TODO: recap 
+<!-- .slide: class="large-slide" -->
+Instead of manually calculating each
+cell one-by-one using Python loops...
 
 [NEXT]
-`np.loadtxt` <!-- .element: class="code-header" -->
-
-```python
-data = np.loadtxt(
-    'aapl.us.txt',
-    skiprows=1,       # skip CSV header  
-    delimiter=',',
-    usecols=(0, 4),   # only keep date and close price
-    converters={
-        0: np.datestr2num,
-        4: np.float64
-    })
-```
-<!-- .element: class="large" -->
+<!-- .slide: class="large-slide" -->
+Use bulk matrix-based operations using NumPy.
 
 [NEXT]
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc1.svg)
+
+[NEXT]
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc2.svg)
+
+[NEXT]
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc3.svg)
+
+[NEXT]
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc4.svg)
+
+[NEXT]
+# The NumPy Code
+
+[NEXT]
+<pre class="large"><code data-noescape class="python"># Construct empty date x symbol price matrix.
+price_matrix = np.zeros(shape=(num_dates_in_sim,
+                               num_stocks))
+
+# ...populate price_matrix using CSV files...
+
+# Calculate returns using matrix operations.
+shifted_prices = np.roll(price_matrix, shift=1, axis=0)
+shifted_prices[:1, :] = np.nan
+returns = (price_matrix - shifted_prices)
+          / shifted_prices  
+</code></pre>
+
+[NEXT]
+<pre class="large"><code data-noescape class="python"># Construct empty date x symbol price matrix.
+<mark>price_matrix = np.zeros(shape=(num_dates_in_sim,
+                               num_stocks))</mark>
+
+# ...populate price_matrix using CSV files...
+
+# Calculate returns using matrix operations.
+shifted_prices = np.roll(price_matrix, shift=1, axis=0)
+shifted_prices[:1, :] = np.nan
+returns = (price_matrix - shifted_prices)
+          / shifted_prices  
+</code></pre>
+
+[NEXT]
+<pre class="large"><code data-noescape class="python"># Construct empty date x symbol price matrix.
+price_matrix = np.zeros(shape=(num_dates_in_sim,
+                               num_stocks))
+
+<mark># ...populate price_matrix using CSV files...</mark>
+
+# Calculate returns using matrix operations.
+shifted_prices = np.roll(price_matrix, shift=1, axis=0)
+shifted_prices[:1, :] = np.nan
+returns = (price_matrix - shifted_prices)
+          / shifted_prices  
+</code></pre>
+
+[NEXT]
+<pre class="large"><code data-noescape class="python"># Construct empty date x symbol price matrix.
+price_matrix = np.zeros(shape=(num_dates_in_sim,
+                               num_stocks))
+
+# ...populate price_matrix using CSV files...
+
+# Calculate returns using matrix operations.
+<mark>shifted_prices = np.roll(price_matrix, shift=1, axis=0)</mark>
+<mark>shifted_prices[:1, :] = np.nan</mark>
+returns = (price_matrix - shifted_prices)
+          / shifted_prices  
+</code></pre>
+
+[NEXT]
+<pre class="large"><code data-noescape class="python"># Construct empty date x symbol price matrix.
+price_matrix = np.zeros(shape=(num_dates_in_sim,
+                               num_stocks))
+
+# ...populate price_matrix using CSV files...
+
+# Calculate returns using matrix operations.
+shifted_prices = np.roll(price_matrix, shift=1, axis=0)
+shifted_prices[:1, :] = np.nan
+<mark>returns = (price_matrix - shifted_prices)</mark>
+<mark>          / shifted_prices</mark>
+</code></pre>
+
+[NEXT]
+## The Result: Return Matrix
+![numpy_example_price_matrix](images/numpy_example_returns_matrix_marked.svg)
+
+[NEXT]
+## Returns Matrix Usafe
+
+Compute the returns matrix once at start of simulation.
+
+Use slices of matrix for each date of sim. (**no copies!**)
+
+Complete returns matrix is sized **7000 x 7000**.
+
+[NEXT]
+## Time to Calculate All Returns
+<div id="numpy-returns-times"></div>
+
+[NEXT]
+## Speedup
+<div id="numpy-returns-speedup"></div>
+
+_note_
+TIME: poplate these grapgs
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
 We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.
 
 [NEXT]

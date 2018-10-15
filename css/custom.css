@@ -89,6 +89,11 @@ code {
     font-size: 55px !important;
 }
 
+.very-large code {
+    font-size: 30px;
+    line-height: 40px;
+}
+
 .large code {
     font-size: 25px;
     line-height: 30px;
@@ -326,6 +331,14 @@ img[alt="numpy_add_loop"],
 img[alt="numpy_add_native"]
 {
     width: 600px;
+}
+
+img[alt="numpy_example_price_matrix"] {
+    width: 800px;
+}
+
+img[alt="numpy_example_returns_matrix_detail"] {
+    width: 1200px;
 }
 
 img[alt="sisd"],

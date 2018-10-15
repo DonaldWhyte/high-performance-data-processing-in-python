@@ -288,6 +288,7 @@
           'purepython-times', [pure_python_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
           true, true, seconds_label_formatter);
+
         create_bar_chart(
           'numpy-times', [pure_python_times, numpy_times],
           timing_sections, time_axis_label, time_axis_formatter, 'dark',
@@ -347,6 +348,38 @@
           total_time_sections,
           speedup_axis_label, speedup_axis_formatter, 'dark',
           false, true, speedup_label_formatter, false);
+
+        just_returns_sections = [timing_sections[0]];
+        pure_python_just_returns_times = JSON.parse(
+            JSON.stringify(pure_python_times));
+        pure_python_just_returns_times.data.length = 1;
+        numpy_just_returns_times = JSON.parse(
+            JSON.stringify(numpy_times));
+        numpy_just_returns_times.data.length = 1;
+        create_bar_chart(
+          'numpy-returns-times',
+          [pure_python_just_returns_times, numpy_just_returns_times],
+          just_returns_sections,
+          time_axis_label, time_axis_formatter, 'dark',
+          true, true, seconds_label_formatter);
+
+        const pure_python_just_returns_speedups = {
+            name: 'Pure Python',
+            color: 'green',
+            data: [1.0]
+        };
+        const numpy_just_returns_speedups = {
+          name: 'NumPy',
+          color: 'blue',
+          data: [pure_python_just_returns_times.data[0] / 
+                 numpy_just_returns_times.data[0]]
+        };
+        create_bar_chart(
+          'numpy-returns-speedup',
+          [pure_python_just_returns_speedups, numpy_just_returns_speedups],
+          just_returns_sections,
+          speedup_axis_label, speedup_axis_formatter, 'dark',
+          true, true, speedup_label_formatter);
 
         create_bar_chart(
           'basic-numpy-benchmark-times',
