@@ -613,7 +613,7 @@ Many libraries/frameworks are built on top of NumPy.
 * routines for fast operations on arrays
   - mathematical, logical, sorting, selecting
 * efficient loading/saving of numerical data to disk
-  - including HDF5
+  - including CSV
 
 [NEXT]
 `numpy.ndarray`
@@ -866,22 +866,52 @@ Allows us to apply smaller arrays to larger arrays.
 TODO: one sentence summary
 
 [NEXT]
-TODO: recap on how to calculate returns, the equation
+## Calculating Relative Return
+
+Stock's relative daily return (in USD) on day _t_ is:
+
+![equation](images/equation_returns.svg)
 
 [NEXT]
+TODO: relative return example
+
+[NEXT]
+## Stock Price Matrix
+
 TODO: stock price matrix (X axis days, Y axis stocks)
 
 [NEXT]
+## Stock Return Matrix
 TODO: returns matrix
 
 [NEXT]
-TODO: highlight specific cell of metrix and show it's calculated
+TODO: highlight specific cell of matrix and show it's calculated
+
+[NEXT}]
 
 [NEXT]
-TODO: pure python code for this
+TODO: mention nature of pure python code (cumbersome, verbose, etc.)
+
+TODO: lots of for loops
 
 [NEXT]
-TODO: numpy code for this
+TODO: recap 
+
+[NEXT]
+`np.loadtxt` <!-- .element: class="code-header" -->
+
+```python
+data = np.loadtxt(
+    'aapl.us.txt',
+    skiprows=1,       # skip CSV header  
+    delimiter=',',
+    usecols=(0, 4),   # only keep date and close price
+    converters={
+        0: np.datestr2num,
+        4: np.float64
+    })
+```
+<!-- .element: class="large" -->
 
 [NEXT]
 We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.

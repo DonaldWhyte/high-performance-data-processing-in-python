@@ -85,6 +85,10 @@ code {
     font-weight: bold !important;
 }
 
+.code-header {
+    font-size: 55px !important;
+}
+
 .large code {
     font-size: 25px;
     line-height: 30px;
