@@ -319,6 +319,10 @@ img[alt="reversion_example_aapl"] {
     width: 900px;
 }
 
+img[alt="price_correlation"] {
+    width: 800px;
+}
+
 img[alt="python_slow_1"] {
     width: 500px;
 }

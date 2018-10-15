@@ -289,12 +289,17 @@ show total profit made
 ## 2. Stocks are Correlated
 
 [NEXT]
-TODO: positively correlated stock graph
-![positive_corr_prices](images/positive_corr_prices.svg)
+### Positive Correlation
+#### Apple Vs. Amazon
+![price_correlation](images/positive_corr_prices.svg)
 
 [NEXT]
-TODO: negatively correlated stock graph
-![negative_corr_prices](images/negative_corr_prices.svg)
+### Negative Correlation
+#### Apple Vs. AngloGold Ashanti
+![price_correlation](images/negative_corr_prices.svg)
+
+_note_
+AngloGold Ashanti is a gold mining company.
 
 [NEXT]
 TODO: what these mean together
@@ -314,16 +319,16 @@ Whenever we buy or borrow a stock...
 [NEXT]
 ### Trading Universe
 
-Every day, we choose 3000 out of the 7000 stocks to trade.
+Every day, we choose 4000 out of the 7000 stocks to trade.
 
-Pick the 3000 most traded stocks.
+Pick the 4000 most traded stocks.
 
 This is our **trading universe**. We only ever trade these stocks.
 
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="hidden" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="hidden" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="hidden" -->
 2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
@@ -333,7 +338,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="focus" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="focus" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="hidden" -->
 2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
@@ -343,7 +348,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="focus" -->
 2. calculate correlation between each stock's returns <!-- .element: class="hidden" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
@@ -353,7 +358,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
 2. calculate correlation between each stock's returns <!-- .element: class="focus" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="hidden" -->
@@ -363,7 +368,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
 2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="focus" -->
@@ -373,7 +378,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
 2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="crossed" -->
@@ -383,7 +388,7 @@ Every weekday just before the US stock market closes:
 [NEXT]
 Every weekday just before the US stock market closes:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. calculate each stock's daily returns for the past year  <!-- .element: class="crossed" -->
 2. calculate correlation between each stock's returns <!-- .element: class="crossed" -->
 3. use correlations and yesterday's returns to decide how much to buy/sell of each stock <!-- .element: class="crossed" -->
@@ -480,7 +485,7 @@ What went wrong?
 [NEXT]
 <span class="highlighted">Three steps</span> are computationally heavy:
 
-0. choose 3000 stocks to consider trading <!-- .element: class="crossed" -->
+0. choose 4000 stocks to consider trading <!-- .element: class="crossed" -->
 1. <span class="highlighted">calculate each stock's daily returns for the past year</span>
 2. <span class="highlighted">calculate correlation between each stock's returns</span>
 3. <span class="highlighted">use correlations and yesterday's returns to decide how much to buy/sell of each stock</span>
