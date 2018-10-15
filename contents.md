@@ -1027,23 +1027,24 @@ Use bulk matrix-based operations using NumPy.
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc1.svg)
 
 [NEXT]
+### Shift Prices Forward One Day
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc2.svg)
 
 [NEXT]
-### Subtract By Day Shifted Price Matrix
-<div style="height: 32px"></div>
-![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc2.svg)
-
-[NEXT]
-### Divide By Day Shifted Price Matrix
+### Subtract 1-Day Shifted Price Matrix
 <div style="height: 32px"></div>
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc3.svg)
+
+[NEXT]
+### Divide By 1-Day Shifted Price Matrix
+<div style="height: 32px"></div>
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc4.svg)
 
 [NEXT]
 ### Output
 ##### A Matrix With Each Stock's Daily Returns
 <div style="height: 32px"></div>
-![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc4.svg)
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc5.svg)
 
 [NEXT]
 ### Output
