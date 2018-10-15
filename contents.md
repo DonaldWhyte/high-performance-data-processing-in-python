@@ -1030,10 +1030,25 @@ Use bulk matrix-based operations using NumPy.
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc2.svg)
 
 [NEXT]
+### Subtract By Day Shifted Price Matrix
+<div style="height: 32px"></div>
+![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc2.svg)
+
+[NEXT]
+### Divide By Day Shifted Price Matrix
+<div style="height: 32px"></div>
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc3.svg)
 
 [NEXT]
+### Output
+##### A Matrix With Each Stock's Daily Returns
+<div style="height: 32px"></div>
 ![numpy_example_returns_matrix_calc](images/numpy_example_returns_matrix_calc4.svg)
+
+[NEXT]
+### Output
+##### A Matrix With Each Stock's Daily Returns
+![numpy_example_returns_matrix](images/numpy_example_returns_matrix.svg)
 
 [NEXT]
 # The NumPy Code
@@ -1109,11 +1124,7 @@ shifted_prices[:1, :] = np.nan
 </code></pre>
 
 [NEXT]
-## The Result: Return Matrix
-![numpy_example_price_matrix](images/numpy_example_returns_matrix_marked.svg)
-
-[NEXT]
-## Returns Matrix Usafe
+## How The Returns Matrix is Used
 
 Compute the returns matrix once at start of simulation.
 
@@ -1122,11 +1133,13 @@ Use slices of matrix for each date of sim. (**no copies!**)
 Complete returns matrix is sized **7000 x 7000**.
 
 [NEXT]
-## Time to Calculate All Returns
+## Timings
+#### Calculating All Returns
 <div id="numpy-returns-times"></div>
 
 [NEXT]
 ## Speedup
+#### Calculating All Returns
 <div id="numpy-returns-speedup"></div>
 
 _note_
