@@ -123,7 +123,6 @@ code {
     line-height: 18px;
 }
 
-
 .small-table-text td, .small-table-text th {
     font-size: 20px;
 }
@@ -149,6 +148,20 @@ code {
 }
 
 .big-emphasis {
+    color: red;
+    font-weight: bold !important;
+}
+
+.large-pnl {
+    font-size: 64px !important;
+}
+
+.profit {
+    color: green;
+    font-weight: bold !important;
+}
+
+.loss {
     color: red;
     font-weight: bold !important;
 }

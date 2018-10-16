@@ -284,7 +284,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Buy:** 1,000 shares at $90 (-$90,000)
 
-**Earned:** —
+**Earned:** <span class="large-pnl">—</span>
 
 ![reversion_example_trading](images/reversion_example_trading2.svg)
 
@@ -292,7 +292,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Sell** 1,000 shares with $2 return (+$92,000)
 
-**Earned:** ($92,000 - $90,000) = $2,000
+**Earned:** ($92,000 - $90,000) = <span class="profit large-pnl">$2,000</span>
 
 ![reversion_example_trading](images/reversion_example_trading3.svg)
 
@@ -300,7 +300,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Buy:** 1,000 shares at $91 (-$91,000)
 
-**Earned:** —
+**Earned:** <span class="large-pnl">—</span>
 
 ![reversion_example_trading](images/reversion_example_trading4.svg)
 
@@ -308,7 +308,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Sell:** 1,000 shares with $1 return (+$92,000)
 
-**Earned:** ($92,000 - $91,000) = $1,000
+**Earned:** ($92,000 - $91,000) = <span class="profit large-pnl">$1,000</span>
 
 ![reversion_example_trading](images/reversion_example_trading5.svg)
 
@@ -316,7 +316,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Borrow Sell:** 1,000 shares at $95 (+$95,000)
 
-**Earned:** —
+**Earned:** <span class="large-pnl">—</span>
 
 ![reversion_example_trading](images/reversion_example_trading6.svg)
 
@@ -324,7 +324,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Buy to Return:** 1,000 shares at $96 (-$96,000)
 
-**Earned:** ($95,000 - $96,000) = -$1,000
+**Earned:** ($95,000 - $96,000) = <span class="loss large-pnl">-$2,000</span>
 
 ![reversion_example_trading](images/reversion_example_trading7.svg)
 
@@ -332,7 +332,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Buy:** 1,000 shares at $94 (-$94,000)
 
-**Earned:** —
+**Earned:** <span class="large-pnl">—</span>
 
 ![reversion_example_trading](images/reversion_example_trading8.svg)
 
@@ -340,20 +340,24 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Sell:** 1,000 shares at $93.8 (-$93,800)
 
-**Profit:** **Earned:** ($93,800 - $94,000) = -$200
+**Profit:** **Earned:** ($93,800 - $94,000) = <span class="loss large-pnl">-$200</span>
 
 ![reversion_example_trading](images/reversion_example_trading9.svg)
 
 [NEXT]
 ## The Results -- 2% Return
 
-| **Trade Pair** | **Profit** |
-| -------------- | ---------- |
-| 1              | $2,000     |
-| 2              | $1,000     |
-| 3              | -$1,000    |
-| 4              | -$200      |
-| **Total**      | $1,800     |
+<table>
+  <tr><th>Trade Pair</th><th>Profit</th></tr>
+  <tr><td>1</td><td><span class="profit">$2,000</span></td></tr>
+  <tr><td>2</td><td><span class="profit">$1,000</span></td></tr>
+  <tr><td>3</td><td><span class="loss">-$1,000</span></td></tr>
+  <tr><td>4</td><td><span class="loss">-$200</span></td></tr>
+  <tr>
+    <td><span class="large-pnl" style="font-weight: bold">Total</td>
+    <td><span class="large-pnl profit">$1,800</span></td>
+  </tr>
+</table>
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
