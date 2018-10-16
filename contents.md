@@ -1523,25 +1523,8 @@ Fall back to Numba if code cannot be vectorised.
 <div id="total-speedups"></div>
 
 [NEXT]
-TODO: add any extra optimisations here
-
-[NEXT]
-### Final Speedup
-**1145** times faster.
-<div id="total-speedups2"></div>
-
-[NEXT]
-## The Ultimate Goal
-TODO
-
-[NEXT]
-### Detecting Outliers in the Full Dataset
-
-TODO: scale
-
-[NEXT]
 <!-- .slide: class="large-slide" -->
-**27 days** ⟶ **38 minutes**
+**TIME days** ⟶ **TIME minutes**
 
 [NEXT]
 On a single Macbook pro.
