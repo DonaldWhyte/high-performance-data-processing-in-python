@@ -1301,10 +1301,6 @@ This is **non-trivial**.
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-Also...
-
-[NEXT]
-<!-- .slide: class="large-slide" -->
 Not all algorithms are vectorisable.
 
 [NEXT]
@@ -1321,18 +1317,18 @@ _note_
 see https://numba.pydata.org/ for examples
 
 [NEXT]
-<!-- .slide: class="large-slide" -->
+## Problem
 Not all algorithms are vectorisable.
 
 _note_
 Are these non-vectorisable Python functions doomed to be slow?
 
 [NEXT]
-### Solution
+## Solution
 Compile non-vectorisable Python code to native machine instructions.
 
 [NEXT]
-### Numba
+## Numba
 
 Annotate Python functions with **decorators**.
 
