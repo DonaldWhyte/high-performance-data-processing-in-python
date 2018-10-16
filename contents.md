@@ -286,7 +286,7 @@ Suppose we have
 
 **Earned:** —
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading2.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -294,7 +294,7 @@ Suppose we have
 
 **Earned:** ($92,000 - $90,000) = $2,000
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading3.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -302,7 +302,7 @@ Suppose we have
 
 **Earned:** —
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading4.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -310,7 +310,7 @@ Suppose we have
 
 **Earned:** ($92,000 - $91,000) = $1,000
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading5.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -318,7 +318,7 @@ Suppose we have
 
 **Earned:** —
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading6.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -326,7 +326,7 @@ Suppose we have
 
 **Earned:** ($95,000 - $96,000) = -$1,000
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading7.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -334,7 +334,7 @@ Suppose we have
 
 **Earned:** —
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading8.svg)
 
 [NEXT]
 <!-- .slide: class="medium-slide" -->
@@ -342,18 +342,18 @@ Suppose we have
 
 **Profit:** **Earned:** ($93,800 - $94,000) = -$200
 
-![reversion_example_trading](images/reversion_example_trading1.svg)
+![reversion_example_trading](images/reversion_example_trading9.svg)
 
 [NEXT]
 ## The Results -- 2% Return
 
-| **Trade** | **Profit** |
-| --------- | ---------- |
-| 1         | $2,000     |
-| 2         | $1,000     |
-| 3         | -$1,000    |
-| 4         | -$200      |
-| **Total** | $1,800     |
+| **Trade Pair** | **Profit** |
+| -------------- | ---------- |
+| 1              | $2,000     |
+| 2              | $1,000     |
+| 3              | -$1,000    |
+| 4              | -$200      |
+| **Total**      | $1,800     |
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
@@ -363,20 +363,30 @@ Make more right trades than wrong trades and you make money.
 # 2. Stocks are Correlated
 
 [NEXT]
-### Positive Correlation
-#### Apple Vs. Amazon
+### Correation with a Stock
+#### Apple <-> Amazon
 ![price_correlation](images/positive_corr_prices.svg)
 
 [NEXT]
-### Negative Correlation
-#### Apple Vs. AngloGold Ashanti
+### Correation with a Stock
+#### Apple <->  AngloGold
 ![price_correlation](images/negative_corr_prices.svg)
 
 _note_
 AngloGold Ashanti is a gold mining company.
 
 [NEXT]
+### Correlation with an Industry
+#### Apple <-> The US Stock Market
+![price_correlation](images/industry_correlation.svg)
+
+[NEXT]
 TODO: what these mean together
+
+[NEXT]
+<!-- .slide class="large-slide" -->
+We TODO
+TODO: emphasise this is the hard part
 
 
 [NEXT SECTION]
@@ -470,6 +480,9 @@ Every weekday just before the US stock market closes:
 5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="focus" -->
 
 [NEXT]
+[one_day_holding](images/one_day_holding.svg)
+
+_note_
 TODO: refer back to AAPL example here for one day holdings
 
 [NEXT]
@@ -488,11 +501,6 @@ Use pricing data we already have to do this.
 | **End Date**   | 10th November 2017 |
 
 [NEXT]
-### Calculating the Profits
-
-TODO
-
-[NEXT]
 <!-- .slide: class="large-slide" -->
 Let's write the strategy in
 
@@ -507,6 +515,7 @@ Let's write the strategy in
     --start_date 2000-01-02
     --end_date 2017-11-10
 ```
+<!-- .element: class="large" -->
 
 [NEXT]
 ## Profit
@@ -541,16 +550,6 @@ TIME: fill in total time taken here
 # Bad for Research
 
 **Very slow** to explore different trading strategies.
-
-[NEXT]
-<!-- .slide: class="large-slide" -->
-# Bad for Production
-
-Cannot run time-sensitive strategies that require real-time computation.
-
-_note_
-TODO: add note here to elaborate on example strategy
-
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
