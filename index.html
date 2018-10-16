@@ -340,15 +340,6 @@
           speedup_axis_label, speedup_axis_formatter, 'dark',
           false, true, speedup_label_formatter, false);
 
-        total_speedups.push({y: 1144.9, color: 'red'});
-        total_time_sections.push('Final');
-        create_bar_chart(
-          'total-speedups2',
-          [{data: total_speedups}],
-          total_time_sections,
-          speedup_axis_label, speedup_axis_formatter, 'dark',
-          false, true, speedup_label_formatter, false);
-
         just_returns_sections = [timing_sections[0]];
         pure_python_just_returns_times = JSON.parse(
             JSON.stringify(pure_python_times));

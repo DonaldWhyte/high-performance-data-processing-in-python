@@ -1225,11 +1225,18 @@ Complete returns matrix is sized **7000 x 7000**.
 <div id="numpy-returns-speedup"></div>
 
 _note_
-TIME: poplate these grapgs
+TIME: poplate these graphs
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-We use NumPy to perform similar optimisations for the **Correlation** and **Decision** steps.
+We use NumPy to perform similar optimisations for the **Correlation** and
+**Decision** steps.
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+# Key Takeway
+
+Expressing data in vector/matrix form opens up a new world of optimisations.
 
 [NEXT]
 ## Trading Simulation
