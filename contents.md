@@ -236,7 +236,7 @@ One trade list **every day!**
 We leverage **two fundamental behaviours** about stock prices.
 
 [NEXT]
-## 1. Prices Revert to the Mean
+# 1. Prices Revert to the Mean
 
 [NEXT]
 ![mean_reversion](images/mean_reversion.png)
@@ -245,7 +245,7 @@ We leverage **two fundamental behaviours** about stock prices.
 ![reversion_example_aapl](images/reversion_example_aapl_price.svg)
 
 [NEXT]
-### Stock's Absolute Daily Return
+## Stock's Absolute Daily Return
 
 <div>
 Stock's price is:
@@ -259,7 +259,6 @@ Stock's absolute daily return (in USD) on day _t_ is:
 ![equation](images/equation_absolute_returns.svg)
 </div> <!-- .element: class="fragment" data-fragment-index="1" -->
 
-
 _note_
 equation is today's price - yesterday's price / yesterday's price
 
@@ -267,26 +266,101 @@ equation is today's price - yesterday's price / yesterday's price
 ![reversion_example_aapl](images/reversion_example_aapl_abs_return.svg)
 
 [NEXT]
-TODO: return graph with outlier boundary lines
+<!-- .slide: class="medium-slide" -->
+# Mean Reversion Trading Strategy
+
+Buy or sell a stock when its returns exceed a threshold.
 
 [NEXT]
-TODO: return graph with first outlier highlighted (buy)
+![reversion_example_trading](images/reversion_example_trading1.svg)
 
 [NEXT]
-TODO: return graph with sell point highlighted
+<!-- .slide: class="large-slide" -->
+Suppose we have
+
+**$90,000** to trade with.
 
 [NEXT]
-TODO: return graph with second outlier highlighted (sell)
+<!-- .slide: class="medium-slide" -->
+**Buy:** 1,000 shares at $90 (-$90,000)
+
+**Earned:** —
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
 
 [NEXT]
-TODO: return graph with second outlier highlighted (buy back)
+<!-- .slide: class="medium-slide" -->
+**Sell** 1,000 shares with $2 return (+$92,000)
+
+**Earned:** ($92,000 - $90,000) = $2,000
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
 
 [NEXT]
-show total profit made
+<!-- .slide: class="medium-slide" -->
+**Buy:** 1,000 shares at $91 (-$91,000)
 
+**Earned:** —
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
 
 [NEXT]
-## 2. Stocks are Correlated
+<!-- .slide: class="medium-slide" -->
+**Sell:** 1,000 shares with $1 return (+$92,000)
+
+**Earned:** ($92,000 - $91,000) = $1,000
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+**Borrow Sell:** 1,000 shares at $95 (+$95,000)
+
+**Earned:** —
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+**Buy to Return:** 1,000 shares at $96 (-$96,000)
+
+**Earned:** ($95,000 - $96,000) = -$1,000
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+**Buy:** 1,000 shares at $94 (-$94,000)
+
+**Earned:** —
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+**Sell:** 1,000 shares at $93.8 (-$93,800)
+
+**Profit:** **Earned:** ($93,800 - $94,000) = -$200
+
+![reversion_example_trading](images/reversion_example_trading1.svg)
+
+[NEXT]
+## The Results -- 2% Return
+
+| **Trade** | **Profit** |
+| --------- | ---------- |
+| 1         | $2,000     |
+| 2         | $1,000     |
+| 3         | -$1,000    |
+| 4         | -$200      |
+| **Total** | $1,800     |
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Make more right trades than wrong trades and you make money.
+
+[NEXT]
+# 2. Stocks are Correlated
 
 [NEXT]
 ### Positive Correlation
