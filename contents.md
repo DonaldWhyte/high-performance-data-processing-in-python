@@ -484,10 +484,8 @@ Every weekday just before the US stock market closes:
 5. wait until tomorrow, then get rid of stocks bought/borrowed <!-- .element: class="focus" -->
 
 [NEXT]
-[one_day_holding](images/one_day_holding.svg)
-
-_note_
-TODO: refer back to AAPL example here for one day holdings
+## Always Sell Stock After 1 Day
+![one_day_holding](images/one_day_holding.svg)
 
 [NEXT]
 ### Simulation
