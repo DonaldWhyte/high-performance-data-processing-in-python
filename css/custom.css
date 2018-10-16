@@ -316,6 +316,10 @@ img[alt="daily_price_files"] {
     width: 1000px;
 }
 
+img[alt="price_csv"] {
+    width: 740px;
+}
+
 img[alt="aapl_price_graph"] {
     width: 800px;
 }

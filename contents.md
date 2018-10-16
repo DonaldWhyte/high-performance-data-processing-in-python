@@ -209,7 +209,7 @@ Collection of **CSV** files.
 <img src="images/daily_price_list.svg" alt="daily_price_files" />
 
 [NEXT]
-`aapl.us.txt`
+`aapl.us.txt` <!-- .element: style="font-size: 64px" -->
 
 ![price_csv](images/price_csv.png)
 
@@ -224,15 +224,16 @@ Over 6,000,000 rows.
 
 1 gigabyte.
 
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+# Goal
+Build an program that generates lists of trades to make.
+
+**One trade list every day.**
 
 [NEXT]
-## Goal
-Build an program that generates **lists of trades** to make.
-
-One trade list **every day!**
-
-[NEXT]
-## How?
+<!-- .slide: class="large-slide" -->
+# How?
 We leverage **two fundamental behaviours** about stock prices.
 
 [NEXT]
@@ -324,7 +325,7 @@ Suppose we have
 <!-- .slide: class="medium-slide" -->
 **Buy to Return:** 1,000 shares at $96 (-$96,000)
 
-**Earned:** ($95,000 - $96,000) = <span class="loss large-pnl">-$2,000</span>
+**Earned:** ($95,000 - $96,000) = <span class="loss large-pnl">-$1,000</span>
 
 ![reversion_example_trading](images/reversion_example_trading7.svg)
 
