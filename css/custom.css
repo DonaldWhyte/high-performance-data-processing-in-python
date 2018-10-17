@@ -340,6 +340,14 @@ img[alt="reversion_example_trading"] {
     width: 900px;
 }
 
+img[alt="price_momentum"] {
+    width: 700px;
+}
+
+img[alt="subtracting_market_impact_full"] {
+    width: 650px;
+}
+
 img[alt="one_day_holding"] {
     width: 700px;
 }
@@ -368,10 +376,6 @@ img[alt="numpy_example_price_matrix"] {
 
 img[alt="numpy_example_returns_matrix_detail"] {
     width: 1200px;
-}
-
-img[alt="price_momentum"] {
-    width: 700px;
 }
 
 img[alt="sisd"],

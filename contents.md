@@ -425,9 +425,12 @@ TODO
 ![subtracting_market_impact](images/subtracting_market_impact2.svg)
 
 [NEXT]
-![subtracting_market_impact](images/subtracting_market_impact3.svg)
+![subtracting_market_impact_full](images/subtracting_market_impact3.svg)
 
 [NEXT]
+<!-- .slide: class="large-slide" -->
+Apply mean reversion strategy to this:
+
 ![subtracting_market_impact_one_panel](images/subtracting_market_impact4.svg)
 
 [NEXT]
