@@ -414,9 +414,11 @@ AngloGold Ashanti is a gold mining company.
 ![price_correlation](images/industry_correlation.svg)
 
 [NEXT]
+<!-- .slide: class="medium-slide" -->
 # Goal
+Avoid trading when stock prices are continously increasing or decreasing.
 
-TODO
+Only use **mean reversion** strategy when stocks are hovering around mean.
 
 [NEXT]
 ![subtracting_market_impact_one_panel](images/subtracting_market_impact1.svg)
@@ -429,16 +431,24 @@ TODO
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
-Apply mean reversion strategy to this:
+Apply mean reversion strategy to:
 
 ![subtracting_market_impact_one_panel](images/subtracting_market_impact4.svg)
 
 [NEXT]
-<!-- .slide class="large-slide" -->
-TODO: trade of _real_ noise
+<!-- .slide: class="large-slide" -->
+Avoid losing money during **momentum** price movements.
 
 [NEXT]
-TODO: mention this is the hardest thing to do
+<!-- .slide: class="large-slide" -->
+Adjusting returns using stock correlations is the **hardest** step.
+
+[NEXT]
+<!-- .slide: class="medium-slide" -->
+Typically involves two stats techniques:
+
+* Principal Component Analysis (PCA)
+* Linear Regression
 
 
 [NEXT SECTION]
