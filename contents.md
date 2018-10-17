@@ -346,7 +346,7 @@ Suppose we have
 ![reversion_example_trading](images/reversion_example_trading9.svg)
 
 [NEXT]
-## The Results -- 2% Return
+## The Results
 
 <table>
   <tr><th>Trade Pair</th><th>Profit</th></tr>
@@ -362,7 +362,35 @@ Suppose we have
 
 [NEXT]
 <!-- .slide: class="large-slide" -->
+<span class="profit">2%</span> return on investment.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
 Make more right trades than wrong trades and you make money.
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+# Problem
+What if the price **doesn't** revert back to the mean?
+
+[NEXT]
+## Price Momentum
+
+![price_momentum](images/price_momentum.svg)
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Mean reversion strategy **loses money** if prices keep climbing or falling!
+
+_note_
+Segway into correlation...what if it doesn't revert? Stocks might go down for
+legit reasons, e.g. the stock market has gone down as a whole (recession),
+so if you buy when it dips it NEVER bounces back and you've lost money .
+
+[NEXT]
+<!-- .slide: class="large-slide" -->
+Avoid this problem by considering **stock correlation** in trading decisions.
+
 
 [NEXT]
 # 2. Stocks are Correlated
@@ -386,12 +414,28 @@ AngloGold Ashanti is a gold mining company.
 ![price_correlation](images/industry_correlation.svg)
 
 [NEXT]
-TODO: what these mean together
+# Goal
+
+TODO
+
+[NEXT]
+![subtracting_market_impact_one_panel](images/subtracting_market_impact1.svg)
+
+[NEXT]
+![subtracting_market_impact](images/subtracting_market_impact2.svg)
+
+[NEXT]
+![subtracting_market_impact](images/subtracting_market_impact3.svg)
+
+[NEXT]
+![subtracting_market_impact_one_panel](images/subtracting_market_impact4.svg)
 
 [NEXT]
 <!-- .slide class="large-slide" -->
-We TODO
-TODO: emphasise this is the hard part
+TODO: trade of _real_ noise
+
+[NEXT]
+TODO: mention this is the hardest thing to do
 
 
 [NEXT SECTION]
